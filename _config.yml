@@ -17,7 +17,6 @@ plugins:
 # Theme-specific settings
 
 minima:
-
   skin: solarized-dark
   github_username: josephholler
 
@@ -48,11 +47,9 @@ minima:
 # If you want to link only specific pages in your header, uncomment this and add the path to the pages in
 # order as they should show up.
 #
-# header_pages:
-#   - logistics.md
-#   - prepare.md
-#   - committee.md
-#   - apply.md
+header_pages:
+  - index.md
+  - agenda.md
 
 # Set to `true` to show excerpts on the homepage.
 #
