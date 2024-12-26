@@ -1,6 +1,6 @@
 ---
 #layout: home
-title: Syllabus
+title: Agenda
 ---
 
 This is a working agenda to be updated as the course progresses.
