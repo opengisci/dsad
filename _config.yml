@@ -52,7 +52,7 @@ future: true
 # order as they should show up.
 #
 header_pages:
-  - index.md
+  - syllabus.md
   - agenda.md
 
 # Set to `true` to show excerpts on the homepage.
