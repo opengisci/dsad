@@ -15,10 +15,14 @@ plugins:
   - jekyll-seo-tag
 
 # Theme-specific settings
+minima:
+  skin: dark
 
 minima:
   skin: dark
-  github_username: josephholler
+#  github_username: josephholler
+
+future: true
 
   # Minima date format.
   # Refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this.
