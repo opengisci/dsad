@@ -57,16 +57,4 @@ For afternoon labs, you may use lab computers and installed software.
 
 **Small Group Projects 25%**: A final small group project will develop a single interactive spatial data science story about a disaster in the United States. The project will be presented live on one of the final two days of class (10%) and due with working code on GitHub by noon EST of the final day of class (15%). 
 
-Numerical grades are translated into letter grades as follows:
-
-- >=95 : A
-- >=90 : A-
-- >=87 : B+
-- >=83 : B
-- >=80 : B-
-- >=77 : C+
-- >=73 : C
-- >=70 : C-
-- >=67 : D+
-- >=60 : D
-- <60  : F
+Numerical grades are translated into letter grades with the following breaks: 95, 90, 87, 83, 80, 77, 73, 70, 67, 60.
