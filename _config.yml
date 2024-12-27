@@ -1,10 +1,12 @@
 title: Data Sciences Across the Disciplines
-author: "Joseph Holler"
+author:
+  name: Joseph Holler
+  email: josephh@middlebury.edu
 
 # The `>` after `description:` means to ignore line-breaks until next key.
 # If you want to omit the line-break after the end of text, use `>-` instead.
 description: >
-  Middlebury College Data Sciences Across the Displines Winter Term Course
+  Middlebury College Data Sciences Across the Displines 2025 Winter Term Course
 
 # Build settings
 
@@ -18,10 +20,6 @@ plugins:
 # Theme-specific settings
 minima:
   skin: dark
-
-minima:
-  skin: dark
-#  github_username: josephholler
 
 future: true
 
