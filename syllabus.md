@@ -59,16 +59,14 @@ For afternoon labs, you may use lab computers and installed software.
 
 Numerical grades are translated into letter grades as follows:
 
-|Number|Letter|
-|:--:|:--:|
-|>=95|A|
-|>=90|A-|
-|>=87|B+|
-|>=83|B|
-|>=80|B-|
-|>=77|C+|
-|>=73|C|
-|>=70|C-|
-|>=67|D+|
-|>=60|D|
-|<60|F| 
+- >=95 : A
+- >=90 : A-
+- >=87 : B+
+- >=83 : B
+- >=80 : B-
+- >=77 : C+
+- >=73 : C
+- >=70 : C-
+- >=67 : D+
+- >=60 : D
+- <60  : F
