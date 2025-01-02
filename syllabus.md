@@ -45,9 +45,12 @@ We will present findings using spatial data visualizations with the aim of infor
 There are no required book purchases.  
 A few digital articles will be provided and assigned to inform afternoon activities, assignments, and the final projects.  
 
-You will need a laptop computer (MacOS, Windows, or Linux) with free R [https://www.r-project.org/], RStudio Desktop [https://posit.co/download/rstudio-desktop/], and Git [https://git-scm.com/] software installed. 
+You will need a laptop computer (MacOS, Windows, or Linux) and the following free software and accounts:
 
-You will need a free GitHub [https://github.com/] account. 
+- R software [www.r-project.org](https://www.r-project.org/)
+- RStudio Desktop software [posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/)
+- Git software [git-scm.com/](https://git-scm.com/)
+- GitHub account [github.com/](https://github.com/)
 
 ### Expectations and Evaluation
 

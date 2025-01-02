@@ -5,12 +5,14 @@ title: "Before Class"
 
 Welcome to data sciences across the disciplines!
 
-Please prepare for this course by getting a laptop computer ready with the following free and open source software and accounts:
+Preview our [syllabus](syllabus) and [agenda](agenda).
 
-- R software [https://www.r-project.org/]
-- RStudio Desktop software [https://posit.co/download/rstudio-desktop/]
-- Git software [https://git-scm.com/]
-- GitHub account [https://github.com/]
+Please prepare for this course *before the first meeting* by getting a laptop computer ready with the following free and open source software and accounts:
+
+- R software [www.r-project.org](https://www.r-project.org/)
+- RStudio Desktop software [posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/)
+- Git software [git-scm.com/](https://git-scm.com/)
+- GitHub account [github.com/](https://github.com/)
 
 For installing R and RStudio before Monday morning class, please see [this video](https://drive.google.com/file/d/1OicG9Vc3GOE15eN3AbJq4qEBZXWo9qf9/view)
 
