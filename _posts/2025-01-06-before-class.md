@@ -5,7 +5,7 @@ title: "Before Class"
 
 Welcome to data sciences across the disciplines!
 
-Preview our [syllabus](/syllabus) and [agenda](/agenda).
+Preview our [syllabus]({% link syllabus.md %}) and [agenda]({% link agenda.md %}).
 
 Please prepare for this course *before the first meeting* by getting a laptop computer ready with the following free and open source software and accounts:
 
