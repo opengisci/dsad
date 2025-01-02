@@ -80,10 +80,9 @@ Very short extensions may be granted with notice more than two days in advance, 
 ### Honor Code
 
 The Middlebury College Honor Code requires students to neither give nor receive unauthorized aid on any assignment.
-Unless otherwise noted, in Data Science Across Disciplines you are authorized to use the myriad of resources at your disposal including
-internet searches, AI-supported queries, and consulting with other students.
+Unless otherwise noted, in Data Science Across Disciplines you are authorized to use the myriad of resources at your disposal including internet searches, AI-supported queries, and consulting with other students.
 Part of being a good data scientist involves actively collaborating with others and borrowing useful code snippets from websites like Stack Overflow or R help documentation.
 In this course, however, it is never allowed to copy entire blocks of code without attribution. 
-Building upon other’s existing code is part of being a good coder, but copying code without attribution isn't.
-If you find that any significant portion of your code is from other sources, you are probably approaching the assignment incorrectly. Any work submitted that is not your own will be considered a violation of the Honor Code.
-If you don't understand how the Middlebury Honor Code might apply to a particular assignment or assessment, please don’t hesitate to ask.
+If you find that any significant portion of your code is from other sources, you are probably approaching the assignment incorrectly.
+Any work submitted that is not your own will be considered a violation of the Honor Code.
+If you don't understand how the Middlebury Honor Code might apply to a particular assignment or assessment, please ask!

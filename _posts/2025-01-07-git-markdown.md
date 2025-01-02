@@ -18,3 +18,7 @@ The best way to keep track of what you're learning is with **computational noteb
 In R, computational notebooks are **Rmarkdown** files.
 We will explore how to make them in our first afternoon lab.
 I will check your progress on these notebooks at the end of each week.
+
+## Reading
+
+- Twitter wildfire article
