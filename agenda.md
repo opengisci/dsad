@@ -11,7 +11,7 @@ This is a working agenda to be updated as the course progresses.
 - **Tuesday Afternoon**: GitHub and RMarkdown
 - **Wednesday Morning**: Data wrangling
 - **Thursday Morning**: Ethical data visualization
-- **Thursday Afternoon**: Exploring Disaster Data; Tools for reproducible data science
+- **Thursday Afternoon**: Disaster data and techniques for reproducible data science
 
 ## Week Two
 
