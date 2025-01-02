@@ -5,29 +5,30 @@ title: Agenda
 This is a working agenda to be updated as the course progresses.
 
 ## Week One
-- **Monday Morning**: Install R and RStudio
-- **Tuesday Morning**: Introduction to R and Graphing
+- **Before Class**: Install R and RStudio
+- **Monday Morning**: Introduction to R and Graphing
+- **Tuesday Morning**: More advanced graphing
 - **Tuesday Afternoon**: GitHub and RMarkdown
-- **Wednesday Morning**: More advanced graphing
-- **Thursday Morning**: Data wrangling
+- **Wednesday Morning**: Data wrangling
+- **Thursday Morning**: Ethical data visualization
 - **Thursday Afternoon**: Exploring Disaster Data; Tools for reproducible data science
 
 ## Week Two
 
-- **Monday Morning**: Ethical data visualization
-- **Tuesday Morning**: Text strings
+- **Monday Morning**: Text strings
+- **Tuesday Morning**: Web scraping
 - **Tuesday Afternoon**: Text analysis of word frequency and association
-- **Wednesday Morning**: Web scraping
-- **Thursday Morning**: Joining and animating I
+- **Wednesday Morning**: Joining and animating I
+- **Thursday Morning**: Joining and animating II
 - **Thursday Afternoon**: Census data, joining by location, and choropleth maps with tmap
 
 ## Week Three
 
 - **Martin Luther King Day**: no class
-- **Tuesday Morning**: Joining and animating II
+- **Tuesday Morning**: Choropleth maps with ggplot and leaflet
 - **Tuesday Afternoon**: Spatial hotspot analysis
-- **Wednesday Morning**: Choropleth maps with ggplot and leaflet
-- **Thursday Morning**: Shiny Apps
+- **Wednesday Morning**: Shiny Apps I
+- **Thursday Morning**: Shiny Apps II
 - **Thursday Afternoon**: Form small group research questions and plans
 
 ## Week Four
