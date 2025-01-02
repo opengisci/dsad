@@ -7,15 +7,20 @@ title: "Disaster Data"
 
 - Zou, L., Lam, N. S. N., Cai, H., & Qiang, Y. (2018). Mining Twitter Data for Improved Understanding of Disaster Resilience. Annals of the American Association of Geographers, 108(5), 1422–1441. https://doi.org/10.1080/24694452.2017.1421897
 
-## Twitter/X Social Media Data
+## Cleaning Text
 
-- presentation
-- metadata
+- non-text
+- stop words
+- search terms
 
-## Data Investigation
+## Word Frequency
 
-Let's start analyzing this data by investigating some preliminary questions about it's quality and structure.
+- histograms
+- word graphs
 
-- Graph frequency of tweets over time
-- Summarize and graph the precision of geographic data contained in the tweets
-- 
+## Word Association
+
+- tuples
+- graphs
+
+## Sentiment

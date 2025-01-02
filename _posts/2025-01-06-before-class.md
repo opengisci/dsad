@@ -3,9 +3,6 @@ layout: post
 title: "Before Class"
 ---
 
-base url: {{site.baseurl}}
-site url: {{site.url}}
-
 Welcome to data sciences across the disciplines!
 
 Preview our [syllabus]({{site.baseurl}}/syllabus.html) and [agenda]({{site.baseurl}}/agenda.html).

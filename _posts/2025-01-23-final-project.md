@@ -5,11 +5,11 @@ title: "Final Projects"
 
 ## Reading for Discussion
 
-- Social amplification of risk
+- Kasperson, R. Renn, O., Slovic, P, Brown, H., Emel, J., Goble, R., Kasperson, J., Ratick, S. (1988). The social amplification of risk: A conceptual framework. *Society for Risk Analysis*, 8(2), 177–187. https://doi.org/10.1111/j.1539-6924.1988.tb01168.x
 
 ## Final Project Groups:
 
-- Group composition to be determined
+- Group composition to be determined by prior experience with spatial analysis.
 
 ## Final Project Expectations:
 
