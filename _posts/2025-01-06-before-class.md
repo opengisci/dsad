@@ -8,7 +8,7 @@ site url: {{site.url}}
 
 Welcome to data sciences across the disciplines!
 
-Preview our [syllabus]({% link syllabus.md %}) and [agenda]({% link agenda.md %}).
+Preview our [syllabus]({{site.baseurl}}/syllabus.html) and [agenda]({{site.baseurl}}/agenda.html).
 
 Please prepare for this course *before the first meeting* by getting a laptop computer ready with the following free and open source software and accounts:
 
