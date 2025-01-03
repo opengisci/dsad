@@ -29,7 +29,7 @@ This is a working agenda to be updated as the course progresses.
 - **Tuesday Afternoon**: Spatial hotspot analysis
 - **Wednesday Morning**: Shiny Apps I
 - **Thursday Morning**: Shiny Apps II
-- **Thursday Afternoon**: Form small group research questions and plans
+- **Thursday Afternoon**: Network visualization; Form small group research questions and plans
 
 ## Week Four
 
