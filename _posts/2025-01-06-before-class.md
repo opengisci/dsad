@@ -18,6 +18,6 @@ For installing R and RStudio before Monday morning class, please see [this video
 
 If you have any difficulty with software installation or account creation, please attend the first set of office hours on Monday afternoon.
 
-Once you have a GitHub account, please [fill out this form](https://forms.gle/4tWobsz8NEoCkasM7) to confirm enrollment in the course and share your GitHub user account.
+Once you have a GitHub account, please **[fill out this form](https://forms.gle/4tWobsz8NEoCkasM7)** to confirm enrollment in the course and share your GitHub user account.
 
-Finally, please read one research article prior to the Tuesday afternoon workshop. Details are posted on the [workshop page](/2025/01/07/git-markdown) [workshop page](2025/01/07/git-markdown) [workshop page]({{site.baseurl}}/2025/01/07/git-markdown) [workshop page]({{site.baseurl}}/2025/01/07/git-markdown.html).
+Finally, please **read one research article** prior to the Tuesday afternoon workshop. Details are posted on Tuesday's [workshop page]({{site.baseurl}}/2025/01/07/git-markdown).
