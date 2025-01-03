@@ -3,19 +3,30 @@ layout: post
 title: "Disaster Data"
 ---
 
-## Reading for Discussion
-
-- Zou, L., Lam, N. S. N., Cai, H., & Qiang, Y. (2018). Mining Twitter Data for Improved Understanding of Disaster Resilience. Annals of the American Association of Geographers, 108(5), 1422–1441. https://doi.org/10.1080/24694452.2017.1421897
-
 ## Twitter/X Social Media Data
 
-- presentation
-- metadata
+- Characteristics of ``big data'' generally and Twitter/X specifically
+- Legal and ethical constraints and considerations
+- Twitter application programming interface and queries
+- Twitter metadata and example Tweet
 
-## Data Investigation
+## Data Science Tools
+
+- Here package to manage links
+- Rtweet package to use Twitter API
+- GitHub and gitignore
+- Handling large and confidential data files
+
+# First Assignment
 
 Let's start analyzing this data by investigating some preliminary questions about it's quality and structure.
 
 - Graph frequency of tweets over time
-- Summarize and graph the precision of geographic data contained in the tweets
-- 
+- Practice varying temporal scale of graphs (e.g. by day, by hour, by six-hour increments)
+- Summarize and graph the precision of geographic data contained in the tweets (e.g. geographic coordinates, place, county, or user profile)
+
+## Transactions
+
+- Computational Notebook due Friday at 12 noon
+- First Assignment due Monday at 5pm
+- Reading for Tuesday Workshop

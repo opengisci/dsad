@@ -3,26 +3,25 @@ layout: post
 title: "Census Data"
 ---
 
-## Reading for Discussion
+## Accessing Census Data
 
-- Zou, L., Lam, N. S. N., Cai, H., & Qiang, Y. (2018). Mining Twitter Data for Improved Understanding of Disaster Resilience. Annals of the American Association of Geographers, 108(5), 1422–1441. https://doi.org/10.1080/24694452.2017.1421897
+- Census API 
+- tidycensus package
+- the geographic scale of social media data is best suited for analysis at the county or even state level.
 
-Kasperson, R. Renn, O., Slovic, P, Brown, H., Emel, J., Goble, R., Kasperson, J., Ratick, S. (1988). The social amplification of risk: A conceptual framework. Society for Risk Analysis, 8(2), 177–187. https://doi.org/10.1111/j.1539-6924.1988.tb01168.x
+## Mapping Census Data
 
-## Cleaning Text
+- choosing variables
+- normalizing
+- classification types
+- choropleth maps with tmap
 
-- non-text
-- stop words
-- search terms
+## Spatial Joins
 
-## Word Frequency
+Spatial joins are accomplished much like an attribute join, but the `by` criteria for matching data is replaced with a spatial relationship.
 
-- histograms
-- word graphs
+After joining, we need to `count` how many tweets occurred in each county.
 
-## Word Association
+## Mapping Twitter Data
 
-- tuples
-- graphs
-
-## Sentiment
+- Normalizing tweets by meaningful denominators (e.g. people, households, population aged 15-65)

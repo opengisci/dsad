@@ -12,4 +12,3 @@ title: "Interactive Spatial Stories"
 - Software
 - Data
 - Literature
-

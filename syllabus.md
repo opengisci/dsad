@@ -10,10 +10,11 @@ Instructors:
 
 ### Times
 
-| Monday | Tuesday | Wednesday | Thursday |
-| :--: | :--: | :--: | :--: | 
-| 10:00-11:30 Lecture | 10:00-11:30 Lecture | 10:00-11:30 Lecture | 10:00-11:30 Lecture |
-| 12:00-2:00 Office Hrs | 1:30-4:00 Workshop | 12:00-1:00 Office Hrs | 1:30-4:00 Workshop
+| Monday | Tuesday | Wednesday | Thursday | Friday |
+| :--: | :--: | :--: | :--: | :--: |
+| 10:00-11:30 Lecture | 10:00-11:30 Lecture | 10:00-11:30 Lecture | 10:00-11:30 Lecture | |
+| 12:00-2:00 Office Hrs | 1:30-4:00 Workshop | 12:00-1:00 Office Hrs | 1:30-4:00 Workshop | |
+| 5:00 Individual Assignment Due | | | Individual Assignment Given | 12:00 Computational Notebook Due |
 
 ### Places
 
@@ -43,7 +44,7 @@ We will present findings using spatial data visualizations with the aim of infor
 ### Required Materials and Resources
 
 There are no required book purchases.  
-A few digital articles will be provided and assigned to inform afternoon activities, assignments, and the final projects.  
+Three or four digital articles will be provided and assigned to inform afternoon activities, assignments, and the final projects.  
 
 You will need a laptop computer (MacOS, Windows, or Linux) and the following free software and accounts:
 
@@ -55,11 +56,16 @@ You will need a laptop computer (MacOS, Windows, or Linux) and the following fre
 ### Expectations and Evaluation
 
 **Participation 25%**: Full attendance and participation is required for success in the course.
-The participation grade is to be composed of **attendance** (10%) and completion of useful and tidy **computational notebooks** (15%) checked after each week. 
+The participation grade is to be composed of **attendance** (10%) and completion of useful and tidy **computational notebooks** (15%) checked at noon EST on Friday of each week. 
+Chronic tardiness and each unexcused absence will result in loss of 10% of attendance credit.  
+Students have the responsibility to make up content and work from absences and use office hours for this when necessary.
 
-**Individual Assignments 45%**: One assignment will be assigned on Thursday and due by Monday morning of each of the first three weeks. The assignment will challenge you to apply what you have learned in morning lectures and afternoon labs to applied research with geographic disaster-related data.
+**Individual Assignments 45%**: Three individual assignments at the end of teh first three weeks will provide a chance to practice spatial data science and prepare for final projects. 
+The assignments will be given at the end of Thursday workshops and due at 5:00 pm EST on Monday.
 
-**Small Group Projects 30%**: A final small group project will develop a single interactive spatial data science story about a disaster in the United States. The project will be presented live on one of the final two days of class (10%) and due with working code on GitHub by noon EST of the final day of class (20%). 
+**Group Projects 30%**: A final small group project will develop a single interactive spatial data science story about a disaster in the United States. 
+The project will be presented live on one of the final two days of class (10%) and due with working code on GitHub by noon EST of the final day of class (20%). 
+The project will be accompanied by a short reflection on the overall learning experience and on the dynamics of small group collaboration.
 
 Numerical grades are translated into letter grades with the following break values: {95, 90, 87, 83, 80, 77, 73, 70, 67, 60}.
 
@@ -73,16 +79,16 @@ Contacts at DRC include: ada@middlebury.edu, Jodi Litchfield at litchfie@middleb
 
 ### Late policy
 
-In a cumulative course such as this, it is imperative to keep up with the pace of new content!  
+It is imperative to keep up with content in cumulative courses!  
 Late assignments will lose 10% of full credit per day. 
 Very short extensions may be granted with notice more than two days in advance, or in reponse to urgent and unexpected circumstances.
 
 ### Honor Code
 
 The Middlebury College Honor Code requires students to neither give nor receive unauthorized aid on any assignment.
-Unless otherwise noted, in Data Science Across Disciplines you are authorized to use the myriad of resources at your disposal including internet searches, AI-supported queries, and consulting with other students.
-Part of being a good data scientist involves actively collaborating with others and borrowing useful code snippets from websites like Stack Overflow or R help documentation.
-In this course, however, it is never allowed to copy entire blocks of code without attribution. 
-If you find that any significant portion of your code is from other sources, you are probably approaching the assignment incorrectly.
-Any work submitted that is not your own will be considered a violation of the Honor Code.
+Unless otherwise noted, in Data Science Across Disciplines you are always authorized to use class notes, consulation with peers, R software [documentation](https://www.r-project.org/other-docs.html), books, tutorials, troubleshooting forums (e.g. [Stack Overflow](https://stackoverflow.com/), ResearchGate, GitHub Issues, etc.).
+You may also use internet searches and AI-supported chatbots to help debug *your* code.
+You *may not* copy blocks of code from generative AI or from other data scientists.
+In special cases, you may request permission to do so from the professor, and you are required to attribute the source.
+If you submit any work from elsewhere without authorization and attribution, it will be considered a violation of the Honor Code. 
 If you don't understand how the Middlebury Honor Code might apply to a particular assignment or assessment, please ask!
