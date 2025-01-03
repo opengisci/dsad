@@ -3,7 +3,7 @@ layout: post
 title: "Before Class"
 ---
 
-Welcome to data sciences across the disciplines!
+Welcome to data science across the disciplines!
 
 Preview our [syllabus]({{site.baseurl}}/syllabus.html) and [agenda]({{site.baseurl}}/agenda.html).
 
