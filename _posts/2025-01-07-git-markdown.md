@@ -92,14 +92,12 @@ These will be due at **12:00 noon EST on Friday** each week, by committing them 
   - Code blocks can be run one at a time with ctrl+shift+enter or the Green play button
   - Create new blocks with ctrl+alt+i or Code -> Insert Chunk or by typing out the code for a new chunk
   
-  ```md
-  {% raw %}
+  ```md  
   ```{r}
   ... your code here ...
   ```
-  {% endraw %}
   ```
-  
+
 - Markdown looks different, but it's really easy: check out this [10 minute tutorial](https://commonmark.org/help/tutorial)
 - Rmarkdown Style:
   - Put every sentence on a new line
