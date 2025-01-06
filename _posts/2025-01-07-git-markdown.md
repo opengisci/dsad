@@ -31,3 +31,8 @@ In R, computational notebooks are **Rmarkdown** files.
 To maximize the legitiblity and usefulness of your class notes and in-class assignments, you are expected to create daily or weekly RMarkdown documents toward your participation grade.  
 These will be due at **12:00 noon EST on Friday** each week, by committing them to your GitHub repository.
 
+## Assets
+
+- [ggplot2]({{site.baseurl}}/assets/ggplot2.pdf)
+- [ggplot2]({{site.baseurl}}/assets/rmarkdown.pdf)
+
