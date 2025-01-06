@@ -34,5 +34,6 @@ These will be due at **12:00 noon EST on Friday** each week, by committing them 
 ## Assets
 
 - [ggplot2]({{site.baseurl}}/assets/ggplot2.pdf)
-- [ggplot2]({{site.baseurl}}/assets/rmarkdown.pdf)
+- [markdown]({{site.baseurl}}/assets/rmarkdown.pdf)
+- [rmarkdown]({{site.baseurl}}/assets/rmarkdown.pdf)
 
