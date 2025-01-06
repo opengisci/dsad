@@ -113,6 +113,9 @@ Create an RStudio project with the GitHub repository on a lab computer
 - *Save* all documents using the `Jan06` naming convention, *commit* changes, and *push* to GitHub
 - *Link* to the knitted html from your `README.md` file by writing the html file name into the parenthesis at the end of `- [Monday]()`
 
+Now, make a notebook for your second lecture!  
+In future lectures, you *may* start with an RMarkdown file saved to your `wt25` repository, rather than an R script.
+
 ### Sign Out
 
 ***Please*** [Sign Out](https://midd.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=97e5eec2-ab3d-453c-821d-b1e301495aef) of the lab computers after *every session*!
