@@ -53,6 +53,8 @@ You will need a laptop computer (MacOS, Windows, or Linux) and the following fre
 - Git software [git-scm.com/](https://git-scm.com/)
 - GitHub account [github.com/](https://github.com/)
 
+Morning lecture materials will be posted to a course [Google Drive Folder](https://drive.google.com/drive/folders/1oxtq-NfEi92eonyS9BNvXJRcc1YD_MYS?usp=sharing) (Middlebury access only)
+
 ### Expectations and Evaluation
 
 **Participation 25%**: Full attendance and participation is required for success in the course.
