@@ -90,18 +90,29 @@ These will be due at **12:00 noon EST on Friday** each week, by committing them 
   - Everything else is `Markdown`, a streamlined language for writing with simple formatting options
   - The default document contains three code blocks: one with default settings to include code in ouput, one to load data on car speed and distance required to stop, and one to graph the temperature and vapor pressure of Mercury 
   - Code blocks can be run one at a time with ctrl+shift+enter or the Green play button
-  - Create new blocks with ctrl+alt+i or Code -> Insert Chunk or by typing out the code for a new chunk
-  
-  ```md  
-  ```{r}
-  ... your code here ...
-  ```
-  ```
+  - Try changing the `plot(pressure)` code to `plot(cars)` and then re-run that code block
+  - Create new blocks with ctrl+alt+i *or* Code -> Insert Chunk *or* by typing out the code for a new chunk
+
+### Markdown
 
 - Markdown looks different, but it's really easy: check out this [10 minute tutorial](https://commonmark.org/help/tutorial)
 - Rmarkdown Style:
   - Put every sentence on a new line
   - Leave a blank line in between each code block, heading, paragraph, or other element (e.g. table, blockquote, etc.) 
+
+### Make a Computational Notebook for First Lecture
+
+- Let's delete everything in our RMarkdown file from the `## R Markdown` line to the end
+- Create new headings for topics in lecture one
+- Copy code into distinct code blocks
+- Write instructional notes prior to code blocks, and interpretive notes afterward
+- Headings will populate the **Outline** feature
+- Optionally, develop using the **Visual** mode
+- Add `eval=FALSE` to code blocks with package installation: run those blocks manually once on each computer. The block header will be: `{r eval=FALSE}`
+- Make sure you have complete notes and understand everything from lecture by conferring with Prof Lyford's [notes and recordings](https://drive.google.com/drive/folders/1oxtq-NfEi92eonyS9BNvXJRcc1YD_MYS), your peers, and your professors.
+- Once you are finished, **Knit** to HTML.
+- *Save* all documents using the `Jan06` naming convention, *commit* changes, and *push* to GitHub
+- *Link* to the knitted html from your `README.md` file by writing the html file name into the parenthesis at the end of `- [Monday]()`
 
 ## Assets
 
