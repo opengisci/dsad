@@ -72,12 +72,11 @@ Create an RStudio project with the GitHub repository on a lab computer
 ## RMarkdown
 
 - RMarkdown [rmarkdown.rstudio.com/](https://rmarkdown.rstudio.com/)
-
-The morning lectures will provide both working R code vignettes to solve specific problems *and* explanations about the context/purpose of the code, how it works, and how to use it.
-The best way to keep track of what you're learning is with **computational notebooks** to interweave narrative explanations and notes with working code blocks and outputs. 
-In R, computational notebooks are **Rmarkdown** files.  
-To maximize the legitiblity and usefulness of your class notes and in-class assignments, you are expected to create daily RMarkdown documents toward your participation grade.  
-These will be due at **12:00 noon EST on Friday** each week, by committing them to your `wt25` GitHub repository.
+- The morning lectures will provide both working R code vignettes to solve specific problems *and* explanations about the context/purpose of the code, how it works, and how to use it.
+- The best way to keep track of what you're learning is with **computational notebooks** to interweave narrative explanations and notes with working code blocks and outputs. 
+- In R, computational notebooks are **Rmarkdown** files.  
+- To maximize the legitiblity and usefulness of your class notes and in-class assignments, you are expected to create daily RMarkdown documents toward your participation grade.  
+- These will be due at **12:00 noon EST on Friday** each week, by committing them to your `wt25` GitHub repository.
 
 ### Create an RMarkdown document
 
@@ -86,12 +85,12 @@ These will be due at **12:00 noon EST on Friday** each week, by committing them 
 - Enter a title for the first lecture, and your name as Author
 - Use the default type (*document*) and format (*HTML* webpage)
 - Go to Run -> Run All to see how RMarkdown works
-  - R code is written inside code chunks blocked off by three backtics
-  - Everything else is `Markdown`, a streamlined language for writing with simple formatting options
-  - The default document contains three code blocks: one with default settings to include code in ouput, one to load data on car speed and distance required to stop, and one to graph the temperature and vapor pressure of Mercury 
-  - Code blocks can be run one at a time with ctrl+shift+enter or the Green play button
-  - Try changing the `plot(pressure)` code to `plot(cars)` and then re-run that code block
-  - Create new blocks with ctrl+alt+i *or* Code -> Insert Chunk *or* by typing out the code for a new chunk
+- R code is written inside code chunks blocked off by three backtics
+- Everything else is `Markdown`, a streamlined language for writing with simple formatting options
+- The default document contains three code blocks: one with default settings to include code in ouput, one to load data on car speed and distance required to stop, and one to graph the temperature and vapor pressure of Mercury 
+- Code blocks can be run one at a time with ctrl+shift+enter or the Green play button
+- Try changing the `plot(pressure)` code to `plot(cars)` and then re-run that code block
+- Create new blocks with ctrl+alt+i *or* Code -> Insert Chunk *or* by typing out the code for a new chunk
 
 ### Markdown
 
