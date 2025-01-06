@@ -15,9 +15,9 @@ Wang, Z., Ye, X., & Tsou, M. H. (2016). Spatial, temporal, and content analysis 
 - Git software [git-scm.com/](https://git-scm.com/)
 - GitHub account [github.com/](https://github.com/)
 - What is version control?
-- Advantages of using Git version control for Data Science
+- Advantages of using Git version control for Data Science: [do you have a minute?](https://drive.google.com/open?id=1F-GyfrPV_gb1EU_L9OYBCXW3WbM8rhdM&usp=drive_fs)
 
-### Key Git and GitHub Actions
+### Essential Git / GitHub Actions
 
 - `Clone`: Download a repository (yours or someone else's) to a local computer
 - `Fork`: Make a copy of a repository (yours or someone else's) in your own online GitHub account. This copy may maintain association with the original repository.
@@ -112,6 +112,10 @@ Create an RStudio project with the GitHub repository on a lab computer
 - Once you are finished, **Knit** to HTML.
 - *Save* all documents using the `Jan06` naming convention, *commit* changes, and *push* to GitHub
 - *Link* to the knitted html from your `README.md` file by writing the html file name into the parenthesis at the end of `- [Monday]()`
+
+### Sign Out
+
+***Please*** [Sign Out](https://midd.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=97e5eec2-ab3d-453c-821d-b1e301495aef) of the lab computers after *every session*!
 
 ## Assets
 
