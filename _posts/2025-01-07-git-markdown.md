@@ -3,6 +3,12 @@ layout: post
 title: "GitHub and RMarkdown"
 ---
 
+## Transactions
+
+- Use lab computers for lab, and [Sign Out](https://midd.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=97e5eec2-ab3d-453c-821d-b1e301495aef) when finished
+- Bookmark [course webpage](https://opengisci.github.io/hegsrr)
+- Refresh course webpages to see updates
+
 ## Reading for Discussion
 
 Please read the following article prior to our Tuesday afternoon meeting.  
@@ -16,6 +22,7 @@ Wang, Z., Ye, X., & Tsou, M. H. (2016). Spatial, temporal, and content analysis 
 - GitHub account [github.com/](https://github.com/)
 - What is version control?
 - Advantages of using Git version control for Data Science: [do you have a minute?](https://drive.google.com/open?id=1F-GyfrPV_gb1EU_L9OYBCXW3WbM8rhdM&usp=drive_fs)
+- Example [data science project on GitHub](https://github.com/HEGSRR/OR-VT-Pharmacy)
 
 ### Essential Git / GitHub Actions
 
@@ -68,6 +75,14 @@ Create an RStudio project with the GitHub repository on a lab computer
 - Copy your notes (hopefully in R script format) from lecture into the `scripts` folder
 - **Commit** and **Push** the changes
 - Return to the lab computer and **Pull** the changes into the lab computer
+
+## Advice for Git(hub)
+
+- Always **pull** changes before beginning work
+- Use our [GitHub Discussions](https://github.com/opengisci/dsad_forum/discussions) to share questions and solutions
+- Avoid large files over `100mb`
+- Git tracks changes line-by-line and Markdown compiles lines into paragraphs, so write one sentence per line and use short lines of code
+- Commit and push *incremental* changes, keeping in mind you can "undo" one commit at a time.
 
 ## RMarkdown
 

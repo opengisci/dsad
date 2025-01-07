@@ -16,6 +16,8 @@ Please prepare for this course *before the first meeting* by getting a laptop co
 
 For installing R and RStudio before Monday morning class, please see [this video](https://drive.google.com/file/d/1OicG9Vc3GOE15eN3AbJq4qEBZXWo9qf9/view)
 
+If you have already installed R and RStudio, please make sure your software versions are up-to-date.
+
 If you have any difficulty with software installation or account creation, please attend the first set of office hours on Monday afternoon.
 
 Once you have a GitHub account, please **[fill out this form](https://forms.gle/4tWobsz8NEoCkasM7)** to confirm enrollment in the course and share your GitHub user account.
