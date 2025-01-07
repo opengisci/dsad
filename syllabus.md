@@ -21,6 +21,7 @@ Instructors:
 - Morning Lecture: BiHall 104
 - Afternoon Workshop: BiHall 632
 - Holler's Office Hours: BiHall 632 or 634
+- Virtual [Discussion Forum](https://github.com/opengisci/dsad_forum/discussions)
 
 ### Course Description
 
@@ -88,7 +89,7 @@ Very short extensions may be granted with notice more than two days in advance, 
 ### Honor Code
 
 The Middlebury College Honor Code requires students to neither give nor receive unauthorized aid on any assignment.
-Unless otherwise noted, in Data Science Across Disciplines you are always authorized to use class notes, consulation with peers, R software [documentation](https://www.r-project.org/other-docs.html), books, tutorials, troubleshooting forums (e.g. [Stack Overflow](https://stackoverflow.com/), ResearchGate, GitHub Issues, etc.).
+Unless otherwise noted, in Data Science Across Disciplines you are always authorized to use class notes, consulation with peers, R software [documentation](https://www.r-project.org/other-docs.html), books, tutorials, troubleshooting forums (e.g. [Stack Overflow](https://stackoverflow.com/), ResearchGate, [GitHub Discussion](https://github.com/opengisci/dsad_forum/discussions), etc.).
 You may also use internet searches and AI-supported chatbots to help debug *your* code.
 You *may not* copy blocks of code from generative AI or from other data scientists.
 In special cases, you may request permission to do so from the professor, and you are required to attribute the source.
