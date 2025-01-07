@@ -21,6 +21,7 @@ Wang, Z., Ye, X., & Tsou, M. H. (2016). Spatial, temporal, and content analysis 
 
 - `Clone`: Download a repository (yours or someone else's) to a local computer
 - `Fork`: Make a copy of a repository (yours or someone else's) in your own online GitHub account. This copy may maintain association with the original repository.
+- `Stage`: Designate changes in a file for inclusion in the next `commit`
 - `Commit`: Save a batch of changes to your repository, including a brief message and description
 - `Revert`: Undo one or more commits.
 - `Push`: Upload one or more commits from the local computer to the GitHub servers
@@ -59,6 +60,8 @@ Create an RStudio project with the GitHub repository on a lab computer
 - View the Readme file on GitHub.com to see the change (you may need to Refresh the browser)
 - View the **Commits** history to see how this repository has been changed over time, one commit at a time
 - View the most recent commit details to see a *diff* of the changes in that commit
+- Create a `data` folder
+- Copy the 
 
 ## Set up the Repository on your Personal Computer
 
@@ -66,7 +69,7 @@ Create an RStudio project with the GitHub repository on a lab computer
 - This will require having [Git downloaded and installed](https://git-scm.com/downloads)
 - Create a `scripts` folder inside your repository
 - Copy your notes (hopefully in R script format) from lecture into the `scripts` folder
-- **Commit** and **Push** the changes
+- **Commit** and **Push** the changes. If a new file appears with `?` as untracked, double-click to start tracking that file.
 - Return to the lab computer and **Pull** the changes into the lab computer
 
 ## RMarkdown
@@ -113,8 +116,16 @@ Create an RStudio project with the GitHub repository on a lab computer
 - *Save* all documents using the `Jan06` naming convention, *commit* changes, and *push* to GitHub
 - *Link* to the knitted html from your `README.md` file by writing the html file name into the parenthesis at the end of `- [Monday]()`
 
+### Make a notebook for the second lecture
+
 Now, make a notebook for your second lecture!  
+In case some topics or analyses span two lectures, you may move them into the same notebook, e.g. the diamonds analysis from Wednesday morning could be appeneded to the Tuesday notebook.
 In future lectures, you *may* start with an RMarkdown file saved to your `wt25` repository, rather than an R script.
+
+- Create a data folder and copy the `profiles.csv` file into it, but ***do not track or commit this file***. It is too large (`>100mb`) to store on GitHub.
+- In fact, open the `.gitignore` file and add a line for `profiles.csv` to tell Git not to track this file.
+- Install the `here` package and use `here("data", "profiles.csv")` to load the file.
+- You will need to seperately copy the file to the lab computer for your code to work there. 
 
 ### Sign Out
 
@@ -123,6 +134,6 @@ In future lectures, you *may* start with an RMarkdown file saved to your `wt25` 
 ## Assets
 
 - [ggplot2]({{site.baseurl}}/assets/ggplot2.pdf)
+- [dyplr]({{site.baseurl}}/assets/dplyr.pdf)
 - [markdown]({{site.baseurl}}/assets/rmarkdown.pdf)
 - [rmarkdown]({{site.baseurl}}/assets/rmarkdown.pdf)
-
