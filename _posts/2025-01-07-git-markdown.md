@@ -41,7 +41,7 @@ Professor Holler will create a private personal respository in which each studen
 
 Repositories begin with the prefix `wt25`
 
-- On lab computer, **sign in** to the GitHub [Open GIScience organization][https://github.com/opengisci]
+- On lab computer, **sign in** to the GitHub [Open GIScience organization](https://github.com/opengisci)
 - Confirm that you can see a repository named `wt25_...` where `...` is your GitHub user name
 - Open the repository and copy the web address (e.g. `https://github.com/opengisci/wt25_...`)
 
@@ -53,7 +53,7 @@ Create an RStudio project with the GitHub repository on a lab computer
 - Git
 - Repository URL: paste the web address of your `wt25_` repository
 - Project directory name: use the default
-- Create project as a subdirectory of: **browse** to your local `documents` folder. *Do not* store the project inside of any other project/repository or inside of any syncing folder (e.g. OneDrive, Google Drive, Icloud)
+- Create project as a subdirectory of: **browse** to your local `documents` folder. *Do not* store the project inside of any other project/repository or inside of any cloud-syncing folder (e.g. OneDrive, Google Drive, Icloud)
 - Sign into GitHub when prompted using your browser
 
 ## Practice Using the Repository
@@ -67,8 +67,6 @@ Create an RStudio project with the GitHub repository on a lab computer
 - View the Readme file on GitHub.com to see the change (you may need to Refresh the browser)
 - View the **Commits** history to see how this repository has been changed over time, one commit at a time
 - View the most recent commit details to see a *diff* of the changes in that commit
-- Create a `data` folder
-- Copy the 
 
 ## Set up the Repository on your Personal Computer
 
@@ -76,14 +74,14 @@ Create an RStudio project with the GitHub repository on a lab computer
 - This will require having [Git downloaded and installed](https://git-scm.com/downloads)
 - Create a `scripts` folder inside your repository
 - Copy your notes (hopefully in R script format) from lecture into the `scripts` folder
-- **Commit** and **Push** the changes. If a new file appears with `?` as untracked, double-click to start tracking that file.
+- **Commit** and **Push** the changes. If a new file appears with `?` as untracked, check the `stage` button to stage and formally track it
 - Return to the lab computer and **Pull** the changes into the lab computer
 
 ## Advice for Git(hub)
 
 - Always **pull** changes before beginning work
 - Use our [GitHub Discussions](https://github.com/opengisci/dsad_forum/discussions) to share questions and solutions
-- Avoid large files over `100mb`
+- Avoid committing large files over `100mb` (including the `profiles.csv` file from lecture)
 - Git tracks changes line-by-line and Markdown compiles lines into paragraphs, so write one sentence per line and use short lines of code
 - Commit and push *incremental* changes, keeping in mind you can "undo" one commit at a time.
 
@@ -94,7 +92,7 @@ Create an RStudio project with the GitHub repository on a lab computer
 - The best way to keep track of what you're learning is with **computational notebooks** to interweave narrative explanations and notes with working code blocks and outputs. 
 - In R, computational notebooks are **Rmarkdown** files.  
 - To maximize the legitiblity and usefulness of your class notes and in-class assignments, you are expected to create daily RMarkdown documents toward your participation grade.  
-- These will be due at **12:00 noon EST on Friday** each week, by committing them to your `wt25` GitHub repository.
+- These will be due at **12:00 noon EST on Friday** each week, by committing them to your `wt25_...` GitHub repository.
 
 ### Create an RMarkdown document
 
