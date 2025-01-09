@@ -53,6 +53,8 @@ Let's start analyzing this data by investigating some preliminary questions abou
 - How many tweets are there from each country in the dataset?
 - Graph the frequency of tweets over time, by different time increments
 
+Submit the first assignment by completing an Rmarkdown document and knitting it, including a graph of how many tweets are tagged with place names of which types, and another interesting and creative graph from this dataset.
+
 
 ## Transactions
 
