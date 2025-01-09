@@ -5,7 +5,7 @@ title: "Disaster Data"
 
 ## Guest Speaker
 
-- Surprise! Alumnus Liam Smith will join us at the beginning of class to speak about his experience learning data science and applying it to an internship with the National Park Service.
+- Surprise! Alumnus Liam Smith will join us at the beginning of class to speak about his experience learning data science and applying it to an internship with the National Park Service. [Some Links](https://docs.google.com/document/d/1ye3qI0mlQXvzvh31zMydYT6Qh3KtTUpzQvMN5X1vyxQ/edit?tab=t.0)
 
 ## A Forum
 
@@ -39,6 +39,8 @@ Managing the folder structure with Git:
  - Add `data_private\` to your `.gitignore` so that private things will not be tracked
  - commit the changes to `.gitignore`
  - Git pays no attention to folders until they have content inside
+
+ [Example Repository Structure and File Management](https://github.com/opengisci/wt25_demo)
 
 # First Assignment
 
