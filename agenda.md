@@ -10,12 +10,12 @@ This is a working agenda to be updated as the course progresses.
 - **Tuesday Morning**: More advanced graphing
 - **Tuesday Afternoon**: GitHub and RMarkdown
 - **Wednesday Morning**: Data wrangling
-- **Thursday Morning**: Ethical data visualization
+- **Thursday Morning**: Text strings
 - **Thursday Afternoon**: Disaster data and techniques for reproducible data science
 
 ## Week Two
 
-- **Monday Morning**: Text strings
+- **Monday Morning**: Ethical data visualization
 - **Tuesday Morning**: Web scraping
 - **Tuesday Afternoon**: Text analysis of word frequency and association
 - **Wednesday Morning**: Joining and animating I
