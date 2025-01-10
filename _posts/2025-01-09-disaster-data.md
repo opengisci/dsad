@@ -17,6 +17,7 @@ title: "Disaster Data"
 - Legal and ethical constraints and considerations
 - Twitter application programming interface and queries
 - Twitter metadata and example Tweet
+- [slides](https://drive.google.com/open?id=122vhIvRJ7Xys8Oyvppb5V_3gBn879b0a&usp=drive_fs)
 
 ## Data Science Tools and Organization
 
