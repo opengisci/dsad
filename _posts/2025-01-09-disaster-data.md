@@ -56,6 +56,7 @@ Let's start analyzing this data by investigating some preliminary questions abou
 
 Submit the first assignment by completing an Rmarkdown document and knitting it, including a graph of how many tweets are tagged with place names of which types, and another interesting and creative graph from this dataset.
 
+Data is available in this private repository [github.com/opengisci/opengisci_restricted](https://github.com/opengisci/opengisci_restricted)
 
 ## Transactions
 
