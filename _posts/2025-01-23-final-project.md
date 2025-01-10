@@ -17,7 +17,7 @@ We can construct graph models of social networks by measuring associations betwe
 
 ## Final Project Groups:
 
-Groups of three to five students will be determined by prior experience and interests.
+Groups of two to four students will be formed based on prior experience and research interest.
 
 ## Final Project Expectations:
 
@@ -27,3 +27,5 @@ Groups of three to five students will be determined by prior experience and inte
 - **Attribution** of sources for all data, software, ideas, and any authorized use of code.
 - **Presentation** of the final project to the full DSAD class (time T.B.D. on last two days of class)
 - **Submission** of the final code repository on GitHub by noon EST of Friday, January 31.
+
+- Data for final projects is available in a private repository: [github.com/opengisci/opengisci_restricted](https://github.com/opengisci/opengisci_restricted)
