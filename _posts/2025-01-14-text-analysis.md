@@ -15,9 +15,6 @@ Questions for discussion:
 -	How does sentiment analysis work and what do the outputs of sentiment analysis mean? 
 -   What is the story/interpretation of the tables and figures in the paper? 
 
-
-
-
 ## Cleaning Text
 
 - non-text
