@@ -41,6 +41,27 @@ Managing the folder structure with Git:
  - commit the changes to `.gitignore`
  - Git pays no attention to folders until they have content inside
 
+
+### Create a new folder with codde
+
+The following line of code can check if a folder exists and if not, create it.
+
+```r
+if(!dir.exists(here("data_private"))) {dir.create(here("data_private"))}
+```
+
+We can break down how it works below:
+
+Code | Purpose |
+| :--: | -- |
+`here(“data_private”)` | creates a path to a `data_private` folder in your project |
+`dir.exists(here(“data_private”)` |   	checks if the folder is there, resulting if `TRUE` if it is, and `FALSE` if it is not. |
+`!dir.exists(here(“data_private”)`  | 	`!` negates the above, equivalent to checking if a folder does NOT exist
+`if( …  )  { …  }`	|	`if()` controls flow of code. If whatever is in the `( parenthesis )` is `TRUE`, then do the stuff inside the `{ curly brackets }`. Otherwise, skip the stuff in curly brackets. |
+`dir.create(here("data_private"))`	| makes a new folder
+
+### Example demo repository
+
  [Example Repository Structure and File Management](https://github.com/opengisci/wt25_demo)
 
 # First Assignment
