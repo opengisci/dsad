@@ -53,7 +53,7 @@ if(!dir.exists(here("data_private"))) {dir.create(here("data_private"))}
 We can break down how it works below:
 
 Code | Purpose |
-| :--: | -- |
+| :--: | :--: |
 `here(“data_private”)` | creates a path to a `data_private` folder in your project |
 `dir.exists(here(“data_private”)` |   	checks if the folder is there, resulting if `TRUE` if it is, and `FALSE` if it is not. |
 `!dir.exists(here(“data_private”)`  | 	`!` negates the above, equivalent to checking if a folder does NOT exist
