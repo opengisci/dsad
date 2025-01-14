@@ -17,6 +17,10 @@ Questions for discussion:
 -	How does sentiment analysis work and what do the outputs of sentiment analysis mean? 
 -   What is the story/interpretation of the tables and figures in the paper? 
 
+## What have you learned?
+
+What did you learn from the first assignment?
+
 ## Time and Text Analysis
 
 Wrapping up lecture...
