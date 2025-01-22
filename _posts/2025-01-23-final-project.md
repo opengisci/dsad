@@ -5,7 +5,7 @@ title: "Final Projects"
 
 ## Reading for Discussion
 
-- Kasperson, R. Renn, O., Slovic, P, Brown, H., Emel, J., Goble, R., Kasperson, J., Ratick, S. (1988). The social amplification of risk: A conceptual framework. *Society for Risk Analysis*, 8(2), 177–187. https://doi.org/10.1111/j.1539-6924.1988.tb01168.x
+- Kasperson, R. Renn, O., Slovic, P, Brown, H., Emel, J., Goble, R., Kasperson, J., Ratick, S. (1988). The social amplification of risk: A conceptual framework. *Society for Risk Analysis*, 8(2), 177–187. https://doi.org/10.1111/j.1539-6924.1988.tb01168.x [download](https://drive.google.com/open?id=121KAXNN4gYgc1r1qpr_-DRYGfwej_xO-&usp=drive_fs)
 
 The reading above is often cited in hazard, risk and disaster literature as a framework for thinking about communication systems and the perils of incomplete or inaccurate information. 
 Although it was written prior to the invention and widespread adoption of social media, the implications are clear.
