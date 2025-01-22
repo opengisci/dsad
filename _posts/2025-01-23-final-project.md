@@ -29,3 +29,8 @@ Groups of two to four students will be formed based on prior experience and rese
 - **Submission** of the final code repository on GitHub by noon EST of Friday, January 31.
 
 - Data for final projects is available in a private repository: [github.com/opengisci/opengisci_restricted](https://github.com/opengisci/opengisci_restricted)
+
+## Cheat sheets
+
+- [sf]({{site.baseurl}}/assets/sf.pdf)
+- [shiny]({{site.baseurl}}/assets/shiny.pdf)
