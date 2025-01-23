@@ -13,13 +13,21 @@ How could this framework help inform your final project research questions and a
 
 ## Graphing Social Networks
 
-We can construct graph models of social networks by measuring associations between users. These can be defined by the frequency and direction of interactions on the social media platform. Common interaction types include following, liking, reposting/retweeting, and replying. Social media users become *nodes* (points) in the network, and their interactions become *edges* (connecting lines). From there, all sorts of network characteristics can be visualized and calculated! 
+We can construct graph models of social networks by measuring associations between users.
+These can be defined by the frequency and direction of interactions on the social media platform.
+Common interaction types include following, liking, reposting/retweeting, and replying.
+Social media users become *nodes* (points) in the network, and their interactions become *edges* (connecting lines).
+From there, all sorts of network characteristics can be visualized and calculated! 
 
-## Final Project Groups:
+[igraph](https://r.igraph.org) is a popular package for building, analyzing, and visualizing graphs in R. 
+The late [rtweet](https://github.com/ropensci-archive/rtweet) package had a convenient function for building an igraph from twitter data on retweets, mentions, quotes, and replies.
+This package has been archived, and I've decided *not* to sort out a work around for it this semester.
+
+## Final Project Groups
 
 Groups of two to four students will be formed based on prior experience and research interest.
 
-## Final Project Expectations:
+## Final Project Expectations
 
 - An insightful **Geographic Research Question** that can be answered with analysis and visualization of social media and Census data.
 - **Data Analysis** using R code that is reproducible, legible, and well-documented.
