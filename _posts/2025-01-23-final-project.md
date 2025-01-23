@@ -78,11 +78,15 @@ Some advice:
   - Only have one person make changes to the Shiny app at a time.
   - Use issues or discussion to track progress and communicate when not in person (i.e. don't duplicate information on email or other platforms: keep communications in one place-- attached to the work itself)
 
-## Final Project Groups:
+[igraph](https://r.igraph.org) is a popular package for building, analyzing, and visualizing graphs in R. 
+The late [rtweet](https://github.com/ropensci-archive/rtweet) package had a convenient function for building an igraph from twitter data on retweets, mentions, quotes, and replies.
+This package has been archived, and I've decided *not* to sort out a work around for it this semester.
+
+## Final Project Groups
 
 Groups of two to four students will be formed based on prior experience and research interest.
 
-## Final Project Expectations:
+## Final Project Expectations
 
 - Investigation of Hurricane Ida
 - An insightful **Geographic Research Question** that can be answered with analysis and visualization of social media and Census data.
