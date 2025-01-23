@@ -88,7 +88,8 @@ This package has been archived, and I've decided *not* to sort out a work around
 
 ## Final Project Groups
 
-Groups of two to four students will be formed based on prior experience and research interest.
+Groups of two to three students will be formed based on prior experience and research interest.  
+Each group shall collaborate in a group GitHub repository within the [OpenGIScience organization](https://github.com/orgs/opengisci/repositories). Group repository names begin with `wt25_grp`
 
 ## Final Project Expectations
 
