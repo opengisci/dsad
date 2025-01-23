@@ -38,6 +38,7 @@ These can be defined by the frequency and direction of interactions on the socia
 Common interaction types include following, liking, reposting/retweeting, and replying. 
 Social media users become *nodes* (points) in the network, and their interactions become *edges* (connecting lines). 
 From there, all sorts of network characteristics can be visualized and calculated! 
+If you want to work on this, by all means... 
 
 ## Bookdown
 
@@ -58,6 +59,8 @@ Some advice:
 
 ## Final Project Tidbits
 
+- Data is available in this private repository [github.com/opengisci/opengisci_restricted](https://github.com/opengisci/opengisci_restricted)
+- Get started downloading Tweets and removing duplicates with [this script](https://drive.google.com/open?id=1FcBs7UUbX76HpyZEzd8T57M4thoM90tT&usp=drive_fs)
 - Store all shiny app content in one folder, including data required of the app
 - Only use cleaned and anonymized data in the app
 - Prepare the data separately, using code in Rmd files
@@ -77,6 +80,7 @@ Some advice:
   - Work on *different* files in parallel. Simultaneous work can be integrated seamlessly if the work was done in different files. E.g. you may have a couple of different Rmd files at first, and then integrate them later.
   - Only have one person make changes to the Shiny app at a time.
   - Use issues or discussion to track progress and communicate when not in person (i.e. don't duplicate information on email or other platforms: keep communications in one place-- attached to the work itself)
+  - Share work by pushing and pulling, *not* sending files by email, cloud share, etc.
 
 [igraph](https://r.igraph.org) is a popular package for building, analyzing, and visualizing graphs in R. 
 The late [rtweet](https://github.com/ropensci-archive/rtweet) package had a convenient function for building an igraph from twitter data on retweets, mentions, quotes, and replies.
@@ -88,10 +92,11 @@ Groups of two to four students will be formed based on prior experience and rese
 
 ## Final Project Expectations
 
-- Investigation of Hurricane Ida
+- Investigation of Hurricane Ida. 
 - An insightful **Geographic Research Question** that can be answered with analysis and visualization of social media and Census data.
 - **Data Analysis** using R code that is reproducible, legible, and well-documented with Rmarkdown.
 - **Data Visualization** of your results with a Shiny app integrating multiple visualization types and some narrative with an emphasis on *legibility* and *telling an insightful story*. Project should somehow investigate relationships between time, geographic space, the storm (track and strength), society (as shown in characteristics of Twitter users and/or content), and demographic or socio-economic characteristics (from Census).
+- Some element of data analysis and visualization should go beyond the skills taught directly in class, even modestly. Draft a short summary of how your project **Extends** what you have learned already.
 - **Interpretation** to tell a story with the data, addressing your research question. This may not actually be written in the app itself, but you should draft a storyline / path through the data visualization for your presentations and save it in the readme or your markdown file.
 - **Attribution** of sources for all data, software, ideas, and any authorized use of code (e.g. from a tutorial or worked example online). 
 - **Presentation** of the final project to the full DSAD class (Thursday 10:25 to 10:55)
