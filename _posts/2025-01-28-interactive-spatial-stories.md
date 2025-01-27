@@ -9,6 +9,8 @@ title: "Interactive Spatial Stories"
 
 - You may download other datasets from the Census or American Community Survey to include more detailed socio-economic information. Here is a [video tutorial](https://midd.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=de8af8be-98b6-4758-bbc1-b126015b09e4) from GEOG 261. You don't need any of the QGIS stuff... the first few videos are a tour of Census data and techniques to download it using `tidycensus`.
 
+- You may download data on storm impacts from NOAA's database. Bulk downloads are available by year, and choose the "details" [NOAA storm events](https://www.ncdc.noaa.gov/stormevents/ftp.jsp)
+
 ## Examples of Great Stories
 
 
