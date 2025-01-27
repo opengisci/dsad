@@ -27,6 +27,17 @@ title: "Interactive Spatial Stories"
 
 ## Best Practices
 
+Thanks to Librarian Julia Deen for these resources:
+
+- https://medium.com/agoda-engineering/10-common-data-visualization-mistakes-and-how-to-avoid-them-e3896fe8e104
+- Wong, B. Gestalt principles (Part 1). Nat Methods 7, 863 (2010). https://doi.org/10.1038/nmeth1110-863
+- Wong, B. Gestalt principles (Part 2). Nat Methods 7, 941 (2010). https://doi.org/10.1038/nmeth1210-941 
+- Wong, B. Points of view: Points of review (part 2). Nat Methods 8, 189 (2011). https://doi.org/10.1038/nmeth0311-189Wong, B. Color coding. Nat Methods 7, 573 (2010). https://doi.org/10.1038/nmeth0810-573
+- Krzywinski, M., Wong, B. Plotting symbols. Nat Methods 10, 451 (2013). https://doi.org/10.1038/nmeth.2490
+- Gehlenborg, N., Wong, B. Mapping quantitative data to color. Nat Methods 9, 769 (2012). https://doi.org/10.1038/nmeth.2134
+- Gehlenborg, N., Wong, B. Heat maps. Nat Methods 9, 213 (2012). https://doi.org/10.1038/nmeth.1902
+
+
 ## Citation
 
 - Software
