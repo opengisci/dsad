@@ -5,7 +5,7 @@ title: "Interactive Spatial Stories"
 
 ## Loops to close
 
-- Assignment 3: varians of Getis-Ord cluster analysis
+- Assignment 3: variants of Getis-Ord cluster analysis
 - Managing data for group projects
   - challenges with Git?
   - Census & other government data can go in the public folder 
