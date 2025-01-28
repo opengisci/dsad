@@ -11,9 +11,11 @@ title: "Interactive Spatial Stories"
   - Census & other government data can go in the public folder 
   - Save documentation about metadata (e.g. dictionary of column names)
   - Prep the simplest, most anonymized RDS data files possible for the app
-- Files required for Bookdown
-- How Prof Holler geocoded profile data
+  - if you must map points, consider randomizing the location somewhat
+- How Prof Holler [geocoded profile data](https://drive.google.com/drive/folders/1a308sFHQ_LyN9hvuIrSpKCw-nGuf5_Ny?usp=sharing)
 - Is the geography New York City a problem?
+- Presentations
+- `qdapRegex` package has some useful text cleaning functions for Twitter text, including `rm_twitter_url`,  `rm_url`, `rm_tag`, and `rm_hash`. It also has some functions for address components.
 
 ## Possible Project Improvements
 
@@ -48,9 +50,9 @@ Thanks to Librarian Julia Deen for these resources:
 
 ## Citation
 
-- Software
-- Data
-- Literature
 
+- Software: list the R version and the packages used for your work
+- Data: Who created it? Where is it available (link, or ? When did you acquire it? 
+- Literature: Authors, year, and DOI link (e.g. https://doi.org/...)
 
-here("data_public", "GDP.csv")
+List this citational information both *in the app* and on the project's `README.md` file.
