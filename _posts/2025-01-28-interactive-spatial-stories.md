@@ -35,6 +35,8 @@ title: "Interactive Spatial Stories"
 ## Best Practices
 
 - Be clear about the "universe" of your data. What population does the data represent? Is it a complete enumeration or a sample?
+- Use consistent symbology, colors, fonts, and classification schemes
+- Keep interactive graph axes constant
 - Cite and link data sources and any significant sources of code
 
 Thanks to Librarian Julia Deen for these resources:
