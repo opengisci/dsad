@@ -13,8 +13,8 @@ title: "Interactive Spatial Stories"
   - Prep the simplest, most anonymized RDS data files possible for the app
   - if you must map points, consider randomizing the location somewhat
 - How Prof Holler [geocoded profile data](https://drive.google.com/drive/folders/1a308sFHQ_LyN9hvuIrSpKCw-nGuf5_Ny?usp=sharing)
-- Is the geography New York City a problem?
-- Presentations
+- Is the geography of New York City a problem?
+- Presentations: 6 minute story with Question, app driver & narrator(s). Focus on your findings and to some extent your achievements, not your struggles
 - `qdapRegex` package has some useful text cleaning functions for Twitter text, including `rm_twitter_url`,  `rm_url`, `rm_tag`, and `rm_hash`. It also has some functions for address components.
 
 ## Possible Project Improvements
