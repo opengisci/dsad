@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Wrangle and graph New York City flights | Data Sciences Across the Disciplines: Geography</title>
+  <meta name="description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Wrangle and graph New York City flights | Data Sciences Across the Disciplines: Geography" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  <meta name="github-repo" content="opengisci/wt25_josephholler/" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Wrangle and graph New York City flights | Data Sciences Across the Disciplines: Geography" />
+  
+  <meta name="twitter:description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  
+
+<meta name="author" content="Joseph Holler" />
+<meta name="author" content="Alex Lyford" />
+
+
+<meta name="date" content="2025-01-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="graph-values-and-qualities-of-diamonds.html"/>
+<link rel="next" href="okcupid.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="r-and-calculations.html"><a href="r-and-calculations.html"><i class="fa fa-check"></i><b>2</b> R and Calculations</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="r-and-calculations.html"><a href="r-and-calculations.html#r-is-a-calculator"><i class="fa fa-check"></i><b>2.1</b> R is a calculator</a></li>
+<li class="chapter" data-level="2.2" data-path="r-and-calculations.html"><a href="r-and-calculations.html#functions"><i class="fa fa-check"></i><b>2.2</b> Functions</a></li>
+<li class="chapter" data-level="2.3" data-path="r-and-calculations.html"><a href="r-and-calculations.html#store-objects-for-future-use-in-environment"><i class="fa fa-check"></i><b>2.3</b> Store objects for future use in environment</a></li>
+<li class="chapter" data-level="2.4" data-path="r-and-calculations.html"><a href="r-and-calculations.html#mean-function-for-averages"><i class="fa fa-check"></i><b>2.4</b> Mean function for averages</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html"><i class="fa fa-check"></i><b>3</b> Graph values and qualities of diamonds</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#install-the-tidyverse-package"><i class="fa fa-check"></i><b>3.1</b> Install the tidyverse package</a></li>
+<li class="chapter" data-level="3.2" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#explore-diamonds-dataset"><i class="fa fa-check"></i><b>3.2</b> Explore Diamonds Dataset</a></li>
+<li class="chapter" data-level="3.3" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#facet-the-data"><i class="fa fa-check"></i><b>3.3</b> Facet the data</a></li>
+<li class="chapter" data-level="3.4" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#restart-r-and-remake-last-graph"><i class="fa fa-check"></i><b>3.4</b> Restart R and Remake last graph</a></li>
+<li class="chapter" data-level="3.5" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#explore-gap-in-prices-between-1k-and-2k"><i class="fa fa-check"></i><b>3.5</b> Explore gap in prices between 1k and 2k</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html"><i class="fa fa-check"></i><b>4</b> Wrangle and graph New York City flights</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#which-carriers-should-travelers-avoid"><i class="fa fa-check"></i><b>4.1</b> Which carriers should travelers avoid?</a></li>
+<li class="chapter" data-level="4.2" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#data-wrangling"><i class="fa fa-check"></i><b>4.2</b> Data Wrangling</a></li>
+<li class="chapter" data-level="4.3" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#on-average-how-long-are-flights-delayed"><i class="fa fa-check"></i><b>4.3</b> On average, how long are flights delayed?</a></li>
+<li class="chapter" data-level="4.4" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#pipe-operator"><i class="fa fa-check"></i><b>4.4</b> Pipe Operator</a></li>
+<li class="chapter" data-level="4.5" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#warmup-question"><i class="fa fa-check"></i><b>4.5</b> Warmup Question</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="okcupid.html"><a href="okcupid.html"><i class="fa fa-check"></i><b>5</b> OkCupid</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="okcupid.html"><a href="okcupid.html#load-ok-cupid-data"><i class="fa fa-check"></i><b>5.1</b> Load OK Cupid Data</a></li>
+<li class="chapter" data-level="5.2" data-path="okcupid.html"><a href="okcupid.html#height"><i class="fa fa-check"></i><b>5.2</b> Height</a></li>
+<li class="chapter" data-level="5.3" data-path="okcupid.html"><a href="okcupid.html#age"><i class="fa fa-check"></i><b>5.3</b> Age</a></li>
+<li class="chapter" data-level="5.4" data-path="okcupid.html"><a href="okcupid.html#diet-and-body-type"><i class="fa fa-check"></i><b>5.4</b> Diet and Body Type</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="okcupid.html"><a href="okcupid.html#collapse-diet-categories"><i class="fa fa-check"></i><b>5.4.1</b> Collapse Diet Categories</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="okcupid.html"><a href="okcupid.html#save-dataset-to-computer"><i class="fa fa-check"></i><b>5.5</b> Save dataset to computer</a></li>
+<li class="chapter" data-level="5.6" data-path="okcupid.html"><a href="okcupid.html#heat-map-of-diet-and-body-type"><i class="fa fa-check"></i><b>5.6</b> Heat map of diet and body type</a></li>
+<li class="chapter" data-level="5.7" data-path="okcupid.html"><a href="okcupid.html#text-mining"><i class="fa fa-check"></i><b>5.7</b> Text mining</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="okcupid.html"><a href="okcupid.html#essay-data-dictionary"><i class="fa fa-check"></i><b>5.7.1</b> Essay data dictionary</a></li>
+<li class="chapter" data-level="5.7.2" data-path="okcupid.html"><a href="okcupid.html#what-are-people-really-good-at"><i class="fa fa-check"></i><b>5.7.2</b> What are people really good at?</a></li>
+<li class="chapter" data-level="5.7.3" data-path="okcupid.html"><a href="okcupid.html#analyze-word-usage-in-essays"><i class="fa fa-check"></i><b>5.7.3</b> Analyze word usage in essays</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="baby-names.html"><a href="baby-names.html"><i class="fa fa-check"></i><b>6</b> Baby Names</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="baby-names.html"><a href="baby-names.html#bens-over-time"><i class="fa fa-check"></i><b>6.1</b> Bens over time</a></li>
+<li class="chapter" data-level="6.2" data-path="baby-names.html"><a href="baby-names.html#babies-over-time"><i class="fa fa-check"></i><b>6.2</b> Babies over time</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="web-scraping.html"><a href="web-scraping.html"><i class="fa fa-check"></i><b>7</b> Web Scraping</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="web-scraping.html"><a href="web-scraping.html#scrape-all-paragraph-text-from-a-webpage"><i class="fa fa-check"></i><b>7.1</b> Scrape all paragraph text from a webpage</a></li>
+<li class="chapter" data-level="7.2" data-path="web-scraping.html"><a href="web-scraping.html#scrape-a-specific-item-from-a-webpage"><i class="fa fa-check"></i><b>7.2</b> Scrape a specific item from a webpage</a></li>
+<li class="chapter" data-level="7.3" data-path="web-scraping.html"><a href="web-scraping.html#ethics-of-web-scraping"><i class="fa fa-check"></i><b>7.3</b> Ethics of web scraping</a></li>
+<li class="chapter" data-level="7.4" data-path="web-scraping.html"><a href="web-scraping.html#scrape-data"><i class="fa fa-check"></i><b>7.4</b> Scrape data</a></li>
+<li class="chapter" data-level="7.5" data-path="web-scraping.html"><a href="web-scraping.html#cardinal-sin-of-data-science"><i class="fa fa-check"></i><b>7.5</b> Cardinal sin of data science</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html"><i class="fa fa-check"></i><b>8</b> Life expectancy and GDP from graphs to animation</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#make-the-same-graph-but-for-three-random-countries"><i class="fa fa-check"></i><b>8.1</b> Make the same graph but for three random countries</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#join-the-life-expectancy-data-together-with-income-data"><i class="fa fa-check"></i><b>8.1.1</b> Join the life expectancy data together with income data</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#size-points-by-population"><i class="fa fa-check"></i><b>8.2</b> Size points by population</a></li>
+<li class="chapter" data-level="8.3" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#web-scrape-region-data"><i class="fa fa-check"></i><b>8.3</b> Web scrape region data</a></li>
+<li class="chapter" data-level="8.4" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#life-expectancy-gdp-and-region"><i class="fa fa-check"></i><b>8.4</b> Life expectancy, GDP and Region</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="animation.html"><a href="animation.html"><i class="fa fa-check"></i><b>9</b> Animation</a>
+<ul>
+<li class="chapter" data-level="9.0.1" data-path="animation.html"><a href="animation.html#graph-all-years"><i class="fa fa-check"></i><b>9.0.1</b> Graph all years</a></li>
+<li class="chapter" data-level="9.1" data-path="animation.html"><a href="animation.html#create-the-animation"><i class="fa fa-check"></i><b>9.1</b> Create the animation</a></li>
+<li class="chapter" data-level="9.2" data-path="animation.html"><a href="animation.html#rendered-animation"><i class="fa fa-check"></i><b>9.2</b> Rendered Animation</a></li>
+<li class="chapter" data-level="9.3" data-path="animation.html"><a href="animation.html#animate-a-bar-chart"><i class="fa fa-check"></i><b>9.3</b> Animate a bar chart</a></li>
+<li class="chapter" data-level="9.4" data-path="animation.html"><a href="animation.html#make-a-tree-map"><i class="fa fa-check"></i><b>9.4</b> Make a tree map</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="animation.html"><a href="animation.html#animate-a-tree-map"><i class="fa fa-check"></i><b>9.4.1</b> Animate a tree map</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="mapping-in-r.html"><a href="mapping-in-r.html"><i class="fa fa-check"></i><b>10</b> Mapping in R</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="mapping-in-r.html"><a href="mapping-in-r.html#map-alcohol-consumption-per-capita"><i class="fa fa-check"></i><b>10.1</b> Map alcohol consumption per capita</a></li>
+<li class="chapter" data-level="10.2" data-path="mapping-in-r.html"><a href="mapping-in-r.html#map-volcanoes"><i class="fa fa-check"></i><b>10.2</b> Map volcanoes</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>11</b> Shiny Apps</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="shiny-apps.html"><a href="shiny-apps.html#strange-online-food-data"><i class="fa fa-check"></i><b>11.1</b> Strange online food data</a></li>
+<li class="chapter" data-level="11.2" data-path="shiny-apps.html"><a href="shiny-apps.html#liberal-arts-college-rankings"><i class="fa fa-check"></i><b>11.2</b> Liberal arts college rankings</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="shiny-apps.html"><a href="shiny-apps.html#leaflet-map-of-college-locations"><i class="fa fa-check"></i><b>11.2.1</b> Leaflet map of college locations</a></li>
+<li class="chapter" data-level="11.2.2" data-path="shiny-apps.html"><a href="shiny-apps.html#graph-college-ranking-over-time"><i class="fa fa-check"></i><b>11.2.2</b> Graph college ranking over time</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-app-notes"><i class="fa fa-check"></i><b>11.3</b> Shiny App notes</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html"><i class="fa fa-check"></i><b>12</b> Hurricane Dorian</a>
+<ul>
+<li class="chapter" data-level="12.0.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#load-and-organize-data"><i class="fa fa-check"></i><b>12.0.1</b> Load and organize data</a></li>
+<li class="chapter" data-level="12.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#temporal-analysis"><i class="fa fa-check"></i><b>12.1</b> Temporal analysis</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#customize-bin-widths"><i class="fa fa-check"></i><b>12.1.1</b> Customize bin widths</a></li>
+<li class="chapter" data-level="12.1.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#customize-a-date-time-axis"><i class="fa fa-check"></i><b>12.1.2</b> Customize a date-time axis</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#text-analysis"><i class="fa fa-check"></i><b>12.2</b> Text analysis</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#graph-word-frequencies"><i class="fa fa-check"></i><b>12.2.1</b> Graph word frequencies</a></li>
+<li class="chapter" data-level="12.2.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#graph-word-associations"><i class="fa fa-check"></i><b>12.2.2</b> Graph word associations</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#geographic-analysis"><i class="fa fa-check"></i><b>12.3</b> Geographic analysis</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#construct-geographic-points-from-tweets"><i class="fa fa-check"></i><b>12.3.1</b> Construct geographic points from tweets</a></li>
+<li class="chapter" data-level="12.3.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#location-services"><i class="fa fa-check"></i><b>12.3.2</b> Location services</a></li>
+<li class="chapter" data-level="12.3.3" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#place-name"><i class="fa fa-check"></i><b>12.3.3</b> Place name</a></li>
+<li class="chapter" data-level="12.3.4" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#geographic-point-data"><i class="fa fa-check"></i><b>12.3.4</b> Geographic point data</a></li>
+<li class="chapter" data-level="12.3.5" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#aquire-census-data"><i class="fa fa-check"></i><b>12.3.5</b> Aquire Census data</a></li>
+<li class="chapter" data-level="12.3.6" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#select-counties-of-interest"><i class="fa fa-check"></i><b>12.3.6</b> Select counties of interest</a></li>
+<li class="chapter" data-level="12.3.7" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-population-density-and-tweet-points"><i class="fa fa-check"></i><b>12.3.7</b> Map population density and tweet points</a></li>
+<li class="chapter" data-level="12.3.8" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#join-tweets-to-counties"><i class="fa fa-check"></i><b>12.3.8</b> Join tweets to counties</a></li>
+<li class="chapter" data-level="12.3.9" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#calculate-county-tweet-rates"><i class="fa fa-check"></i><b>12.3.9</b> Calculate county tweet rates</a></li>
+<li class="chapter" data-level="12.3.10" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-tweet-rates-by-county"><i class="fa fa-check"></i><b>12.3.10</b> Map tweet rates by county</a></li>
+<li class="chapter" data-level="12.3.11" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#conclusions"><i class="fa fa-check"></i><b>12.3.11</b> Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-hurricane-tracks-with-tmap"><i class="fa fa-check"></i><b>12.4</b> Map hurricane tracks with tmap</a></li>
+<li class="chapter" data-level="12.5" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#acquire-hurricane-track-data"><i class="fa fa-check"></i><b>12.5</b> Acquire hurricane track data</a></li>
+<li class="chapter" data-level="12.6" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-2019-north-atlantic-storm-season"><i class="fa fa-check"></i><b>12.6</b> Map 2019 North Atlantic storm season</a></li>
+<li class="chapter" data-level="12.7" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-hurricane-dorian-track"><i class="fa fa-check"></i><b>12.7</b> Map Hurricane Dorian track</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html"><i class="fa fa-check"></i><b>13</b> Spatial Cluster Analysis</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#advice-for-saving-and-loading-data-in-r"><i class="fa fa-check"></i><b>13.1</b> Advice for saving and loading data in R</a></li>
+<li class="chapter" data-level="13.2" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#load-and-map-county-level-tweet-rate"><i class="fa fa-check"></i><b>13.2</b> Load and map county-level tweet rate</a></li>
+<li class="chapter" data-level="13.3" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#create-spatial-weight-matrix"><i class="fa fa-check"></i><b>13.3</b> Create Spatial Weight Matrix</a></li>
+<li class="chapter" data-level="13.4" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#calculate-getis-ord-g-statistic"><i class="fa fa-check"></i><b>13.4</b> Calculate Getis-Ord G* Statistic</a></li>
+<li class="chapter" data-level="13.5" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#map-hotpots"><i class="fa fa-check"></i><b>13.5</b> Map Hotpots</a></li>
+<li class="chapter" data-level="13.6" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#remove-counties-with-no-tweets"><i class="fa fa-check"></i><b>13.6</b> Remove counties with no tweets</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="hurricane-ida.html"><a href="hurricane-ida.html"><i class="fa fa-check"></i><b>14</b> Hurricane Ida</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Sciences Across the Disciplines: Geography</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="wrangle-and-graph-new-york-city-flights" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Wrangle and graph New York City flights<a href="wrangle-and-graph-new-york-city-flights.html#wrangle-and-graph-new-york-city-flights" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Install the <code>nycflights23</code> package, containing data on flights in and out of New York City’s airports in 2023.<br />
+The package does not contain any functions, just data.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="wrangle-and-graph-new-york-city-flights.html#cb44-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;nycflights23&quot;</span>)</span></code></pre></div>
+<p>Load the nycflights23 package</p>
+<p>view flights</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="wrangle-and-graph-new-york-city-flights.html#cb45-1" tabindex="-1"></a>flights</span></code></pre></div>
+<pre><code>## # A tibble: 435,352 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2023     1     1        1           2038       203      328              3
+##  2  2023     1     1       18           2300        78      228            135
+##  3  2023     1     1       31           2344        47      500            426
+##  4  2023     1     1       33           2140       173      238           2352
+##  5  2023     1     1       36           2048       228      223           2252
+##  6  2023     1     1      503            500         3      808            815
+##  7  2023     1     1      520            510        10      948            949
+##  8  2023     1     1      524            530        -6      645            710
+##  9  2023     1     1      537            520        17      926            818
+## 10  2023     1     1      547            545         2      845            852
+## # ℹ 435,342 more rows
+## # ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<div id="which-carriers-should-travelers-avoid" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Which carriers should travelers avoid?<a href="wrangle-and-graph-new-york-city-flights.html#which-carriers-should-travelers-avoid" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Analysis goal: which flight carriers should travelers avoid?
+Let’s explore what goes on at different airports with different carriers.</p>
+<p>NYTIMES story about change in delay time!</p>
+<p>How often is a flight delayed?
+This answer may be subjective.
+Let’s define flight delays as arriving any amount of time after scheduled</p>
+<p>Make a histogram of arrival delays.
+pressing “tab” can open an auto-fill menu</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="wrangle-and-graph-new-york-city-flights.html#cb47-1" tabindex="-1"></a><span class="fu">ggplot</span>(flights) <span class="sc">+</span> </span>
+<span id="cb47-2"><a href="wrangle-and-graph-new-york-city-flights.html#cb47-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> arr_delay), </span>
+<span id="cb47-3"><a href="wrangle-and-graph-new-york-city-flights.html#cb47-3" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">&quot;darkblue&quot;</span>,</span>
+<span id="cb47-4"><a href="wrangle-and-graph-new-york-city-flights.html#cb47-4" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>)</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## Warning: Removed 12534 rows containing non-finite outside the scale range
+## (`stat_bin()`).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p>Let’s limit the graph to the section with the most data</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="wrangle-and-graph-new-york-city-flights.html#cb50-1" tabindex="-1"></a><span class="fu">ggplot</span>(flights) <span class="sc">+</span> </span>
+<span id="cb50-2"><a href="wrangle-and-graph-new-york-city-flights.html#cb50-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> arr_delay), </span>
+<span id="cb50-3"><a href="wrangle-and-graph-new-york-city-flights.html#cb50-3" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">&quot;darkblue&quot;</span>,</span>
+<span id="cb50-4"><a href="wrangle-and-graph-new-york-city-flights.html#cb50-4" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb50-5"><a href="wrangle-and-graph-new-york-city-flights.html#cb50-5" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">300</span>)</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## Warning: Removed 14636 rows containing non-finite outside the scale range
+## (`stat_bin()`).</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values or values outside the scale
+## range (`geom_bar()`).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+</div>
+<div id="data-wrangling" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Data Wrangling<a href="wrangle-and-graph-new-york-city-flights.html#data-wrangling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Manipulating data…<br />
+Let’s calculate the proportion of delayed flights</p>
+<ul>
+<li>Data wrangling functions are English words that suggest what you’re doing with the data</li>
+</ul>
+<p>Create a new column indicating whether flight was delayed</p>
+<p><code>mutate</code> function does this to a dataset.
+Below, we calculate a new column, <code>was_flight_delayed</code> and fill it in with TRUE if arr_delay is greater than 0, and FALSE if it is not.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="wrangle-and-graph-new-york-city-flights.html#cb54-1" tabindex="-1"></a>flights_with_delay <span class="ot">&lt;-</span> <span class="fu">mutate</span>(flights, <span class="at">was_flight_delayed =</span> arr_delay <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb54-2"><a href="wrangle-and-graph-new-york-city-flights.html#cb54-2" tabindex="-1"></a>flights_with_delay</span></code></pre></div>
+<pre><code>## # A tibble: 435,352 × 20
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2023     1     1        1           2038       203      328              3
+##  2  2023     1     1       18           2300        78      228            135
+##  3  2023     1     1       31           2344        47      500            426
+##  4  2023     1     1       33           2140       173      238           2352
+##  5  2023     1     1       36           2048       228      223           2252
+##  6  2023     1     1      503            500         3      808            815
+##  7  2023     1     1      520            510        10      948            949
+##  8  2023     1     1      524            530        -6      645            710
+##  9  2023     1     1      537            520        17      926            818
+## 10  2023     1     1      547            545         2      845            852
+## # ℹ 435,342 more rows
+## # ℹ 12 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, was_flight_delayed &lt;lgl&gt;</code></pre>
+<p><code>count</code> function counts things!</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="wrangle-and-graph-new-york-city-flights.html#cb56-1" tabindex="-1"></a><span class="fu">count</span>(flights_with_delay, was_flight_delayed)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##   was_flight_delayed      n
+##   &lt;lgl&gt;               &lt;int&gt;
+## 1 FALSE              281244
+## 2 TRUE               141574
+## 3 NA                  12534</code></pre>
+<p>The missing values are cancelled flights!
+It’s important to investigate NAs:
+What do they mean?
+Why are they missing?
+What should we do with this information in the context of the research question?</p>
+</div>
+<div id="on-average-how-long-are-flights-delayed" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> On average, how long are flights delayed?<a href="wrangle-and-graph-new-york-city-flights.html#on-average-how-long-are-flights-delayed" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>summarize</code> allows us to calculate summary statistics</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="wrangle-and-graph-new-york-city-flights.html#cb58-1" tabindex="-1"></a><span class="fu">summarize</span>(flights, <span class="at">average_flight_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 1
+##   average_flight_delay
+##                  &lt;dbl&gt;
+## 1                 4.34</code></pre>
+<p>Out of all flights, the average delay is 4.34</p>
+<p>But of the flights that are delayed, what is the average delay time?</p>
+<p><code>filter</code> can filter out rows of the dataset</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="wrangle-and-graph-new-york-city-flights.html#cb60-1" tabindex="-1"></a>only_delayed_flights <span class="ot">&lt;-</span> <span class="fu">filter</span>(flights, arr_delay <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb60-2"><a href="wrangle-and-graph-new-york-city-flights.html#cb60-2" tabindex="-1"></a>only_delayed_flights</span></code></pre></div>
+<pre><code>## # A tibble: 141,574 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2023     1     1        1           2038       203      328              3
+##  2  2023     1     1       18           2300        78      228            135
+##  3  2023     1     1       31           2344        47      500            426
+##  4  2023     1     1       33           2140       173      238           2352
+##  5  2023     1     1       36           2048       228      223           2252
+##  6  2023     1     1      537            520        17      926            818
+##  7  2023     1     1      549            559       -10      905            901
+##  8  2023     1     1      605            600         5      906            855
+##  9  2023     1     1      611            530        41      923            839
+## 10  2023     1     1      619            620        -1      751            745
+## # ℹ 141,564 more rows
+## # ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>Here are just the 141k… flights that were delayed</p>
+<p>Shall we now summarize the average delay <em>of the delayed flights</em> ?</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="wrangle-and-graph-new-york-city-flights.html#cb62-1" tabindex="-1"></a><span class="fu">summarize</span>(only_delayed_flights, <span class="at">average_flight_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 1
+##   average_flight_delay
+##                  &lt;dbl&gt;
+## 1                 50.3</code></pre>
+<p>Aha, there’s an average of 50 minutes delay!</p>
+<p>What is the average flight delay time for each carrier?</p>
+<p><code>group_by</code> allows you to calculate summaries for subgroups of the data all at once</p>
+<p>First, let’s group the flight record by carrier</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="wrangle-and-graph-new-york-city-flights.html#cb64-1" tabindex="-1"></a>flights_grouped_by_carrier <span class="ot">&lt;-</span> <span class="fu">group_by</span>(flights, carrier)</span></code></pre></div>
+<p>Next, let’s summarize average delay time</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="wrangle-and-graph-new-york-city-flights.html#cb65-1" tabindex="-1"></a><span class="fu">summarize</span>(flights_grouped_by_carrier, <span class="at">average_flight_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 14 × 2
+##    carrier average_flight_delay
+##    &lt;chr&gt;                  &lt;dbl&gt;
+##  1 9E                   -2.23  
+##  2 AA                    5.27  
+##  3 AS                    0.0844
+##  4 B6                   15.6   
+##  5 DL                    1.64  
+##  6 F9                   26.2   
+##  7 G4                   -5.88  
+##  8 HA                   21.4   
+##  9 MQ                    0.119 
+## 10 NK                    9.89  
+## 11 OO                   13.7   
+## 12 UA                    9.04  
+## 13 WN                    5.76  
+## 14 YX                   -4.64</code></pre>
+<p>When data wrangling, we can chain multiple functions together in a sequence</p>
+</div>
+<div id="pipe-operator" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Pipe Operator<a href="wrangle-and-graph-new-york-city-flights.html#pipe-operator" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It looks like this: |&gt;
+ctrl + shift + m (change global options -&gt; code to use this)</p>
+<p>The pipe takes the result of whatever is on the left, and inserts it as the first argument to the next function.
+More efficiently, we can group and summarize all at once.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="wrangle-and-graph-new-york-city-flights.html#cb67-1" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb67-2"><a href="wrangle-and-graph-new-york-city-flights.html#cb67-2" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span> </span>
+<span id="cb67-3"><a href="wrangle-and-graph-new-york-city-flights.html#cb67-3" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">average_flight_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 14 × 2
+##    carrier average_flight_delay
+##    &lt;chr&gt;                  &lt;dbl&gt;
+##  1 9E                   -2.23  
+##  2 AA                    5.27  
+##  3 AS                    0.0844
+##  4 B6                   15.6   
+##  5 DL                    1.64  
+##  6 F9                   26.2   
+##  7 G4                   -5.88  
+##  8 HA                   21.4   
+##  9 MQ                    0.119 
+## 10 NK                    9.89  
+## 11 OO                   13.7   
+## 12 UA                    9.04  
+## 13 WN                    5.76  
+## 14 YX                   -4.64</code></pre>
+<p>We can modify that sequence to also filter by flights that <em>are</em> in fact delayed.
+Marcus asked about difference between spacing lines out with commas (for many parameters) and spacing out with piping</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="wrangle-and-graph-new-york-city-flights.html#cb69-1" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb69-2"><a href="wrangle-and-graph-new-york-city-flights.html#cb69-2" tabindex="-1"></a>  <span class="fu">filter</span>(arr_delay <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb69-3"><a href="wrangle-and-graph-new-york-city-flights.html#cb69-3" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span> </span>
+<span id="cb69-4"><a href="wrangle-and-graph-new-york-city-flights.html#cb69-4" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">average_flight_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 14 × 2
+##    carrier average_flight_delay
+##    &lt;chr&gt;                  &lt;dbl&gt;
+##  1 9E                      43.9
+##  2 AA                      55.9
+##  3 AS                      47.7
+##  4 B6                      58.1
+##  5 DL                      52.0
+##  6 F9                      67.5
+##  7 G4                      43.2
+##  8 HA                      45.0
+##  9 MQ                      27.7
+## 10 NK                      54.7
+## 11 OO                      60.7
+## 12 UA                      50.1
+## 13 WN                      36.8
+## 14 YX                      39.8</code></pre>
+</div>
+<div id="warmup-question" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Warmup Question<a href="wrangle-and-graph-new-york-city-flights.html#warmup-question" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>What is the average flight time in the air of Delta flights leaving each of the three NYC airports?
+Answer with a graph</p>
+<ul>
+<li><code>==</code> is the logical comparison “equals to” whereas <code>=</code> assigns a new value</li>
+<li><code>"DL"</code> is in quotes because it is a text string</li>
+<li>need to use <code>mean()</code> inside of <code>summarize()</code> because the input is a full dataset, not just a vector list</li>
+<li>need to use <code>geom_col()</code> rather than geom_bar() because we already know the y value. geom_bar() is for when you still need to count the values</li>
+</ul>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="wrangle-and-graph-new-york-city-flights.html#cb71-1" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb71-2"><a href="wrangle-and-graph-new-york-city-flights.html#cb71-2" tabindex="-1"></a>  <span class="fu">filter</span>(carrier <span class="sc">==</span> <span class="st">&quot;DL&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb71-3"><a href="wrangle-and-graph-new-york-city-flights.html#cb71-3" tabindex="-1"></a>  <span class="fu">group_by</span>(origin) <span class="sc">|&gt;</span> </span>
+<span id="cb71-4"><a href="wrangle-and-graph-new-york-city-flights.html#cb71-4" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">average_air_time =</span> <span class="fu">mean</span>(air_time, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span>  </span>
+<span id="cb71-5"><a href="wrangle-and-graph-new-york-city-flights.html#cb71-5" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb71-6"><a href="wrangle-and-graph-new-york-city-flights.html#cb71-6" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> origin, <span class="at">y =</span> average_air_time))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p>Lets’s create this column graph for all the carriers
+Group by both origin <em>and</em> carrier</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="wrangle-and-graph-new-york-city-flights.html#cb72-1" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb72-2"><a href="wrangle-and-graph-new-york-city-flights.html#cb72-2" tabindex="-1"></a>  <span class="co">#filter(carrier == &quot;DL&quot;) |&gt; </span></span>
+<span id="cb72-3"><a href="wrangle-and-graph-new-york-city-flights.html#cb72-3" tabindex="-1"></a>  <span class="fu">group_by</span>(origin, carrier) <span class="sc">|&gt;</span> </span>
+<span id="cb72-4"><a href="wrangle-and-graph-new-york-city-flights.html#cb72-4" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">average_air_time =</span> <span class="fu">mean</span>(air_time, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span>  </span>
+<span id="cb72-5"><a href="wrangle-and-graph-new-york-city-flights.html#cb72-5" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb72-6"><a href="wrangle-and-graph-new-york-city-flights.html#cb72-6" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> origin, <span class="at">y =</span> average_air_time)) <span class="sc">+</span></span>
+<span id="cb72-7"><a href="wrangle-and-graph-new-york-city-flights.html#cb72-7" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>carrier)</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;origin&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="graph-values-and-qualities-of-diamonds.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="okcupid.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

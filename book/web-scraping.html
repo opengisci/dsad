@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Web Scraping | Data Sciences Across the Disciplines: Geography</title>
+  <meta name="description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Web Scraping | Data Sciences Across the Disciplines: Geography" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  <meta name="github-repo" content="opengisci/wt25_josephholler/" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Web Scraping | Data Sciences Across the Disciplines: Geography" />
+  
+  <meta name="twitter:description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  
+
+<meta name="author" content="Joseph Holler" />
+<meta name="author" content="Alex Lyford" />
+
+
+<meta name="date" content="2025-01-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="baby-names.html"/>
+<link rel="next" href="life-expectancy-and-gdp-from-graphs-to-animation.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="r-and-calculations.html"><a href="r-and-calculations.html"><i class="fa fa-check"></i><b>2</b> R and Calculations</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="r-and-calculations.html"><a href="r-and-calculations.html#r-is-a-calculator"><i class="fa fa-check"></i><b>2.1</b> R is a calculator</a></li>
+<li class="chapter" data-level="2.2" data-path="r-and-calculations.html"><a href="r-and-calculations.html#functions"><i class="fa fa-check"></i><b>2.2</b> Functions</a></li>
+<li class="chapter" data-level="2.3" data-path="r-and-calculations.html"><a href="r-and-calculations.html#store-objects-for-future-use-in-environment"><i class="fa fa-check"></i><b>2.3</b> Store objects for future use in environment</a></li>
+<li class="chapter" data-level="2.4" data-path="r-and-calculations.html"><a href="r-and-calculations.html#mean-function-for-averages"><i class="fa fa-check"></i><b>2.4</b> Mean function for averages</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html"><i class="fa fa-check"></i><b>3</b> Graph values and qualities of diamonds</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#install-the-tidyverse-package"><i class="fa fa-check"></i><b>3.1</b> Install the tidyverse package</a></li>
+<li class="chapter" data-level="3.2" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#explore-diamonds-dataset"><i class="fa fa-check"></i><b>3.2</b> Explore Diamonds Dataset</a></li>
+<li class="chapter" data-level="3.3" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#facet-the-data"><i class="fa fa-check"></i><b>3.3</b> Facet the data</a></li>
+<li class="chapter" data-level="3.4" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#restart-r-and-remake-last-graph"><i class="fa fa-check"></i><b>3.4</b> Restart R and Remake last graph</a></li>
+<li class="chapter" data-level="3.5" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#explore-gap-in-prices-between-1k-and-2k"><i class="fa fa-check"></i><b>3.5</b> Explore gap in prices between 1k and 2k</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html"><i class="fa fa-check"></i><b>4</b> Wrangle and graph New York City flights</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#which-carriers-should-travelers-avoid"><i class="fa fa-check"></i><b>4.1</b> Which carriers should travelers avoid?</a></li>
+<li class="chapter" data-level="4.2" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#data-wrangling"><i class="fa fa-check"></i><b>4.2</b> Data Wrangling</a></li>
+<li class="chapter" data-level="4.3" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#on-average-how-long-are-flights-delayed"><i class="fa fa-check"></i><b>4.3</b> On average, how long are flights delayed?</a></li>
+<li class="chapter" data-level="4.4" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#pipe-operator"><i class="fa fa-check"></i><b>4.4</b> Pipe Operator</a></li>
+<li class="chapter" data-level="4.5" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#warmup-question"><i class="fa fa-check"></i><b>4.5</b> Warmup Question</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="okcupid.html"><a href="okcupid.html"><i class="fa fa-check"></i><b>5</b> OkCupid</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="okcupid.html"><a href="okcupid.html#load-ok-cupid-data"><i class="fa fa-check"></i><b>5.1</b> Load OK Cupid Data</a></li>
+<li class="chapter" data-level="5.2" data-path="okcupid.html"><a href="okcupid.html#height"><i class="fa fa-check"></i><b>5.2</b> Height</a></li>
+<li class="chapter" data-level="5.3" data-path="okcupid.html"><a href="okcupid.html#age"><i class="fa fa-check"></i><b>5.3</b> Age</a></li>
+<li class="chapter" data-level="5.4" data-path="okcupid.html"><a href="okcupid.html#diet-and-body-type"><i class="fa fa-check"></i><b>5.4</b> Diet and Body Type</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="okcupid.html"><a href="okcupid.html#collapse-diet-categories"><i class="fa fa-check"></i><b>5.4.1</b> Collapse Diet Categories</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="okcupid.html"><a href="okcupid.html#save-dataset-to-computer"><i class="fa fa-check"></i><b>5.5</b> Save dataset to computer</a></li>
+<li class="chapter" data-level="5.6" data-path="okcupid.html"><a href="okcupid.html#heat-map-of-diet-and-body-type"><i class="fa fa-check"></i><b>5.6</b> Heat map of diet and body type</a></li>
+<li class="chapter" data-level="5.7" data-path="okcupid.html"><a href="okcupid.html#text-mining"><i class="fa fa-check"></i><b>5.7</b> Text mining</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="okcupid.html"><a href="okcupid.html#essay-data-dictionary"><i class="fa fa-check"></i><b>5.7.1</b> Essay data dictionary</a></li>
+<li class="chapter" data-level="5.7.2" data-path="okcupid.html"><a href="okcupid.html#what-are-people-really-good-at"><i class="fa fa-check"></i><b>5.7.2</b> What are people really good at?</a></li>
+<li class="chapter" data-level="5.7.3" data-path="okcupid.html"><a href="okcupid.html#analyze-word-usage-in-essays"><i class="fa fa-check"></i><b>5.7.3</b> Analyze word usage in essays</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="baby-names.html"><a href="baby-names.html"><i class="fa fa-check"></i><b>6</b> Baby Names</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="baby-names.html"><a href="baby-names.html#bens-over-time"><i class="fa fa-check"></i><b>6.1</b> Bens over time</a></li>
+<li class="chapter" data-level="6.2" data-path="baby-names.html"><a href="baby-names.html#babies-over-time"><i class="fa fa-check"></i><b>6.2</b> Babies over time</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="web-scraping.html"><a href="web-scraping.html"><i class="fa fa-check"></i><b>7</b> Web Scraping</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="web-scraping.html"><a href="web-scraping.html#scrape-all-paragraph-text-from-a-webpage"><i class="fa fa-check"></i><b>7.1</b> Scrape all paragraph text from a webpage</a></li>
+<li class="chapter" data-level="7.2" data-path="web-scraping.html"><a href="web-scraping.html#scrape-a-specific-item-from-a-webpage"><i class="fa fa-check"></i><b>7.2</b> Scrape a specific item from a webpage</a></li>
+<li class="chapter" data-level="7.3" data-path="web-scraping.html"><a href="web-scraping.html#ethics-of-web-scraping"><i class="fa fa-check"></i><b>7.3</b> Ethics of web scraping</a></li>
+<li class="chapter" data-level="7.4" data-path="web-scraping.html"><a href="web-scraping.html#scrape-data"><i class="fa fa-check"></i><b>7.4</b> Scrape data</a></li>
+<li class="chapter" data-level="7.5" data-path="web-scraping.html"><a href="web-scraping.html#cardinal-sin-of-data-science"><i class="fa fa-check"></i><b>7.5</b> Cardinal sin of data science</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html"><i class="fa fa-check"></i><b>8</b> Life expectancy and GDP from graphs to animation</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#make-the-same-graph-but-for-three-random-countries"><i class="fa fa-check"></i><b>8.1</b> Make the same graph but for three random countries</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#join-the-life-expectancy-data-together-with-income-data"><i class="fa fa-check"></i><b>8.1.1</b> Join the life expectancy data together with income data</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#size-points-by-population"><i class="fa fa-check"></i><b>8.2</b> Size points by population</a></li>
+<li class="chapter" data-level="8.3" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#web-scrape-region-data"><i class="fa fa-check"></i><b>8.3</b> Web scrape region data</a></li>
+<li class="chapter" data-level="8.4" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#life-expectancy-gdp-and-region"><i class="fa fa-check"></i><b>8.4</b> Life expectancy, GDP and Region</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="animation.html"><a href="animation.html"><i class="fa fa-check"></i><b>9</b> Animation</a>
+<ul>
+<li class="chapter" data-level="9.0.1" data-path="animation.html"><a href="animation.html#graph-all-years"><i class="fa fa-check"></i><b>9.0.1</b> Graph all years</a></li>
+<li class="chapter" data-level="9.1" data-path="animation.html"><a href="animation.html#create-the-animation"><i class="fa fa-check"></i><b>9.1</b> Create the animation</a></li>
+<li class="chapter" data-level="9.2" data-path="animation.html"><a href="animation.html#rendered-animation"><i class="fa fa-check"></i><b>9.2</b> Rendered Animation</a></li>
+<li class="chapter" data-level="9.3" data-path="animation.html"><a href="animation.html#animate-a-bar-chart"><i class="fa fa-check"></i><b>9.3</b> Animate a bar chart</a></li>
+<li class="chapter" data-level="9.4" data-path="animation.html"><a href="animation.html#make-a-tree-map"><i class="fa fa-check"></i><b>9.4</b> Make a tree map</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="animation.html"><a href="animation.html#animate-a-tree-map"><i class="fa fa-check"></i><b>9.4.1</b> Animate a tree map</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="mapping-in-r.html"><a href="mapping-in-r.html"><i class="fa fa-check"></i><b>10</b> Mapping in R</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="mapping-in-r.html"><a href="mapping-in-r.html#map-alcohol-consumption-per-capita"><i class="fa fa-check"></i><b>10.1</b> Map alcohol consumption per capita</a></li>
+<li class="chapter" data-level="10.2" data-path="mapping-in-r.html"><a href="mapping-in-r.html#map-volcanoes"><i class="fa fa-check"></i><b>10.2</b> Map volcanoes</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>11</b> Shiny Apps</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="shiny-apps.html"><a href="shiny-apps.html#strange-online-food-data"><i class="fa fa-check"></i><b>11.1</b> Strange online food data</a></li>
+<li class="chapter" data-level="11.2" data-path="shiny-apps.html"><a href="shiny-apps.html#liberal-arts-college-rankings"><i class="fa fa-check"></i><b>11.2</b> Liberal arts college rankings</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="shiny-apps.html"><a href="shiny-apps.html#leaflet-map-of-college-locations"><i class="fa fa-check"></i><b>11.2.1</b> Leaflet map of college locations</a></li>
+<li class="chapter" data-level="11.2.2" data-path="shiny-apps.html"><a href="shiny-apps.html#graph-college-ranking-over-time"><i class="fa fa-check"></i><b>11.2.2</b> Graph college ranking over time</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-app-notes"><i class="fa fa-check"></i><b>11.3</b> Shiny App notes</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html"><i class="fa fa-check"></i><b>12</b> Hurricane Dorian</a>
+<ul>
+<li class="chapter" data-level="12.0.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#load-and-organize-data"><i class="fa fa-check"></i><b>12.0.1</b> Load and organize data</a></li>
+<li class="chapter" data-level="12.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#temporal-analysis"><i class="fa fa-check"></i><b>12.1</b> Temporal analysis</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#customize-bin-widths"><i class="fa fa-check"></i><b>12.1.1</b> Customize bin widths</a></li>
+<li class="chapter" data-level="12.1.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#customize-a-date-time-axis"><i class="fa fa-check"></i><b>12.1.2</b> Customize a date-time axis</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#text-analysis"><i class="fa fa-check"></i><b>12.2</b> Text analysis</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#graph-word-frequencies"><i class="fa fa-check"></i><b>12.2.1</b> Graph word frequencies</a></li>
+<li class="chapter" data-level="12.2.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#graph-word-associations"><i class="fa fa-check"></i><b>12.2.2</b> Graph word associations</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#geographic-analysis"><i class="fa fa-check"></i><b>12.3</b> Geographic analysis</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#construct-geographic-points-from-tweets"><i class="fa fa-check"></i><b>12.3.1</b> Construct geographic points from tweets</a></li>
+<li class="chapter" data-level="12.3.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#location-services"><i class="fa fa-check"></i><b>12.3.2</b> Location services</a></li>
+<li class="chapter" data-level="12.3.3" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#place-name"><i class="fa fa-check"></i><b>12.3.3</b> Place name</a></li>
+<li class="chapter" data-level="12.3.4" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#geographic-point-data"><i class="fa fa-check"></i><b>12.3.4</b> Geographic point data</a></li>
+<li class="chapter" data-level="12.3.5" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#aquire-census-data"><i class="fa fa-check"></i><b>12.3.5</b> Aquire Census data</a></li>
+<li class="chapter" data-level="12.3.6" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#select-counties-of-interest"><i class="fa fa-check"></i><b>12.3.6</b> Select counties of interest</a></li>
+<li class="chapter" data-level="12.3.7" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-population-density-and-tweet-points"><i class="fa fa-check"></i><b>12.3.7</b> Map population density and tweet points</a></li>
+<li class="chapter" data-level="12.3.8" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#join-tweets-to-counties"><i class="fa fa-check"></i><b>12.3.8</b> Join tweets to counties</a></li>
+<li class="chapter" data-level="12.3.9" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#calculate-county-tweet-rates"><i class="fa fa-check"></i><b>12.3.9</b> Calculate county tweet rates</a></li>
+<li class="chapter" data-level="12.3.10" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-tweet-rates-by-county"><i class="fa fa-check"></i><b>12.3.10</b> Map tweet rates by county</a></li>
+<li class="chapter" data-level="12.3.11" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#conclusions"><i class="fa fa-check"></i><b>12.3.11</b> Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-hurricane-tracks-with-tmap"><i class="fa fa-check"></i><b>12.4</b> Map hurricane tracks with tmap</a></li>
+<li class="chapter" data-level="12.5" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#acquire-hurricane-track-data"><i class="fa fa-check"></i><b>12.5</b> Acquire hurricane track data</a></li>
+<li class="chapter" data-level="12.6" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-2019-north-atlantic-storm-season"><i class="fa fa-check"></i><b>12.6</b> Map 2019 North Atlantic storm season</a></li>
+<li class="chapter" data-level="12.7" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-hurricane-dorian-track"><i class="fa fa-check"></i><b>12.7</b> Map Hurricane Dorian track</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html"><i class="fa fa-check"></i><b>13</b> Spatial Cluster Analysis</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#advice-for-saving-and-loading-data-in-r"><i class="fa fa-check"></i><b>13.1</b> Advice for saving and loading data in R</a></li>
+<li class="chapter" data-level="13.2" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#load-and-map-county-level-tweet-rate"><i class="fa fa-check"></i><b>13.2</b> Load and map county-level tweet rate</a></li>
+<li class="chapter" data-level="13.3" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#create-spatial-weight-matrix"><i class="fa fa-check"></i><b>13.3</b> Create Spatial Weight Matrix</a></li>
+<li class="chapter" data-level="13.4" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#calculate-getis-ord-g-statistic"><i class="fa fa-check"></i><b>13.4</b> Calculate Getis-Ord G* Statistic</a></li>
+<li class="chapter" data-level="13.5" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#map-hotpots"><i class="fa fa-check"></i><b>13.5</b> Map Hotpots</a></li>
+<li class="chapter" data-level="13.6" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#remove-counties-with-no-tweets"><i class="fa fa-check"></i><b>13.6</b> Remove counties with no tweets</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="hurricane-ida.html"><a href="hurricane-ida.html"><i class="fa fa-check"></i><b>14</b> Hurricane Ida</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Sciences Across the Disciplines: Geography</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="web-scraping" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Web Scraping<a href="web-scraping.html#web-scraping" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Install and load packages</p>
+<p>Install here package to help manage file paths</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="web-scraping.html#cb121-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;here&quot;</span>)</span>
+<span id="cb121-2"><a href="web-scraping.html#cb121-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span>
+<span id="cb121-3"><a href="web-scraping.html#cb121-3" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rvest&quot;</span>)</span></code></pre></div>
+<p>Load <code>tidyverse</code> and <code>here</code> packages</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="web-scraping.html#cb122-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb122-2"><a href="web-scraping.html#cb122-2" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb122-3"><a href="web-scraping.html#cb122-3" tabindex="-1"></a><span class="fu">library</span>(rvest)</span></code></pre></div>
+<pre><code>## Warning: package &#39;rvest&#39; was built under R version 4.3.3</code></pre>
+<pre><code>## 
+## Attaching package: &#39;rvest&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:readr&#39;:
+## 
+##     guess_encoding</code></pre>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="web-scraping.html#cb126-1" tabindex="-1"></a>urloi <span class="ot">&lt;-</span> <span class="st">&quot;https://en.wikipedia.org/wiki/Dolphin&quot;</span></span></code></pre></div>
+<div id="scrape-all-paragraph-text-from-a-webpage" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Scrape all paragraph text from a webpage<a href="web-scraping.html#scrape-all-paragraph-text-from-a-webpage" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>html_text</code> cleans up html tags out of text
+<code>html_elements</code> selects content within particular html tags. <code>p</code> is for paragraph.</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="web-scraping.html#cb127-1" tabindex="-1"></a>all_text <span class="ot">&lt;-</span> urloi <span class="sc">|&gt;</span> </span>
+<span id="cb127-2"><a href="web-scraping.html#cb127-2" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb127-3"><a href="web-scraping.html#cb127-3" tabindex="-1"></a>  <span class="fu">html_elements</span>(<span class="st">&quot;p&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb127-4"><a href="web-scraping.html#cb127-4" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
+<span id="cb127-5"><a href="web-scraping.html#cb127-5" tabindex="-1"></a></span>
+<span id="cb127-6"><a href="web-scraping.html#cb127-6" tabindex="-1"></a>all_text <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;\n\n&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## [2] &quot;A dolphin is an aquatic mammal in the clade Odontoceti (toothed whale). Dolphins belong to the families Delphinidae (the oceanic dolphins), Platanistidae (the Indian river dolphins), Iniidae (the New World river dolphins), Pontoporiidae (the brackish dolphins), and possibly extinct Lipotidae (baiji or Chinese river dolphin). There are 40 extant species named as dolphins.\n&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+## [3] &quot;Dolphins range in size from the 1.7-metre-long (5 ft 7 in) and 50-kilogram (110-pound) Maui&#39;s dolphin to the 9.5 m (31 ft) and 10-tonne (11-short-ton) orca. Various species of dolphins exhibit sexual dimorphism where the males are larger than females. They have streamlined bodies and two limbs that are modified into flippers. Though not quite as flexible as seals, they are faster; some dolphins can briefly travel at speeds of 29 kilometres per hour (18 mph) or leap about 9 metres (30 ft).[1] Dolphins use their conical teeth to capture fast-moving prey. They have well-developed hearing which is adapted for both air and water; it is so well developed that some can survive even if they are blind. Some species are well adapted for diving to great depths. They have a layer of fat, or blubber, under the skin to keep warm in the cold water.\n&quot;
+## [4] &quot;Dolphins are widespread. Most species prefer the warm waters of the tropic zones, but some, such as the right whale dolphin, prefer colder climates. Dolphins feed largely on fish and squid, but a few, such as the orca, feed on large mammals such as seals. Male dolphins typically mate with multiple females every year, but females only mate every two to three years. Calves are typically born in the spring and summer months and females bear all the responsibility for raising them. Mothers of some species fast and nurse their young for a relatively long period of time. \n&quot;                                                                                                                                                                                                                                                                                 
+## [5] &quot;Dolphins produce a variety of vocalizations, usually in the form of clicks and whistles.\n&quot;</code></pre>
+</div>
+<div id="scrape-a-specific-item-from-a-webpage" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Scrape a specific item from a webpage<a href="web-scraping.html#scrape-a-specific-item-from-a-webpage" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Right-click and <code>inspect</code> a page to investigate how it’s structured.
+Right-click an item and copy x-path
+If the path has quotes in it, use alternative form of quotes (single instead of double or <em>vis a versa</em>)</p>
+<p>/html/body/div/main/article/section/div/div/p[4]</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="web-scraping.html#cb129-1" tabindex="-1"></a>all_text <span class="ot">&lt;-</span> urloi <span class="sc">|&gt;</span> </span>
+<span id="cb129-2"><a href="web-scraping.html#cb129-2" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb129-3"><a href="web-scraping.html#cb129-3" tabindex="-1"></a>  <span class="fu">html_element</span>(<span class="at">xpath =</span> <span class="st">&quot;/html/body/div[2]/div/div[3]/main/div[3]/div[3]/div[1]/figure[1]/figcaption&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb129-4"><a href="web-scraping.html#cb129-4" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
+<span id="cb129-5"><a href="web-scraping.html#cb129-5" tabindex="-1"></a></span>
+<span id="cb129-6"><a href="web-scraping.html#cb129-6" tabindex="-1"></a>all_text</span></code></pre></div>
+<pre><code>## [1] &quot; A common bottlenose dolphin (Tursiops truncatus)&quot;</code></pre>
+</div>
+<div id="ethics-of-web-scraping" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Ethics of web scraping<a href="web-scraping.html#ethics-of-web-scraping" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the United States, web scraping is legal.
+However, there are many illegal things you may do with the data you scraped, including copyright infringement.
+Poor scraping design may also crash web servers through denial of service.
+add <code>/robots.txt</code> to a web address to see what you are not supposed to crawl.</p>
+<p>Web scrapers can add pauses into their code to detect scraping behavior.
+Rtweet was throttled and re-queried every 12 to 15 minutes.</p>
+</div>
+<div id="scrape-data" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Scrape data<a href="web-scraping.html#scrape-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Scrape data on Tom Brady from Wikipedia.</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="web-scraping.html#cb131-1" tabindex="-1"></a>urloi <span class="ot">&lt;-</span> <span class="st">&quot;https://en.wikipedia.org/wiki/Tom_Brady&quot;</span></span></code></pre></div>
+<p>Scrape table-based text from a page</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="web-scraping.html#cb132-1" tabindex="-1"></a>all_tables <span class="ot">&lt;-</span> urloi <span class="sc">|&gt;</span> </span>
+<span id="cb132-2"><a href="web-scraping.html#cb132-2" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb132-3"><a href="web-scraping.html#cb132-3" tabindex="-1"></a>  <span class="fu">html_elements</span>(<span class="st">&quot;table&quot;</span>)  </span>
+<span id="cb132-4"><a href="web-scraping.html#cb132-4" tabindex="-1"></a><span class="co">#  html_text()</span></span>
+<span id="cb132-5"><a href="web-scraping.html#cb132-5" tabindex="-1"></a></span>
+<span id="cb132-6"><a href="web-scraping.html#cb132-6" tabindex="-1"></a>all_tables</span></code></pre></div>
+<pre><code>## {xml_nodeset (58)}
+##  [1] &lt;table class=&quot;box-Very_long plainlinks metadata ambox ambox-style ambox- ...
+##  [2] &lt;table class=&quot;infobox vcard&quot; style=&quot;width: 25em; line-height: 1.2em;&quot;&gt;\n ...
+##  [3] &lt;table class=&quot;infobox&quot; style=&quot;border-collapse:collapse; border-spacing:0 ...
+##  [4] &lt;table class=&quot;infobox&quot; style=&quot;border-collapse:collapse; border-spacing:0 ...
+##  [5] &lt;table class=&quot;wikitable&quot; style=&quot;text-align:center;&quot;&gt;&lt;tbody&gt;\n&lt;tr&gt;\n&lt;th r ...
+##  [6] &lt;table class=&quot;box-Cleanup_reorganize plainlinks metadata ambox ambox-sty ...
+##  [7] &lt;table class=&quot;wikitable&quot; style=&quot;text-align:center&quot;&gt;\n&lt;caption&gt;Pre-draft  ...
+##  [8] &lt;table class=&quot;wikitable&quot;&gt;&lt;tbody&gt;\n&lt;tr&gt;&lt;th colspan=&quot;2&quot;&gt;Legend\n&lt;/th&gt;&lt;/tr&gt; ...
+##  [9] &lt;table class=&quot;wikitable&quot; style=&quot;text-align:center;&quot;&gt;&lt;tbody&gt;\n&lt;tr&gt;\n&lt;th r ...
+## [10] &lt;table class=&quot;wikitable&quot; style=&quot;text-align:center;&quot;&gt;&lt;tbody&gt;\n&lt;tr&gt;\n&lt;th r ...
+## [11] &lt;table class=&quot;wikitable&quot; style=&quot;text-align:center;&quot;&gt;&lt;tbody&gt;\n&lt;tr&gt;\n&lt;th r ...
+## [12] &lt;table class=&quot;col-begin&quot; role=&quot;presentation&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;col-b ...
+## [13] &lt;table class=&quot;wikitable&quot;&gt;\n&lt;caption&gt;\n&lt;/caption&gt;\n&lt;tbody&gt;\n&lt;tr&gt;\n&lt;th&gt;Yea ...
+## [14] &lt;table class=&quot;wikitable&quot;&gt;\n&lt;caption&gt;\n&lt;/caption&gt;\n&lt;tbody&gt;\n&lt;tr&gt;\n&lt;th&gt;Yea ...
+## [15] &lt;table class=&quot;nowraplinks mw-collapsible autocollapse navbox-inner&quot; styl ...
+## [16] &lt;table class=&quot;nowraplinks mw-collapsible mw-collapsed navbox-inner&quot; styl ...
+## [17] &lt;table class=&quot;nowraplinks mw-collapsible mw-collapsed navbox-inner&quot; styl ...
+## [18] &lt;table class=&quot;nowraplinks mw-collapsible autocollapse navbox-inner&quot; styl ...
+## [19] &lt;table class=&quot;nowraplinks mw-collapsible autocollapse navbox-inner&quot; styl ...
+## [20] &lt;table class=&quot;nowraplinks mw-collapsible mw-collapsed navbox-inner&quot; styl ...
+## ...</code></pre>
+<p>Hold on, scrape a <em>specific</em> table</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="web-scraping.html#cb134-1" tabindex="-1"></a>reg_season <span class="ot">&lt;-</span> urloi <span class="sc">|&gt;</span> </span>
+<span id="cb134-2"><a href="web-scraping.html#cb134-2" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb134-3"><a href="web-scraping.html#cb134-3" tabindex="-1"></a>  <span class="fu">html_element</span>(<span class="at">xpath =</span> <span class="st">&quot;/html/body/div[2]/div/div[3]/main/div[3]/div[3]/div[1]/table[7]&quot;</span>)  <span class="sc">|&gt;</span> </span>
+<span id="cb134-4"><a href="web-scraping.html#cb134-4" tabindex="-1"></a>  <span class="fu">html_table</span>()</span>
+<span id="cb134-5"><a href="web-scraping.html#cb134-5" tabindex="-1"></a></span>
+<span id="cb134-6"><a href="web-scraping.html#cb134-6" tabindex="-1"></a>reg_season</span></code></pre></div>
+<pre><code>## # A tibble: 25 × 23
+##    Year  Team  Games Games Games Passing Passing Passing Passing Passing Passing
+##    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
+##  1 Year  Team  GP    GS    Reco… Cmp     Att     Pct     Yds     Y/A     Lng    
+##  2 2000  NE    1     0     —     1       3       33.3    6       2.0     6      
+##  3 2001  NE    15    14    11–3  264     413     63.9    2,843   6.9     91     
+##  4 2002  NE    16    16    9–7   373     601     62.1    3,764   6.3     49     
+##  5 2003  NE    16    16    14–2  317     527     60.2    3,620   6.9     82     
+##  6 2004  NE    16    16    14–2  288     474     60.8    3,692   7.8     50     
+##  7 2005  NE    16    16    10–6  334     530     63.0    4,110   7.8     71     
+##  8 2006  NE    16    16    12–4  319     516     61.8    3,529   6.8     62     
+##  9 2007  NE    16    16    16–0  398     578     68.9    4,806   8.3     69     
+## 10 2008  NE    1     1     1–0   7       11      63.6    76      6.9     26     
+## # ℹ 15 more rows
+## # ℹ 12 more variables: Passing &lt;chr&gt;, Passing &lt;chr&gt;, Passing &lt;chr&gt;,
+## #   Rushing &lt;chr&gt;, Rushing &lt;chr&gt;, Rushing &lt;chr&gt;, Rushing &lt;chr&gt;, Rushing &lt;chr&gt;,
+## #   Sacked &lt;chr&gt;, Sacked &lt;chr&gt;, Fumbles &lt;chr&gt;, Fumbles &lt;chr&gt;</code></pre>
+<p>Summarize average
+First you need unique column names!
+You can make a list of new column names as follows: <code>colnames(reg_season) &lt;- c("Year", "Team", ... "LastVar")</code></p>
+<p>Better solution: paste data in row 1 into the column names
+Subset the first row using brackets <code>[row(s), column(s)]</code></p>
+</div>
+<div id="cardinal-sin-of-data-science" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Cardinal sin of data science<a href="web-scraping.html#cardinal-sin-of-data-science" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Overwrite a dataset that you cannot get back.
+The solution to this is save a raw version of your data and work with a new version of the data.
+<strong>Please save an RDS file!</strong></p>
+<p><strong>Paste with a sep option!</strong></p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="web-scraping.html#cb136-1" tabindex="-1"></a>brady_data_clean <span class="ot">&lt;-</span> reg_season</span>
+<span id="cb136-2"><a href="web-scraping.html#cb136-2" tabindex="-1"></a><span class="fu">paste</span>(<span class="fu">colnames</span>(brady_data_clean), reg_season[<span class="dv">1</span>, ])</span></code></pre></div>
+<pre><code>##  [1] &quot;Year Year&quot;    &quot;Team Team&quot;    &quot;Games GP&quot;     &quot;Games GS&quot;     &quot;Games Record&quot;
+##  [6] &quot;Passing Cmp&quot;  &quot;Passing Att&quot;  &quot;Passing Pct&quot;  &quot;Passing Yds&quot;  &quot;Passing Y/A&quot; 
+## [11] &quot;Passing Lng&quot;  &quot;Passing TD&quot;   &quot;Passing Int&quot;  &quot;Passing Rtg&quot;  &quot;Rushing Att&quot; 
+## [16] &quot;Rushing Yds&quot;  &quot;Rushing Y/A&quot;  &quot;Rushing Lng&quot;  &quot;Rushing TD&quot;   &quot;Sacked Sck&quot;  
+## [21] &quot;Sacked Yds&quot;   &quot;Fumbles Fum&quot;  &quot;Fumbles Lost&quot;</code></pre>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="web-scraping.html#cb138-1" tabindex="-1"></a><span class="fu">colnames</span>(brady_data_clean) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">colnames</span>(reg_season), reg_season[<span class="dv">1</span>, ])</span>
+<span id="cb138-2"><a href="web-scraping.html#cb138-2" tabindex="-1"></a>brady_data_clean</span></code></pre></div>
+<pre><code>## # A tibble: 25 × 23
+##    `Year Year` `Team Team` `Games GP` `Games GS` `Games Record` `Passing Cmp`
+##    &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;        
+##  1 Year        Team        GP         GS         Record         Cmp          
+##  2 2000        NE          1          0          —              1            
+##  3 2001        NE          15         14         11–3           264          
+##  4 2002        NE          16         16         9–7            373          
+##  5 2003        NE          16         16         14–2           317          
+##  6 2004        NE          16         16         14–2           288          
+##  7 2005        NE          16         16         10–6           334          
+##  8 2006        NE          16         16         12–4           319          
+##  9 2007        NE          16         16         16–0           398          
+## 10 2008        NE          1          1          1–0            7            
+## # ℹ 15 more rows
+## # ℹ 17 more variables: `Passing Att` &lt;chr&gt;, `Passing Pct` &lt;chr&gt;,
+## #   `Passing Yds` &lt;chr&gt;, `Passing Y/A` &lt;chr&gt;, `Passing Lng` &lt;chr&gt;,
+## #   `Passing TD` &lt;chr&gt;, `Passing Int` &lt;chr&gt;, `Passing Rtg` &lt;chr&gt;,
+## #   `Rushing Att` &lt;chr&gt;, `Rushing Yds` &lt;chr&gt;, `Rushing Y/A` &lt;chr&gt;,
+## #   `Rushing Lng` &lt;chr&gt;, `Rushing TD` &lt;chr&gt;, `Sacked Sck` &lt;chr&gt;,
+## #   `Sacked Yds` &lt;chr&gt;, `Fumbles Fum` &lt;chr&gt;, `Fumbles Lost` &lt;chr&gt;</code></pre>
+<p>Can we graph Brady’s passing yards over time?</p>
+<p>First remove line 1</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="web-scraping.html#cb140-1" tabindex="-1"></a>brady_data_clean_types <span class="ot">&lt;-</span> brady_data_clean <span class="sc">|&gt;</span> </span>
+<span id="cb140-2"><a href="web-scraping.html#cb140-2" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="sc">-</span><span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb140-3"><a href="web-scraping.html#cb140-3" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Year Year</span><span class="st">`</span> <span class="sc">!=</span> <span class="st">&quot;Career&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb140-4"><a href="web-scraping.html#cb140-4" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb140-5"><a href="web-scraping.html#cb140-5" tabindex="-1"></a>    <span class="at">passing_yards_numeric =</span> <span class="fu">as.numeric</span>(<span class="fu">str_remove</span>(<span class="st">`</span><span class="at">Passing Yds</span><span class="st">`</span>, <span class="st">&quot;,&quot;</span>)),</span>
+<span id="cb140-6"><a href="web-scraping.html#cb140-6" tabindex="-1"></a>    <span class="at">year_numeric =</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">Year Year</span><span class="st">`</span>)</span>
+<span id="cb140-7"><a href="web-scraping.html#cb140-7" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="web-scraping.html#cb141-1" tabindex="-1"></a>brady_data_clean_types <span class="sc">|&gt;</span> </span>
+<span id="cb141-2"><a href="web-scraping.html#cb141-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb141-3"><a href="web-scraping.html#cb141-3" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> year_numeric, <span class="at">y =</span> passing_yards_numeric))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="baby-names.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="life-expectancy-and-gdp-from-graphs-to-animation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

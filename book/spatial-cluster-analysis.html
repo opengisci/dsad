@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 13 Spatial Cluster Analysis | Data Sciences Across the Disciplines: Geography</title>
+  <meta name="description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 13 Spatial Cluster Analysis | Data Sciences Across the Disciplines: Geography" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  <meta name="github-repo" content="opengisci/wt25_josephholler/" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 13 Spatial Cluster Analysis | Data Sciences Across the Disciplines: Geography" />
+  
+  <meta name="twitter:description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  
+
+<meta name="author" content="Joseph Holler" />
+<meta name="author" content="Alex Lyford" />
+
+
+<meta name="date" content="2025-01-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="hurricane-dorian.html"/>
+<link rel="next" href="hurricane-ida.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="r-and-calculations.html"><a href="r-and-calculations.html"><i class="fa fa-check"></i><b>2</b> R and Calculations</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="r-and-calculations.html"><a href="r-and-calculations.html#r-is-a-calculator"><i class="fa fa-check"></i><b>2.1</b> R is a calculator</a></li>
+<li class="chapter" data-level="2.2" data-path="r-and-calculations.html"><a href="r-and-calculations.html#functions"><i class="fa fa-check"></i><b>2.2</b> Functions</a></li>
+<li class="chapter" data-level="2.3" data-path="r-and-calculations.html"><a href="r-and-calculations.html#store-objects-for-future-use-in-environment"><i class="fa fa-check"></i><b>2.3</b> Store objects for future use in environment</a></li>
+<li class="chapter" data-level="2.4" data-path="r-and-calculations.html"><a href="r-and-calculations.html#mean-function-for-averages"><i class="fa fa-check"></i><b>2.4</b> Mean function for averages</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html"><i class="fa fa-check"></i><b>3</b> Graph values and qualities of diamonds</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#install-the-tidyverse-package"><i class="fa fa-check"></i><b>3.1</b> Install the tidyverse package</a></li>
+<li class="chapter" data-level="3.2" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#explore-diamonds-dataset"><i class="fa fa-check"></i><b>3.2</b> Explore Diamonds Dataset</a></li>
+<li class="chapter" data-level="3.3" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#facet-the-data"><i class="fa fa-check"></i><b>3.3</b> Facet the data</a></li>
+<li class="chapter" data-level="3.4" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#restart-r-and-remake-last-graph"><i class="fa fa-check"></i><b>3.4</b> Restart R and Remake last graph</a></li>
+<li class="chapter" data-level="3.5" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#explore-gap-in-prices-between-1k-and-2k"><i class="fa fa-check"></i><b>3.5</b> Explore gap in prices between 1k and 2k</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html"><i class="fa fa-check"></i><b>4</b> Wrangle and graph New York City flights</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#which-carriers-should-travelers-avoid"><i class="fa fa-check"></i><b>4.1</b> Which carriers should travelers avoid?</a></li>
+<li class="chapter" data-level="4.2" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#data-wrangling"><i class="fa fa-check"></i><b>4.2</b> Data Wrangling</a></li>
+<li class="chapter" data-level="4.3" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#on-average-how-long-are-flights-delayed"><i class="fa fa-check"></i><b>4.3</b> On average, how long are flights delayed?</a></li>
+<li class="chapter" data-level="4.4" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#pipe-operator"><i class="fa fa-check"></i><b>4.4</b> Pipe Operator</a></li>
+<li class="chapter" data-level="4.5" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#warmup-question"><i class="fa fa-check"></i><b>4.5</b> Warmup Question</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="okcupid.html"><a href="okcupid.html"><i class="fa fa-check"></i><b>5</b> OkCupid</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="okcupid.html"><a href="okcupid.html#load-ok-cupid-data"><i class="fa fa-check"></i><b>5.1</b> Load OK Cupid Data</a></li>
+<li class="chapter" data-level="5.2" data-path="okcupid.html"><a href="okcupid.html#height"><i class="fa fa-check"></i><b>5.2</b> Height</a></li>
+<li class="chapter" data-level="5.3" data-path="okcupid.html"><a href="okcupid.html#age"><i class="fa fa-check"></i><b>5.3</b> Age</a></li>
+<li class="chapter" data-level="5.4" data-path="okcupid.html"><a href="okcupid.html#diet-and-body-type"><i class="fa fa-check"></i><b>5.4</b> Diet and Body Type</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="okcupid.html"><a href="okcupid.html#collapse-diet-categories"><i class="fa fa-check"></i><b>5.4.1</b> Collapse Diet Categories</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="okcupid.html"><a href="okcupid.html#save-dataset-to-computer"><i class="fa fa-check"></i><b>5.5</b> Save dataset to computer</a></li>
+<li class="chapter" data-level="5.6" data-path="okcupid.html"><a href="okcupid.html#heat-map-of-diet-and-body-type"><i class="fa fa-check"></i><b>5.6</b> Heat map of diet and body type</a></li>
+<li class="chapter" data-level="5.7" data-path="okcupid.html"><a href="okcupid.html#text-mining"><i class="fa fa-check"></i><b>5.7</b> Text mining</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="okcupid.html"><a href="okcupid.html#essay-data-dictionary"><i class="fa fa-check"></i><b>5.7.1</b> Essay data dictionary</a></li>
+<li class="chapter" data-level="5.7.2" data-path="okcupid.html"><a href="okcupid.html#what-are-people-really-good-at"><i class="fa fa-check"></i><b>5.7.2</b> What are people really good at?</a></li>
+<li class="chapter" data-level="5.7.3" data-path="okcupid.html"><a href="okcupid.html#analyze-word-usage-in-essays"><i class="fa fa-check"></i><b>5.7.3</b> Analyze word usage in essays</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="baby-names.html"><a href="baby-names.html"><i class="fa fa-check"></i><b>6</b> Baby Names</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="baby-names.html"><a href="baby-names.html#bens-over-time"><i class="fa fa-check"></i><b>6.1</b> Bens over time</a></li>
+<li class="chapter" data-level="6.2" data-path="baby-names.html"><a href="baby-names.html#babies-over-time"><i class="fa fa-check"></i><b>6.2</b> Babies over time</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="web-scraping.html"><a href="web-scraping.html"><i class="fa fa-check"></i><b>7</b> Web Scraping</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="web-scraping.html"><a href="web-scraping.html#scrape-all-paragraph-text-from-a-webpage"><i class="fa fa-check"></i><b>7.1</b> Scrape all paragraph text from a webpage</a></li>
+<li class="chapter" data-level="7.2" data-path="web-scraping.html"><a href="web-scraping.html#scrape-a-specific-item-from-a-webpage"><i class="fa fa-check"></i><b>7.2</b> Scrape a specific item from a webpage</a></li>
+<li class="chapter" data-level="7.3" data-path="web-scraping.html"><a href="web-scraping.html#ethics-of-web-scraping"><i class="fa fa-check"></i><b>7.3</b> Ethics of web scraping</a></li>
+<li class="chapter" data-level="7.4" data-path="web-scraping.html"><a href="web-scraping.html#scrape-data"><i class="fa fa-check"></i><b>7.4</b> Scrape data</a></li>
+<li class="chapter" data-level="7.5" data-path="web-scraping.html"><a href="web-scraping.html#cardinal-sin-of-data-science"><i class="fa fa-check"></i><b>7.5</b> Cardinal sin of data science</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html"><i class="fa fa-check"></i><b>8</b> Life expectancy and GDP from graphs to animation</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#make-the-same-graph-but-for-three-random-countries"><i class="fa fa-check"></i><b>8.1</b> Make the same graph but for three random countries</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#join-the-life-expectancy-data-together-with-income-data"><i class="fa fa-check"></i><b>8.1.1</b> Join the life expectancy data together with income data</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#size-points-by-population"><i class="fa fa-check"></i><b>8.2</b> Size points by population</a></li>
+<li class="chapter" data-level="8.3" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#web-scrape-region-data"><i class="fa fa-check"></i><b>8.3</b> Web scrape region data</a></li>
+<li class="chapter" data-level="8.4" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#life-expectancy-gdp-and-region"><i class="fa fa-check"></i><b>8.4</b> Life expectancy, GDP and Region</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="animation.html"><a href="animation.html"><i class="fa fa-check"></i><b>9</b> Animation</a>
+<ul>
+<li class="chapter" data-level="9.0.1" data-path="animation.html"><a href="animation.html#graph-all-years"><i class="fa fa-check"></i><b>9.0.1</b> Graph all years</a></li>
+<li class="chapter" data-level="9.1" data-path="animation.html"><a href="animation.html#create-the-animation"><i class="fa fa-check"></i><b>9.1</b> Create the animation</a></li>
+<li class="chapter" data-level="9.2" data-path="animation.html"><a href="animation.html#rendered-animation"><i class="fa fa-check"></i><b>9.2</b> Rendered Animation</a></li>
+<li class="chapter" data-level="9.3" data-path="animation.html"><a href="animation.html#animate-a-bar-chart"><i class="fa fa-check"></i><b>9.3</b> Animate a bar chart</a></li>
+<li class="chapter" data-level="9.4" data-path="animation.html"><a href="animation.html#make-a-tree-map"><i class="fa fa-check"></i><b>9.4</b> Make a tree map</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="animation.html"><a href="animation.html#animate-a-tree-map"><i class="fa fa-check"></i><b>9.4.1</b> Animate a tree map</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="mapping-in-r.html"><a href="mapping-in-r.html"><i class="fa fa-check"></i><b>10</b> Mapping in R</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="mapping-in-r.html"><a href="mapping-in-r.html#map-alcohol-consumption-per-capita"><i class="fa fa-check"></i><b>10.1</b> Map alcohol consumption per capita</a></li>
+<li class="chapter" data-level="10.2" data-path="mapping-in-r.html"><a href="mapping-in-r.html#map-volcanoes"><i class="fa fa-check"></i><b>10.2</b> Map volcanoes</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>11</b> Shiny Apps</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="shiny-apps.html"><a href="shiny-apps.html#strange-online-food-data"><i class="fa fa-check"></i><b>11.1</b> Strange online food data</a></li>
+<li class="chapter" data-level="11.2" data-path="shiny-apps.html"><a href="shiny-apps.html#liberal-arts-college-rankings"><i class="fa fa-check"></i><b>11.2</b> Liberal arts college rankings</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="shiny-apps.html"><a href="shiny-apps.html#leaflet-map-of-college-locations"><i class="fa fa-check"></i><b>11.2.1</b> Leaflet map of college locations</a></li>
+<li class="chapter" data-level="11.2.2" data-path="shiny-apps.html"><a href="shiny-apps.html#graph-college-ranking-over-time"><i class="fa fa-check"></i><b>11.2.2</b> Graph college ranking over time</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-app-notes"><i class="fa fa-check"></i><b>11.3</b> Shiny App notes</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html"><i class="fa fa-check"></i><b>12</b> Hurricane Dorian</a>
+<ul>
+<li class="chapter" data-level="12.0.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#load-and-organize-data"><i class="fa fa-check"></i><b>12.0.1</b> Load and organize data</a></li>
+<li class="chapter" data-level="12.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#temporal-analysis"><i class="fa fa-check"></i><b>12.1</b> Temporal analysis</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#customize-bin-widths"><i class="fa fa-check"></i><b>12.1.1</b> Customize bin widths</a></li>
+<li class="chapter" data-level="12.1.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#customize-a-date-time-axis"><i class="fa fa-check"></i><b>12.1.2</b> Customize a date-time axis</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#text-analysis"><i class="fa fa-check"></i><b>12.2</b> Text analysis</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#graph-word-frequencies"><i class="fa fa-check"></i><b>12.2.1</b> Graph word frequencies</a></li>
+<li class="chapter" data-level="12.2.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#graph-word-associations"><i class="fa fa-check"></i><b>12.2.2</b> Graph word associations</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#geographic-analysis"><i class="fa fa-check"></i><b>12.3</b> Geographic analysis</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#construct-geographic-points-from-tweets"><i class="fa fa-check"></i><b>12.3.1</b> Construct geographic points from tweets</a></li>
+<li class="chapter" data-level="12.3.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#location-services"><i class="fa fa-check"></i><b>12.3.2</b> Location services</a></li>
+<li class="chapter" data-level="12.3.3" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#place-name"><i class="fa fa-check"></i><b>12.3.3</b> Place name</a></li>
+<li class="chapter" data-level="12.3.4" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#geographic-point-data"><i class="fa fa-check"></i><b>12.3.4</b> Geographic point data</a></li>
+<li class="chapter" data-level="12.3.5" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#aquire-census-data"><i class="fa fa-check"></i><b>12.3.5</b> Aquire Census data</a></li>
+<li class="chapter" data-level="12.3.6" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#select-counties-of-interest"><i class="fa fa-check"></i><b>12.3.6</b> Select counties of interest</a></li>
+<li class="chapter" data-level="12.3.7" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-population-density-and-tweet-points"><i class="fa fa-check"></i><b>12.3.7</b> Map population density and tweet points</a></li>
+<li class="chapter" data-level="12.3.8" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#join-tweets-to-counties"><i class="fa fa-check"></i><b>12.3.8</b> Join tweets to counties</a></li>
+<li class="chapter" data-level="12.3.9" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#calculate-county-tweet-rates"><i class="fa fa-check"></i><b>12.3.9</b> Calculate county tweet rates</a></li>
+<li class="chapter" data-level="12.3.10" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-tweet-rates-by-county"><i class="fa fa-check"></i><b>12.3.10</b> Map tweet rates by county</a></li>
+<li class="chapter" data-level="12.3.11" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#conclusions"><i class="fa fa-check"></i><b>12.3.11</b> Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-hurricane-tracks-with-tmap"><i class="fa fa-check"></i><b>12.4</b> Map hurricane tracks with tmap</a></li>
+<li class="chapter" data-level="12.5" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#acquire-hurricane-track-data"><i class="fa fa-check"></i><b>12.5</b> Acquire hurricane track data</a></li>
+<li class="chapter" data-level="12.6" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-2019-north-atlantic-storm-season"><i class="fa fa-check"></i><b>12.6</b> Map 2019 North Atlantic storm season</a></li>
+<li class="chapter" data-level="12.7" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-hurricane-dorian-track"><i class="fa fa-check"></i><b>12.7</b> Map Hurricane Dorian track</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html"><i class="fa fa-check"></i><b>13</b> Spatial Cluster Analysis</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#advice-for-saving-and-loading-data-in-r"><i class="fa fa-check"></i><b>13.1</b> Advice for saving and loading data in R</a></li>
+<li class="chapter" data-level="13.2" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#load-and-map-county-level-tweet-rate"><i class="fa fa-check"></i><b>13.2</b> Load and map county-level tweet rate</a></li>
+<li class="chapter" data-level="13.3" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#create-spatial-weight-matrix"><i class="fa fa-check"></i><b>13.3</b> Create Spatial Weight Matrix</a></li>
+<li class="chapter" data-level="13.4" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#calculate-getis-ord-g-statistic"><i class="fa fa-check"></i><b>13.4</b> Calculate Getis-Ord G* Statistic</a></li>
+<li class="chapter" data-level="13.5" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#map-hotpots"><i class="fa fa-check"></i><b>13.5</b> Map Hotpots</a></li>
+<li class="chapter" data-level="13.6" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#remove-counties-with-no-tweets"><i class="fa fa-check"></i><b>13.6</b> Remove counties with no tweets</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="hurricane-ida.html"><a href="hurricane-ida.html"><i class="fa fa-check"></i><b>14</b> Hurricane Ida</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Sciences Across the Disciplines: Geography</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="spatial-cluster-analysis" class="section level1 hasAnchor" number="13">
+<h1><span class="header-section-number">Chapter 13</span> Spatial Cluster Analysis<a href="spatial-cluster-analysis.html#spatial-cluster-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="advice-for-saving-and-loading-data-in-r" class="section level2 hasAnchor" number="13.1">
+<h2><span class="header-section-number">13.1</span> Advice for saving and loading data in R<a href="spatial-cluster-analysis.html#advice-for-saving-and-loading-data-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>At the end of the previous lesson, we output an RDS file of census counties with tweet counts joined.<br />
+In general, it makes sense to output a permanent copy of a data frame when:
+- you first download, scrape or create the data, as an unedited original copy
+- you process large or confidential data to the point when it can be shared
+- you complete a lengthy processing task
+- you reach a natural break in the analysis where it would be convenient to restart with or iterate with the data in a particular state
+- you finish the study</p>
+<p>An advantage of RDS files is that the data objects can be assigned any name as they are read in.
+Here, we can just call them <code>counties</code> for convenience.</p>
+</div>
+<div id="load-and-map-county-level-tweet-rate" class="section level2 hasAnchor" number="13.2">
+<h2><span class="header-section-number">13.2</span> Load and map county-level tweet rate<a href="spatial-cluster-analysis.html#load-and-map-county-level-tweet-rate" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="spatial-cluster-analysis.html#cb329-1" tabindex="-1"></a>counties <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">&quot;data_public&quot;</span>, <span class="st">&quot;counties_tweet_counts.RDS&quot;</span>))</span></code></pre></div>
+<p>Map tweet rate by county using <code>tmap</code></p>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="spatial-cluster-analysis.html#cb330-1" tabindex="-1"></a><span class="fu">tm_shape</span>(counties) <span class="sc">+</span></span>
+<span id="cb330-2"><a href="spatial-cluster-analysis.html#cb330-2" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="st">&quot;tweet_rate&quot;</span>,</span>
+<span id="cb330-3"><a href="spatial-cluster-analysis.html#cb330-3" tabindex="-1"></a>              <span class="at">border.col =</span> <span class="st">&quot;grey95&quot;</span>,</span>
+<span id="cb330-4"><a href="spatial-cluster-analysis.html#cb330-4" tabindex="-1"></a>              <span class="at">border.alpha =</span> <span class="fl">0.1</span>,</span>
+<span id="cb330-5"><a href="spatial-cluster-analysis.html#cb330-5" tabindex="-1"></a>              <span class="at">palette =</span> <span class="st">&quot;YlOrRd&quot;</span>,</span>
+<span id="cb330-6"><a href="spatial-cluster-analysis.html#cb330-6" tabindex="-1"></a>              <span class="at">n =</span> <span class="dv">5</span>,</span>
+<span id="cb330-7"><a href="spatial-cluster-analysis.html#cb330-7" tabindex="-1"></a>              <span class="at">style =</span> <span class="st">&quot;headtails&quot;</span>,</span>
+<span id="cb330-8"><a href="spatial-cluster-analysis.html#cb330-8" tabindex="-1"></a>              <span class="at">title =</span> <span class="st">&quot;Tweet Rate&quot;</span>) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-237-1.png" width="672" /></p>
+</div>
+<div id="create-spatial-weight-matrix" class="section level2 hasAnchor" number="13.3">
+<h2><span class="header-section-number">13.3</span> Create Spatial Weight Matrix<a href="spatial-cluster-analysis.html#create-spatial-weight-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Use 110km Euclidean distance and include self in the weight matrix</p>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="spatial-cluster-analysis.html#cb331-1" tabindex="-1"></a>county_coords <span class="ot">&lt;-</span> counties <span class="sc">%&gt;%</span></span>
+<span id="cb331-2"><a href="spatial-cluster-analysis.html#cb331-2" tabindex="-1"></a>  <span class="fu">st_centroid</span>() <span class="sc">%&gt;%</span> <span class="co"># convert polygons to centroid points</span></span>
+<span id="cb331-3"><a href="spatial-cluster-analysis.html#cb331-3" tabindex="-1"></a>  <span class="fu">st_coordinates</span>() <span class="co"># convert to simple x,y coordinates to play with stdep</span></span>
+<span id="cb331-4"><a href="spatial-cluster-analysis.html#cb331-4" tabindex="-1"></a></span>
+<span id="cb331-5"><a href="spatial-cluster-analysis.html#cb331-5" tabindex="-1"></a>thresdist <span class="ot">&lt;-</span> county_coords <span class="sc">%&gt;%</span> </span>
+<span id="cb331-6"><a href="spatial-cluster-analysis.html#cb331-6" tabindex="-1"></a>  <span class="fu">dnearneigh</span>(<span class="dv">0</span>, <span class="dv">110</span>, <span class="at">longlat =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="co"># use geodesic distance of 110km</span></span>
+<span id="cb331-7"><a href="spatial-cluster-analysis.html#cb331-7" tabindex="-1"></a>  <span class="co"># distance should be long enough for every feature to have &gt;= one neighbor</span></span>
+<span id="cb331-8"><a href="spatial-cluster-analysis.html#cb331-8" tabindex="-1"></a>  <span class="fu">include.self</span>() <span class="co"># include a county in its own neighborhood (for G*)</span></span>
+<span id="cb331-9"><a href="spatial-cluster-analysis.html#cb331-9" tabindex="-1"></a></span>
+<span id="cb331-10"><a href="spatial-cluster-analysis.html#cb331-10" tabindex="-1"></a>thresdist <span class="co"># view statistical summary of the nearest neighbors</span></span></code></pre></div>
+<pre><code>## Neighbour list object:
+## Number of regions: 1705 
+## Number of nonzero links: 48795 
+## Percentage nonzero weights: 1.67852 
+## Average number of links: 28.61877</code></pre>
+<p>Optionally, plot the spatial weight matrix results
+This should result in a very dense graph, because each county is connected
+to all other counties within 110 km.</p>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="spatial-cluster-analysis.html#cb333-1" tabindex="-1"></a><span class="fu">plot</span>(thresdist, county_coords, <span class="at">lwd=</span><span class="fl">0.01</span>) <span class="co"># plot nearest neighbor ties</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-239-1.png" width="672" /></p>
+</div>
+<div id="calculate-getis-ord-g-statistic" class="section level2 hasAnchor" number="13.4">
+<h2><span class="header-section-number">13.4</span> Calculate Getis-Ord G* Statistic<a href="spatial-cluster-analysis.html#calculate-getis-ord-g-statistic" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="spatial-cluster-analysis.html#cb334-1" tabindex="-1"></a><span class="co"># Create weight matrix from the neighbor objects</span></span>
+<span id="cb334-2"><a href="spatial-cluster-analysis.html#cb334-2" tabindex="-1"></a>dwm <span class="ot">&lt;-</span> <span class="fu">nb2listw</span>(thresdist, <span class="at">zero.policy =</span> T)</span>
+<span id="cb334-3"><a href="spatial-cluster-analysis.html#cb334-3" tabindex="-1"></a></span>
+<span id="cb334-4"><a href="spatial-cluster-analysis.html#cb334-4" tabindex="-1"></a><span class="do">######## Local G* Hotspot Analysis ########</span></span>
+<span id="cb334-5"><a href="spatial-cluster-analysis.html#cb334-5" tabindex="-1"></a><span class="co"># Get Ord G* statistic for hot and cold spots</span></span>
+<span id="cb334-6"><a href="spatial-cluster-analysis.html#cb334-6" tabindex="-1"></a>counties<span class="sc">$</span>locG <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">localG</span>(counties<span class="sc">$</span>tweet_rate,</span>
+<span id="cb334-7"><a href="spatial-cluster-analysis.html#cb334-7" tabindex="-1"></a>  <span class="at">listw =</span> dwm,</span>
+<span id="cb334-8"><a href="spatial-cluster-analysis.html#cb334-8" tabindex="-1"></a>  <span class="at">zero.policy =</span> <span class="cn">TRUE</span></span>
+<span id="cb334-9"><a href="spatial-cluster-analysis.html#cb334-9" tabindex="-1"></a>))</span>
+<span id="cb334-10"><a href="spatial-cluster-analysis.html#cb334-10" tabindex="-1"></a></span>
+<span id="cb334-11"><a href="spatial-cluster-analysis.html#cb334-11" tabindex="-1"></a><span class="co"># may be same as:</span></span>
+<span id="cb334-12"><a href="spatial-cluster-analysis.html#cb334-12" tabindex="-1"></a><span class="co"># counties$dorrate %&gt;% localG(listw = dwm, zero.policy = TRUE) %&gt;% as.vector()</span></span>
+<span id="cb334-13"><a href="spatial-cluster-analysis.html#cb334-13" tabindex="-1"></a></span>
+<span id="cb334-14"><a href="spatial-cluster-analysis.html#cb334-14" tabindex="-1"></a><span class="co"># check summary statistics of the local G score</span></span>
+<span id="cb334-15"><a href="spatial-cluster-analysis.html#cb334-15" tabindex="-1"></a><span class="fu">summary</span>(counties<span class="sc">$</span>locG)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -1.9221 -1.1916 -0.8742 -0.2236 -0.1173 13.9514</code></pre>
+</div>
+<div id="map-hotpots" class="section level2 hasAnchor" number="13.5">
+<h2><span class="header-section-number">13.5</span> Map Hotpots<a href="spatial-cluster-analysis.html#map-hotpots" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>classify G scores by significance values typical of Z-scores
+where 1.15 is at the 0.125 confidence level,
+and 1.95 is at the 0.05 confidence level for two tailed z-scores
+based on Getis and Ord (1995) Doi: 10.1111/j.1538-4632.1992.tb00261.x
+to find other critical values, use the qnorm() function as shown here:
+<a href="https://methodenlehre.github.io/SGSCLM-R-course/statistical-distributions.html" class="uri">https://methodenlehre.github.io/SGSCLM-R-course/statistical-distributions.html</a>
+Getis Ord also suggest applying a Bonferroni correction</p>
+<p>breaks and colors from <a href="http://michaelminn.net/tutorials/r-point-analysis/" class="uri">http://michaelminn.net/tutorials/r-point-analysis/</a>
+based on 1.96 as the 95% confidence interval for z-scores
+if your results don’t have values in each of the 5 categories, you may need
+to change the values &amp; labels accordingly.</p>
+<p>What are significance levels and p-values?
+Read here: <a href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-statistics/what-is-a-z-score-what-is-a-p-value.htm" class="uri">https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-statistics/what-is-a-z-score-what-is-a-p-value.htm</a></p>
+<p>Classify by significance levels</p>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="spatial-cluster-analysis.html#cb336-1" tabindex="-1"></a>siglevel <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.15</span>, <span class="fl">1.95</span>)</span>
+<span id="cb336-2"><a href="spatial-cluster-analysis.html#cb336-2" tabindex="-1"></a>counties <span class="ot">&lt;-</span> counties <span class="sc">%&gt;%</span></span>
+<span id="cb336-3"><a href="spatial-cluster-analysis.html#cb336-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sig =</span> <span class="fu">cut</span>(locG, <span class="fu">c</span>(</span>
+<span id="cb336-4"><a href="spatial-cluster-analysis.html#cb336-4" tabindex="-1"></a>    <span class="fu">min</span>(counties<span class="sc">$</span>locG),</span>
+<span id="cb336-5"><a href="spatial-cluster-analysis.html#cb336-5" tabindex="-1"></a>    siglevel[<span class="dv">2</span>] <span class="sc">*</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb336-6"><a href="spatial-cluster-analysis.html#cb336-6" tabindex="-1"></a>    siglevel[<span class="dv">1</span>] <span class="sc">*</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb336-7"><a href="spatial-cluster-analysis.html#cb336-7" tabindex="-1"></a>    siglevel[<span class="dv">1</span>],</span>
+<span id="cb336-8"><a href="spatial-cluster-analysis.html#cb336-8" tabindex="-1"></a>    siglevel[<span class="dv">2</span>],</span>
+<span id="cb336-9"><a href="spatial-cluster-analysis.html#cb336-9" tabindex="-1"></a>    <span class="fu">max</span>(counties<span class="sc">$</span>locG)</span>
+<span id="cb336-10"><a href="spatial-cluster-analysis.html#cb336-10" tabindex="-1"></a>  )))</span>
+<span id="cb336-11"><a href="spatial-cluster-analysis.html#cb336-11" tabindex="-1"></a><span class="fu">rm</span>(siglevel)</span></code></pre></div>
+<p>Map results!</p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="spatial-cluster-analysis.html#cb337-1" tabindex="-1"></a><span class="co"># map results!</span></span>
+<span id="cb337-2"><a href="spatial-cluster-analysis.html#cb337-2" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb337-3"><a href="spatial-cluster-analysis.html#cb337-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> counties, <span class="fu">aes</span>(<span class="at">fill =</span> sig), <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">lwd =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb337-4"><a href="spatial-cluster-analysis.html#cb337-4" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb337-5"><a href="spatial-cluster-analysis.html#cb337-5" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#0000FF80&quot;</span>, <span class="st">&quot;#8080FF80&quot;</span>, <span class="st">&quot;#FFFFFF80&quot;</span>, <span class="st">&quot;#FF808080&quot;</span>, <span class="st">&quot;#FF000080&quot;</span>),</span>
+<span id="cb337-6"><a href="spatial-cluster-analysis.html#cb337-6" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;insignificant&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;high&quot;</span>),</span>
+<span id="cb337-7"><a href="spatial-cluster-analysis.html#cb337-7" tabindex="-1"></a>    <span class="at">aesthetics =</span> <span class="st">&quot;fill&quot;</span></span>
+<span id="cb337-8"><a href="spatial-cluster-analysis.html#cb337-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb337-9"><a href="spatial-cluster-analysis.html#cb337-9" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">&quot;Hot Spots&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb337-10"><a href="spatial-cluster-analysis.html#cb337-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Clusters of Hurricane Dorian Twitter Activity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb337-11"><a href="spatial-cluster-analysis.html#cb337-11" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb337-12"><a href="spatial-cluster-analysis.html#cb337-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb337-13"><a href="spatial-cluster-analysis.html#cb337-13" tabindex="-1"></a>    <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb337-14"><a href="spatial-cluster-analysis.html#cb337-14" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb337-15"><a href="spatial-cluster-analysis.html#cb337-15" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-242-1.png" width="672" /></p>
+</div>
+<div id="remove-counties-with-no-tweets" class="section level2 hasAnchor" number="13.6">
+<h2><span class="header-section-number">13.6</span> Remove counties with no tweets<a href="spatial-cluster-analysis.html#remove-counties-with-no-tweets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s experiment with this hotspot / cluster detection method a bit, by retesting for hotspots after removing counties with no twitter activity at all.</p>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="spatial-cluster-analysis.html#cb338-1" tabindex="-1"></a>countiesNo0 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">&quot;data_public&quot;</span>, <span class="st">&quot;counties_tweet_counts.RDS&quot;</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb338-2"><a href="spatial-cluster-analysis.html#cb338-2" tabindex="-1"></a>  <span class="fu">filter</span>(tweet_rate <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div>
+<p>Recreate the spatial weights matrix</p>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="spatial-cluster-analysis.html#cb339-1" tabindex="-1"></a>county_coords <span class="ot">&lt;-</span> countiesNo0 <span class="sc">%&gt;%</span></span>
+<span id="cb339-2"><a href="spatial-cluster-analysis.html#cb339-2" tabindex="-1"></a>  <span class="fu">st_centroid</span>() <span class="sc">%&gt;%</span> <span class="co"># convert polygons to centroid points</span></span>
+<span id="cb339-3"><a href="spatial-cluster-analysis.html#cb339-3" tabindex="-1"></a>  <span class="fu">st_coordinates</span>() <span class="co"># convert to simple x,y coordinates to play with stdep</span></span>
+<span id="cb339-4"><a href="spatial-cluster-analysis.html#cb339-4" tabindex="-1"></a></span>
+<span id="cb339-5"><a href="spatial-cluster-analysis.html#cb339-5" tabindex="-1"></a>thresdist <span class="ot">&lt;-</span> county_coords <span class="sc">%&gt;%</span> </span>
+<span id="cb339-6"><a href="spatial-cluster-analysis.html#cb339-6" tabindex="-1"></a>  <span class="fu">dnearneigh</span>(<span class="dv">0</span>, <span class="dv">110</span>, <span class="at">longlat =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="co"># use geodesic distance of 110km</span></span>
+<span id="cb339-7"><a href="spatial-cluster-analysis.html#cb339-7" tabindex="-1"></a>  <span class="co"># distance should be long enough for every feature to have &gt;= one neighbor</span></span>
+<span id="cb339-8"><a href="spatial-cluster-analysis.html#cb339-8" tabindex="-1"></a>  <span class="fu">include.self</span>() <span class="co"># include a county in its own neighborhood (for G*)</span></span>
+<span id="cb339-9"><a href="spatial-cluster-analysis.html#cb339-9" tabindex="-1"></a></span>
+<span id="cb339-10"><a href="spatial-cluster-analysis.html#cb339-10" tabindex="-1"></a>thresdist <span class="co"># view statistical summary of the nearest neighbors</span></span></code></pre></div>
+<pre><code>## Neighbour list object:
+## Number of regions: 601 
+## Number of nonzero links: 7757 
+## Percentage nonzero weights: 2.147558 
+## Average number of links: 12.90682 
+## 11 disjoint connected subgraphs</code></pre>
+<p>Re-plot the spatial weights matrix</p>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="spatial-cluster-analysis.html#cb341-1" tabindex="-1"></a><span class="fu">plot</span>(thresdist, county_coords, <span class="at">lwd=</span><span class="fl">0.01</span>) <span class="co"># plot nearest neighbor ties</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-245-1.png" width="672" /></p>
+<p>Re-calculate the local Getis-Ord G* Statistic</p>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="spatial-cluster-analysis.html#cb342-1" tabindex="-1"></a>dwm <span class="ot">&lt;-</span> <span class="fu">nb2listw</span>(thresdist, <span class="at">zero.policy =</span> T)</span>
+<span id="cb342-2"><a href="spatial-cluster-analysis.html#cb342-2" tabindex="-1"></a></span>
+<span id="cb342-3"><a href="spatial-cluster-analysis.html#cb342-3" tabindex="-1"></a>countiesNo0<span class="sc">$</span>locG <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">localG</span>(countiesNo0<span class="sc">$</span>tweet_rate,</span>
+<span id="cb342-4"><a href="spatial-cluster-analysis.html#cb342-4" tabindex="-1"></a>  <span class="at">listw =</span> dwm,</span>
+<span id="cb342-5"><a href="spatial-cluster-analysis.html#cb342-5" tabindex="-1"></a>  <span class="at">zero.policy =</span> <span class="cn">TRUE</span></span>
+<span id="cb342-6"><a href="spatial-cluster-analysis.html#cb342-6" tabindex="-1"></a>))</span>
+<span id="cb342-7"><a href="spatial-cluster-analysis.html#cb342-7" tabindex="-1"></a></span>
+<span id="cb342-8"><a href="spatial-cluster-analysis.html#cb342-8" tabindex="-1"></a><span class="fu">summary</span>(counties<span class="sc">$</span>locG)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -1.9221 -1.1916 -0.8742 -0.2236 -0.1173 13.9514</code></pre>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="spatial-cluster-analysis.html#cb344-1" tabindex="-1"></a>siglevel <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.15</span>, <span class="fl">1.95</span>)</span>
+<span id="cb344-2"><a href="spatial-cluster-analysis.html#cb344-2" tabindex="-1"></a>countiesNo0 <span class="ot">&lt;-</span> countiesNo0 <span class="sc">|&gt;</span> </span>
+<span id="cb344-3"><a href="spatial-cluster-analysis.html#cb344-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sig =</span> <span class="fu">cut</span>(locG, <span class="fu">c</span>(</span>
+<span id="cb344-4"><a href="spatial-cluster-analysis.html#cb344-4" tabindex="-1"></a>    <span class="fu">min</span>(counties<span class="sc">$</span>locG),</span>
+<span id="cb344-5"><a href="spatial-cluster-analysis.html#cb344-5" tabindex="-1"></a>    siglevel[<span class="dv">2</span>] <span class="sc">*</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb344-6"><a href="spatial-cluster-analysis.html#cb344-6" tabindex="-1"></a>    siglevel[<span class="dv">1</span>] <span class="sc">*</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb344-7"><a href="spatial-cluster-analysis.html#cb344-7" tabindex="-1"></a>    siglevel[<span class="dv">1</span>],</span>
+<span id="cb344-8"><a href="spatial-cluster-analysis.html#cb344-8" tabindex="-1"></a>    siglevel[<span class="dv">2</span>],</span>
+<span id="cb344-9"><a href="spatial-cluster-analysis.html#cb344-9" tabindex="-1"></a>    <span class="fu">max</span>(countiesNo0<span class="sc">$</span>locG)</span>
+<span id="cb344-10"><a href="spatial-cluster-analysis.html#cb344-10" tabindex="-1"></a>  )))</span>
+<span id="cb344-11"><a href="spatial-cluster-analysis.html#cb344-11" tabindex="-1"></a><span class="fu">rm</span>(siglevel)</span></code></pre></div>
+<p>And, re-map the hotspots.</p>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="spatial-cluster-analysis.html#cb345-1" tabindex="-1"></a><span class="co"># map results!</span></span>
+<span id="cb345-2"><a href="spatial-cluster-analysis.html#cb345-2" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb345-3"><a href="spatial-cluster-analysis.html#cb345-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> countiesNo0, <span class="fu">aes</span>(<span class="at">fill =</span> sig), <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">lwd =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb345-4"><a href="spatial-cluster-analysis.html#cb345-4" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb345-5"><a href="spatial-cluster-analysis.html#cb345-5" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#0000FF80&quot;</span>, <span class="st">&quot;#8080FF80&quot;</span>, <span class="st">&quot;#FFFFFF80&quot;</span>, <span class="st">&quot;#FF808080&quot;</span>, <span class="st">&quot;#FF000080&quot;</span>),</span>
+<span id="cb345-6"><a href="spatial-cluster-analysis.html#cb345-6" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;insignificant&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;high&quot;</span>),</span>
+<span id="cb345-7"><a href="spatial-cluster-analysis.html#cb345-7" tabindex="-1"></a>    <span class="at">aesthetics =</span> <span class="st">&quot;fill&quot;</span></span>
+<span id="cb345-8"><a href="spatial-cluster-analysis.html#cb345-8" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb345-9"><a href="spatial-cluster-analysis.html#cb345-9" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">&quot;Hot Spots&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb345-10"><a href="spatial-cluster-analysis.html#cb345-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Clusters of Hurricane Dorian Twitter Activity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb345-11"><a href="spatial-cluster-analysis.html#cb345-11" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb345-12"><a href="spatial-cluster-analysis.html#cb345-12" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb345-13"><a href="spatial-cluster-analysis.html#cb345-13" tabindex="-1"></a>    <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb345-14"><a href="spatial-cluster-analysis.html#cb345-14" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb345-15"><a href="spatial-cluster-analysis.html#cb345-15" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-248-1.png" width="672" /></p>
+<p>As we can see, removing the large number of counties with no tweet activity changes the global average of the tweet rate.
+Therefore, neighborhoods must exhibit a higher threshold of twitter activity to be considered significant, reducing the overall geographic extent of the hotspots.
+The cold spots also shift.
+Whereas they were concentrated in areas with no twitter activity at all, they are now centered on areas with low but non-zero twitter activity.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="hurricane-dorian.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="hurricane-ida.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

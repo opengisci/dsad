@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Graph values and qualities of diamonds | Data Sciences Across the Disciplines: Geography</title>
+  <meta name="description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Graph values and qualities of diamonds | Data Sciences Across the Disciplines: Geography" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  <meta name="github-repo" content="opengisci/wt25_josephholler/" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Graph values and qualities of diamonds | Data Sciences Across the Disciplines: Geography" />
+  
+  <meta name="twitter:description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  
+
+<meta name="author" content="Joseph Holler" />
+<meta name="author" content="Alex Lyford" />
+
+
+<meta name="date" content="2025-01-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="r-and-calculations.html"/>
+<link rel="next" href="wrangle-and-graph-new-york-city-flights.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="r-and-calculations.html"><a href="r-and-calculations.html"><i class="fa fa-check"></i><b>2</b> R and Calculations</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="r-and-calculations.html"><a href="r-and-calculations.html#r-is-a-calculator"><i class="fa fa-check"></i><b>2.1</b> R is a calculator</a></li>
+<li class="chapter" data-level="2.2" data-path="r-and-calculations.html"><a href="r-and-calculations.html#functions"><i class="fa fa-check"></i><b>2.2</b> Functions</a></li>
+<li class="chapter" data-level="2.3" data-path="r-and-calculations.html"><a href="r-and-calculations.html#store-objects-for-future-use-in-environment"><i class="fa fa-check"></i><b>2.3</b> Store objects for future use in environment</a></li>
+<li class="chapter" data-level="2.4" data-path="r-and-calculations.html"><a href="r-and-calculations.html#mean-function-for-averages"><i class="fa fa-check"></i><b>2.4</b> Mean function for averages</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html"><i class="fa fa-check"></i><b>3</b> Graph values and qualities of diamonds</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#install-the-tidyverse-package"><i class="fa fa-check"></i><b>3.1</b> Install the tidyverse package</a></li>
+<li class="chapter" data-level="3.2" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#explore-diamonds-dataset"><i class="fa fa-check"></i><b>3.2</b> Explore Diamonds Dataset</a></li>
+<li class="chapter" data-level="3.3" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#facet-the-data"><i class="fa fa-check"></i><b>3.3</b> Facet the data</a></li>
+<li class="chapter" data-level="3.4" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#restart-r-and-remake-last-graph"><i class="fa fa-check"></i><b>3.4</b> Restart R and Remake last graph</a></li>
+<li class="chapter" data-level="3.5" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#explore-gap-in-prices-between-1k-and-2k"><i class="fa fa-check"></i><b>3.5</b> Explore gap in prices between 1k and 2k</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html"><i class="fa fa-check"></i><b>4</b> Wrangle and graph New York City flights</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#which-carriers-should-travelers-avoid"><i class="fa fa-check"></i><b>4.1</b> Which carriers should travelers avoid?</a></li>
+<li class="chapter" data-level="4.2" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#data-wrangling"><i class="fa fa-check"></i><b>4.2</b> Data Wrangling</a></li>
+<li class="chapter" data-level="4.3" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#on-average-how-long-are-flights-delayed"><i class="fa fa-check"></i><b>4.3</b> On average, how long are flights delayed?</a></li>
+<li class="chapter" data-level="4.4" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#pipe-operator"><i class="fa fa-check"></i><b>4.4</b> Pipe Operator</a></li>
+<li class="chapter" data-level="4.5" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#warmup-question"><i class="fa fa-check"></i><b>4.5</b> Warmup Question</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="okcupid.html"><a href="okcupid.html"><i class="fa fa-check"></i><b>5</b> OkCupid</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="okcupid.html"><a href="okcupid.html#load-ok-cupid-data"><i class="fa fa-check"></i><b>5.1</b> Load OK Cupid Data</a></li>
+<li class="chapter" data-level="5.2" data-path="okcupid.html"><a href="okcupid.html#height"><i class="fa fa-check"></i><b>5.2</b> Height</a></li>
+<li class="chapter" data-level="5.3" data-path="okcupid.html"><a href="okcupid.html#age"><i class="fa fa-check"></i><b>5.3</b> Age</a></li>
+<li class="chapter" data-level="5.4" data-path="okcupid.html"><a href="okcupid.html#diet-and-body-type"><i class="fa fa-check"></i><b>5.4</b> Diet and Body Type</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="okcupid.html"><a href="okcupid.html#collapse-diet-categories"><i class="fa fa-check"></i><b>5.4.1</b> Collapse Diet Categories</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="okcupid.html"><a href="okcupid.html#save-dataset-to-computer"><i class="fa fa-check"></i><b>5.5</b> Save dataset to computer</a></li>
+<li class="chapter" data-level="5.6" data-path="okcupid.html"><a href="okcupid.html#heat-map-of-diet-and-body-type"><i class="fa fa-check"></i><b>5.6</b> Heat map of diet and body type</a></li>
+<li class="chapter" data-level="5.7" data-path="okcupid.html"><a href="okcupid.html#text-mining"><i class="fa fa-check"></i><b>5.7</b> Text mining</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="okcupid.html"><a href="okcupid.html#essay-data-dictionary"><i class="fa fa-check"></i><b>5.7.1</b> Essay data dictionary</a></li>
+<li class="chapter" data-level="5.7.2" data-path="okcupid.html"><a href="okcupid.html#what-are-people-really-good-at"><i class="fa fa-check"></i><b>5.7.2</b> What are people really good at?</a></li>
+<li class="chapter" data-level="5.7.3" data-path="okcupid.html"><a href="okcupid.html#analyze-word-usage-in-essays"><i class="fa fa-check"></i><b>5.7.3</b> Analyze word usage in essays</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="baby-names.html"><a href="baby-names.html"><i class="fa fa-check"></i><b>6</b> Baby Names</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="baby-names.html"><a href="baby-names.html#bens-over-time"><i class="fa fa-check"></i><b>6.1</b> Bens over time</a></li>
+<li class="chapter" data-level="6.2" data-path="baby-names.html"><a href="baby-names.html#babies-over-time"><i class="fa fa-check"></i><b>6.2</b> Babies over time</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="web-scraping.html"><a href="web-scraping.html"><i class="fa fa-check"></i><b>7</b> Web Scraping</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="web-scraping.html"><a href="web-scraping.html#scrape-all-paragraph-text-from-a-webpage"><i class="fa fa-check"></i><b>7.1</b> Scrape all paragraph text from a webpage</a></li>
+<li class="chapter" data-level="7.2" data-path="web-scraping.html"><a href="web-scraping.html#scrape-a-specific-item-from-a-webpage"><i class="fa fa-check"></i><b>7.2</b> Scrape a specific item from a webpage</a></li>
+<li class="chapter" data-level="7.3" data-path="web-scraping.html"><a href="web-scraping.html#ethics-of-web-scraping"><i class="fa fa-check"></i><b>7.3</b> Ethics of web scraping</a></li>
+<li class="chapter" data-level="7.4" data-path="web-scraping.html"><a href="web-scraping.html#scrape-data"><i class="fa fa-check"></i><b>7.4</b> Scrape data</a></li>
+<li class="chapter" data-level="7.5" data-path="web-scraping.html"><a href="web-scraping.html#cardinal-sin-of-data-science"><i class="fa fa-check"></i><b>7.5</b> Cardinal sin of data science</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html"><i class="fa fa-check"></i><b>8</b> Life expectancy and GDP from graphs to animation</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#make-the-same-graph-but-for-three-random-countries"><i class="fa fa-check"></i><b>8.1</b> Make the same graph but for three random countries</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#join-the-life-expectancy-data-together-with-income-data"><i class="fa fa-check"></i><b>8.1.1</b> Join the life expectancy data together with income data</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#size-points-by-population"><i class="fa fa-check"></i><b>8.2</b> Size points by population</a></li>
+<li class="chapter" data-level="8.3" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#web-scrape-region-data"><i class="fa fa-check"></i><b>8.3</b> Web scrape region data</a></li>
+<li class="chapter" data-level="8.4" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#life-expectancy-gdp-and-region"><i class="fa fa-check"></i><b>8.4</b> Life expectancy, GDP and Region</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="animation.html"><a href="animation.html"><i class="fa fa-check"></i><b>9</b> Animation</a>
+<ul>
+<li class="chapter" data-level="9.0.1" data-path="animation.html"><a href="animation.html#graph-all-years"><i class="fa fa-check"></i><b>9.0.1</b> Graph all years</a></li>
+<li class="chapter" data-level="9.1" data-path="animation.html"><a href="animation.html#create-the-animation"><i class="fa fa-check"></i><b>9.1</b> Create the animation</a></li>
+<li class="chapter" data-level="9.2" data-path="animation.html"><a href="animation.html#rendered-animation"><i class="fa fa-check"></i><b>9.2</b> Rendered Animation</a></li>
+<li class="chapter" data-level="9.3" data-path="animation.html"><a href="animation.html#animate-a-bar-chart"><i class="fa fa-check"></i><b>9.3</b> Animate a bar chart</a></li>
+<li class="chapter" data-level="9.4" data-path="animation.html"><a href="animation.html#make-a-tree-map"><i class="fa fa-check"></i><b>9.4</b> Make a tree map</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="animation.html"><a href="animation.html#animate-a-tree-map"><i class="fa fa-check"></i><b>9.4.1</b> Animate a tree map</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="mapping-in-r.html"><a href="mapping-in-r.html"><i class="fa fa-check"></i><b>10</b> Mapping in R</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="mapping-in-r.html"><a href="mapping-in-r.html#map-alcohol-consumption-per-capita"><i class="fa fa-check"></i><b>10.1</b> Map alcohol consumption per capita</a></li>
+<li class="chapter" data-level="10.2" data-path="mapping-in-r.html"><a href="mapping-in-r.html#map-volcanoes"><i class="fa fa-check"></i><b>10.2</b> Map volcanoes</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>11</b> Shiny Apps</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="shiny-apps.html"><a href="shiny-apps.html#strange-online-food-data"><i class="fa fa-check"></i><b>11.1</b> Strange online food data</a></li>
+<li class="chapter" data-level="11.2" data-path="shiny-apps.html"><a href="shiny-apps.html#liberal-arts-college-rankings"><i class="fa fa-check"></i><b>11.2</b> Liberal arts college rankings</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="shiny-apps.html"><a href="shiny-apps.html#leaflet-map-of-college-locations"><i class="fa fa-check"></i><b>11.2.1</b> Leaflet map of college locations</a></li>
+<li class="chapter" data-level="11.2.2" data-path="shiny-apps.html"><a href="shiny-apps.html#graph-college-ranking-over-time"><i class="fa fa-check"></i><b>11.2.2</b> Graph college ranking over time</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-app-notes"><i class="fa fa-check"></i><b>11.3</b> Shiny App notes</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html"><i class="fa fa-check"></i><b>12</b> Hurricane Dorian</a>
+<ul>
+<li class="chapter" data-level="12.0.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#load-and-organize-data"><i class="fa fa-check"></i><b>12.0.1</b> Load and organize data</a></li>
+<li class="chapter" data-level="12.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#temporal-analysis"><i class="fa fa-check"></i><b>12.1</b> Temporal analysis</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#customize-bin-widths"><i class="fa fa-check"></i><b>12.1.1</b> Customize bin widths</a></li>
+<li class="chapter" data-level="12.1.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#customize-a-date-time-axis"><i class="fa fa-check"></i><b>12.1.2</b> Customize a date-time axis</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#text-analysis"><i class="fa fa-check"></i><b>12.2</b> Text analysis</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#graph-word-frequencies"><i class="fa fa-check"></i><b>12.2.1</b> Graph word frequencies</a></li>
+<li class="chapter" data-level="12.2.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#graph-word-associations"><i class="fa fa-check"></i><b>12.2.2</b> Graph word associations</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#geographic-analysis"><i class="fa fa-check"></i><b>12.3</b> Geographic analysis</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#construct-geographic-points-from-tweets"><i class="fa fa-check"></i><b>12.3.1</b> Construct geographic points from tweets</a></li>
+<li class="chapter" data-level="12.3.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#location-services"><i class="fa fa-check"></i><b>12.3.2</b> Location services</a></li>
+<li class="chapter" data-level="12.3.3" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#place-name"><i class="fa fa-check"></i><b>12.3.3</b> Place name</a></li>
+<li class="chapter" data-level="12.3.4" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#geographic-point-data"><i class="fa fa-check"></i><b>12.3.4</b> Geographic point data</a></li>
+<li class="chapter" data-level="12.3.5" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#aquire-census-data"><i class="fa fa-check"></i><b>12.3.5</b> Aquire Census data</a></li>
+<li class="chapter" data-level="12.3.6" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#select-counties-of-interest"><i class="fa fa-check"></i><b>12.3.6</b> Select counties of interest</a></li>
+<li class="chapter" data-level="12.3.7" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-population-density-and-tweet-points"><i class="fa fa-check"></i><b>12.3.7</b> Map population density and tweet points</a></li>
+<li class="chapter" data-level="12.3.8" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#join-tweets-to-counties"><i class="fa fa-check"></i><b>12.3.8</b> Join tweets to counties</a></li>
+<li class="chapter" data-level="12.3.9" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#calculate-county-tweet-rates"><i class="fa fa-check"></i><b>12.3.9</b> Calculate county tweet rates</a></li>
+<li class="chapter" data-level="12.3.10" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-tweet-rates-by-county"><i class="fa fa-check"></i><b>12.3.10</b> Map tweet rates by county</a></li>
+<li class="chapter" data-level="12.3.11" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#conclusions"><i class="fa fa-check"></i><b>12.3.11</b> Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-hurricane-tracks-with-tmap"><i class="fa fa-check"></i><b>12.4</b> Map hurricane tracks with tmap</a></li>
+<li class="chapter" data-level="12.5" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#acquire-hurricane-track-data"><i class="fa fa-check"></i><b>12.5</b> Acquire hurricane track data</a></li>
+<li class="chapter" data-level="12.6" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-2019-north-atlantic-storm-season"><i class="fa fa-check"></i><b>12.6</b> Map 2019 North Atlantic storm season</a></li>
+<li class="chapter" data-level="12.7" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-hurricane-dorian-track"><i class="fa fa-check"></i><b>12.7</b> Map Hurricane Dorian track</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html"><i class="fa fa-check"></i><b>13</b> Spatial Cluster Analysis</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#advice-for-saving-and-loading-data-in-r"><i class="fa fa-check"></i><b>13.1</b> Advice for saving and loading data in R</a></li>
+<li class="chapter" data-level="13.2" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#load-and-map-county-level-tweet-rate"><i class="fa fa-check"></i><b>13.2</b> Load and map county-level tweet rate</a></li>
+<li class="chapter" data-level="13.3" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#create-spatial-weight-matrix"><i class="fa fa-check"></i><b>13.3</b> Create Spatial Weight Matrix</a></li>
+<li class="chapter" data-level="13.4" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#calculate-getis-ord-g-statistic"><i class="fa fa-check"></i><b>13.4</b> Calculate Getis-Ord G* Statistic</a></li>
+<li class="chapter" data-level="13.5" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#map-hotpots"><i class="fa fa-check"></i><b>13.5</b> Map Hotpots</a></li>
+<li class="chapter" data-level="13.6" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#remove-counties-with-no-tweets"><i class="fa fa-check"></i><b>13.6</b> Remove counties with no tweets</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="hurricane-ida.html"><a href="hurricane-ida.html"><i class="fa fa-check"></i><b>14</b> Hurricane Ida</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Sciences Across the Disciplines: Geography</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="graph-values-and-qualities-of-diamonds" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Graph values and qualities of diamonds<a href="graph-values-and-qualities-of-diamonds.html#graph-values-and-qualities-of-diamonds" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<ul>
+<li>there are many different functions / ways to explore data and graph it</li>
+<li>these may be the most common/efficient/best ways, but there might be more specialized ways out there</li>
+</ul>
+<div id="install-the-tidyverse-package" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Install the tidyverse package<a href="graph-values-and-qualities-of-diamonds.html#install-the-tidyverse-package" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>install the tidyverse package with <code>install.packages</code></li>
+</ul>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="graph-values-and-qualities-of-diamonds.html#cb26-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<ul>
+<li>use <code>library</code> function to load installed packages into <code>R</code></li>
+<li>needs to be run every time you start an R session</li>
+<li>more efficient for R to load only the packages you need for a particular session / analysis</li>
+</ul>
+</div>
+<div id="explore-diamonds-dataset" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Explore Diamonds Dataset<a href="graph-values-and-qualities-of-diamonds.html#explore-diamonds-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>diamonds is a dataset installed along with <code>tidyverse</code></li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="graph-values-and-qualities-of-diamonds.html#cb27-1" tabindex="-1"></a>diamonds</span></code></pre></div>
+<pre><code>## # A tibble: 53,940 × 10
+##    carat cut       color clarity depth table price     x     y     z
+##    &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+##  2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+##  3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+##  4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+##  5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+##  6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
+##  7  0.24 Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47
+##  8  0.26 Very Good H     SI1      61.9    55   337  4.07  4.11  2.53
+##  9  0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
+## 10  0.23 Very Good H     VS1      59.4    61   338  4     4.05  2.39
+## # ℹ 53,930 more rows</code></pre>
+<ul>
+<li>Let’s graph the weight of a diamond against its $ value using the <code>ggplot</code> function</li>
+<li>Call up help on a function or package with a <code>?</code> followed by a function name in the console. For example, <code>?ggplot</code> brings up help on the graph plotting function.</li>
+<li>creates a graphing object, in which all arguments are optional</li>
+<li>ggplot technically does not need any parameters (to make a blank graph</li>
+<li>graphing is like painting layers on a canvas</li>
+<li><code>ggplot()</code> starts a blank graphing canvas, on which you add data and aesthetic options.</li>
+<li>add layers to ggplot with <code>+</code></li>
+<li>check out ggplot cheat sheet pdf from posit.co</li>
+<li>help documentation and cheat sheet shows what you can customize</li>
+<li>let’s make a scatterplot with <code>geom_point</code></li>
+<li>we need to give a dataset to ggplot and define x and y coordinates</li>
+<li><code>aes</code> tells R to make aesthetics using columns in your dataset</li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="graph-values-and-qualities-of-diamonds.html#cb29-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>Let’s interpret the graph</p>
+<ul>
+<li>price increases with carat weight</li>
+<li>clustering of data on thresholds: 1 carat, 1.5 carats, 2 carats</li>
+<li>you need domain knowledge (content expertise) to explain patterns</li>
+<li>more variation in price as weight increases</li>
+</ul>
+<p>Reflection</p>
+<ul>
+<li>Every graph will have this fundamental code structure, with modifications</li>
+<li>copy code you have that works and modify what you need!</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="graph-values-and-qualities-of-diamonds.html#cb30-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> depth, <span class="at">y =</span> price))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Try graphing three variables: diamond color, carat and price. How could we approach this?</p>
+<ul>
+<li>use scatterplot and symbolize the dots</li>
+</ul>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="graph-values-and-qualities-of-diamonds.html#cb31-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">arrange</span>(diamonds, <span class="fu">desc</span>(color))) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price, <span class="at">color =</span> color))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>Interpret:</p>
+<ul>
+<li><p>D appears more valuable than J</p></li>
+<li><p>Few instances of very large D diamonds</p></li>
+<li><p>Note that ggplot adds each color series one by one</p></li>
+<li><p>many +’s in console indicates one of your lines of code is incomplete (missing parenthesis, started line with a +, etc.)</p></li>
+</ul>
+</div>
+<div id="facet-the-data" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Facet the data<a href="graph-values-and-qualities-of-diamonds.html#facet-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>subdivide the data by a variable &amp; create different graphs for each subgroup</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="graph-values-and-qualities-of-diamonds.html#cb32-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds) <span class="sc">+</span> </span>
+<span id="cb32-2"><a href="graph-values-and-qualities-of-diamonds.html#cb32-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price, <span class="at">color =</span> color)) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="graph-values-and-qualities-of-diamonds.html#cb32-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>color)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>Interpret:</p>
+<ul>
+<li><p>now it’s possible to analyze trends of each color separately</p></li>
+<li><p>maybe facet by cut instead</p></li>
+</ul>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="graph-values-and-qualities-of-diamonds.html#cb33-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds) <span class="sc">+</span> </span>
+<span id="cb33-2"><a href="graph-values-and-qualities-of-diamonds.html#cb33-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price, <span class="at">color =</span> color)) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="graph-values-and-qualities-of-diamonds.html#cb33-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>cut)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>Interpret:</p>
+<ul>
+<li>as cut improves, price gets better</li>
+<li>price improves faster by carat for better cuts</li>
+</ul>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="graph-values-and-qualities-of-diamonds.html#cb34-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds) <span class="sc">+</span> </span>
+<span id="cb34-2"><a href="graph-values-and-qualities-of-diamonds.html#cb34-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price, <span class="at">color =</span> color)) <span class="sc">+</span></span>
+<span id="cb34-3"><a href="graph-values-and-qualities-of-diamonds.html#cb34-3" tabindex="-1"></a>  <span class="fu">facet_grid</span>(clarity<span class="sc">~</span>cut)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>Interpret:</p>
+<ul>
+<li>Each column represents a cut, and each row represents a color</li>
+<li>This visualization shows 5 variables</li>
+<li>IF is more clear (valuable) than I1</li>
+</ul>
+</div>
+<div id="restart-r-and-remake-last-graph" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Restart R and Remake last graph<a href="graph-values-and-qualities-of-diamonds.html#restart-r-and-remake-last-graph" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>If you get an error about a function not being found, you either mistyped its name
+or more likely, you need to load the library in which the function is found.
+You need to do this every time you open a new R session.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="graph-values-and-qualities-of-diamonds.html#cb35-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds) <span class="sc">+</span> </span>
+<span id="cb35-2"><a href="graph-values-and-qualities-of-diamonds.html#cb35-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price, <span class="at">color =</span> color)) <span class="sc">+</span></span>
+<span id="cb35-3"><a href="graph-values-and-qualities-of-diamonds.html#cb35-3" tabindex="-1"></a>  <span class="fu">facet_grid</span>(clarity<span class="sc">~</span>cut)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p>ctrl+shift+r can add a section to an R script.
+Headings take the place of that in Rmd</p>
+</div>
+<div id="explore-gap-in-prices-between-1k-and-2k" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Explore gap in prices between 1k and 2k<a href="graph-values-and-qualities-of-diamonds.html#explore-gap-in-prices-between-1k-and-2k" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s make a histogram showing the distribution of a single quantitative variable</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="graph-values-and-qualities-of-diamonds.html#cb36-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds) <span class="sc">+</span> </span>
+<span id="cb36-2"><a href="graph-values-and-qualities-of-diamonds.html#cb36-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> price))</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+There’s your basic histogram.
+Graph shows the aggregation of diamond data; each bar’s width represents a price range.
+and its height represents the number of data points within that price range.</p>
+<p>Interpretation: the vast majority of diamonds cost less than 2k, and a few diamonds cost more</p>
+<p>We can optionally change the fill and outline colors.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="graph-values-and-qualities-of-diamonds.html#cb38-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds) <span class="sc">+</span> </span>
+<span id="cb38-2"><a href="graph-values-and-qualities-of-diamonds.html#cb38-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> price), </span>
+<span id="cb38-3"><a href="graph-values-and-qualities-of-diamonds.html#cb38-3" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">&quot;darkblue&quot;</span>,</span>
+<span id="cb38-4"><a href="graph-values-and-qualities-of-diamonds.html#cb38-4" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p>Let’s “zoom in” on the area of data with a gap in prices by changing the limits of the x-axis to 1000 and 2000</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="graph-values-and-qualities-of-diamonds.html#cb40-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds) <span class="sc">+</span> </span>
+<span id="cb40-2"><a href="graph-values-and-qualities-of-diamonds.html#cb40-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> price), </span>
+<span id="cb40-3"><a href="graph-values-and-qualities-of-diamonds.html#cb40-3" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">&quot;darkblue&quot;</span>,</span>
+<span id="cb40-4"><a href="graph-values-and-qualities-of-diamonds.html#cb40-4" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb40-5"><a href="graph-values-and-qualities-of-diamonds.html#cb40-5" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">1000</span>, <span class="dv">2000</span>)</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## Warning: Removed 44232 rows containing non-finite outside the scale range
+## (`stat_bin()`).</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values or values outside the scale
+## range (`geom_bar()`).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p>Data science cannot tell us why this price gap exists: you need domain knowledge to explain.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="r-and-calculations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="wrangle-and-graph-new-york-city-flights.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

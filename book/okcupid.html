@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 OkCupid | Data Sciences Across the Disciplines: Geography</title>
+  <meta name="description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 OkCupid | Data Sciences Across the Disciplines: Geography" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  <meta name="github-repo" content="opengisci/wt25_josephholler/" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 OkCupid | Data Sciences Across the Disciplines: Geography" />
+  
+  <meta name="twitter:description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  
+
+<meta name="author" content="Joseph Holler" />
+<meta name="author" content="Alex Lyford" />
+
+
+<meta name="date" content="2025-01-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="wrangle-and-graph-new-york-city-flights.html"/>
+<link rel="next" href="baby-names.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="r-and-calculations.html"><a href="r-and-calculations.html"><i class="fa fa-check"></i><b>2</b> R and Calculations</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="r-and-calculations.html"><a href="r-and-calculations.html#r-is-a-calculator"><i class="fa fa-check"></i><b>2.1</b> R is a calculator</a></li>
+<li class="chapter" data-level="2.2" data-path="r-and-calculations.html"><a href="r-and-calculations.html#functions"><i class="fa fa-check"></i><b>2.2</b> Functions</a></li>
+<li class="chapter" data-level="2.3" data-path="r-and-calculations.html"><a href="r-and-calculations.html#store-objects-for-future-use-in-environment"><i class="fa fa-check"></i><b>2.3</b> Store objects for future use in environment</a></li>
+<li class="chapter" data-level="2.4" data-path="r-and-calculations.html"><a href="r-and-calculations.html#mean-function-for-averages"><i class="fa fa-check"></i><b>2.4</b> Mean function for averages</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html"><i class="fa fa-check"></i><b>3</b> Graph values and qualities of diamonds</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#install-the-tidyverse-package"><i class="fa fa-check"></i><b>3.1</b> Install the tidyverse package</a></li>
+<li class="chapter" data-level="3.2" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#explore-diamonds-dataset"><i class="fa fa-check"></i><b>3.2</b> Explore Diamonds Dataset</a></li>
+<li class="chapter" data-level="3.3" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#facet-the-data"><i class="fa fa-check"></i><b>3.3</b> Facet the data</a></li>
+<li class="chapter" data-level="3.4" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#restart-r-and-remake-last-graph"><i class="fa fa-check"></i><b>3.4</b> Restart R and Remake last graph</a></li>
+<li class="chapter" data-level="3.5" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#explore-gap-in-prices-between-1k-and-2k"><i class="fa fa-check"></i><b>3.5</b> Explore gap in prices between 1k and 2k</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html"><i class="fa fa-check"></i><b>4</b> Wrangle and graph New York City flights</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#which-carriers-should-travelers-avoid"><i class="fa fa-check"></i><b>4.1</b> Which carriers should travelers avoid?</a></li>
+<li class="chapter" data-level="4.2" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#data-wrangling"><i class="fa fa-check"></i><b>4.2</b> Data Wrangling</a></li>
+<li class="chapter" data-level="4.3" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#on-average-how-long-are-flights-delayed"><i class="fa fa-check"></i><b>4.3</b> On average, how long are flights delayed?</a></li>
+<li class="chapter" data-level="4.4" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#pipe-operator"><i class="fa fa-check"></i><b>4.4</b> Pipe Operator</a></li>
+<li class="chapter" data-level="4.5" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#warmup-question"><i class="fa fa-check"></i><b>4.5</b> Warmup Question</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="okcupid.html"><a href="okcupid.html"><i class="fa fa-check"></i><b>5</b> OkCupid</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="okcupid.html"><a href="okcupid.html#load-ok-cupid-data"><i class="fa fa-check"></i><b>5.1</b> Load OK Cupid Data</a></li>
+<li class="chapter" data-level="5.2" data-path="okcupid.html"><a href="okcupid.html#height"><i class="fa fa-check"></i><b>5.2</b> Height</a></li>
+<li class="chapter" data-level="5.3" data-path="okcupid.html"><a href="okcupid.html#age"><i class="fa fa-check"></i><b>5.3</b> Age</a></li>
+<li class="chapter" data-level="5.4" data-path="okcupid.html"><a href="okcupid.html#diet-and-body-type"><i class="fa fa-check"></i><b>5.4</b> Diet and Body Type</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="okcupid.html"><a href="okcupid.html#collapse-diet-categories"><i class="fa fa-check"></i><b>5.4.1</b> Collapse Diet Categories</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="okcupid.html"><a href="okcupid.html#save-dataset-to-computer"><i class="fa fa-check"></i><b>5.5</b> Save dataset to computer</a></li>
+<li class="chapter" data-level="5.6" data-path="okcupid.html"><a href="okcupid.html#heat-map-of-diet-and-body-type"><i class="fa fa-check"></i><b>5.6</b> Heat map of diet and body type</a></li>
+<li class="chapter" data-level="5.7" data-path="okcupid.html"><a href="okcupid.html#text-mining"><i class="fa fa-check"></i><b>5.7</b> Text mining</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="okcupid.html"><a href="okcupid.html#essay-data-dictionary"><i class="fa fa-check"></i><b>5.7.1</b> Essay data dictionary</a></li>
+<li class="chapter" data-level="5.7.2" data-path="okcupid.html"><a href="okcupid.html#what-are-people-really-good-at"><i class="fa fa-check"></i><b>5.7.2</b> What are people really good at?</a></li>
+<li class="chapter" data-level="5.7.3" data-path="okcupid.html"><a href="okcupid.html#analyze-word-usage-in-essays"><i class="fa fa-check"></i><b>5.7.3</b> Analyze word usage in essays</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="baby-names.html"><a href="baby-names.html"><i class="fa fa-check"></i><b>6</b> Baby Names</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="baby-names.html"><a href="baby-names.html#bens-over-time"><i class="fa fa-check"></i><b>6.1</b> Bens over time</a></li>
+<li class="chapter" data-level="6.2" data-path="baby-names.html"><a href="baby-names.html#babies-over-time"><i class="fa fa-check"></i><b>6.2</b> Babies over time</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="web-scraping.html"><a href="web-scraping.html"><i class="fa fa-check"></i><b>7</b> Web Scraping</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="web-scraping.html"><a href="web-scraping.html#scrape-all-paragraph-text-from-a-webpage"><i class="fa fa-check"></i><b>7.1</b> Scrape all paragraph text from a webpage</a></li>
+<li class="chapter" data-level="7.2" data-path="web-scraping.html"><a href="web-scraping.html#scrape-a-specific-item-from-a-webpage"><i class="fa fa-check"></i><b>7.2</b> Scrape a specific item from a webpage</a></li>
+<li class="chapter" data-level="7.3" data-path="web-scraping.html"><a href="web-scraping.html#ethics-of-web-scraping"><i class="fa fa-check"></i><b>7.3</b> Ethics of web scraping</a></li>
+<li class="chapter" data-level="7.4" data-path="web-scraping.html"><a href="web-scraping.html#scrape-data"><i class="fa fa-check"></i><b>7.4</b> Scrape data</a></li>
+<li class="chapter" data-level="7.5" data-path="web-scraping.html"><a href="web-scraping.html#cardinal-sin-of-data-science"><i class="fa fa-check"></i><b>7.5</b> Cardinal sin of data science</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html"><i class="fa fa-check"></i><b>8</b> Life expectancy and GDP from graphs to animation</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#make-the-same-graph-but-for-three-random-countries"><i class="fa fa-check"></i><b>8.1</b> Make the same graph but for three random countries</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#join-the-life-expectancy-data-together-with-income-data"><i class="fa fa-check"></i><b>8.1.1</b> Join the life expectancy data together with income data</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#size-points-by-population"><i class="fa fa-check"></i><b>8.2</b> Size points by population</a></li>
+<li class="chapter" data-level="8.3" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#web-scrape-region-data"><i class="fa fa-check"></i><b>8.3</b> Web scrape region data</a></li>
+<li class="chapter" data-level="8.4" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#life-expectancy-gdp-and-region"><i class="fa fa-check"></i><b>8.4</b> Life expectancy, GDP and Region</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="animation.html"><a href="animation.html"><i class="fa fa-check"></i><b>9</b> Animation</a>
+<ul>
+<li class="chapter" data-level="9.0.1" data-path="animation.html"><a href="animation.html#graph-all-years"><i class="fa fa-check"></i><b>9.0.1</b> Graph all years</a></li>
+<li class="chapter" data-level="9.1" data-path="animation.html"><a href="animation.html#create-the-animation"><i class="fa fa-check"></i><b>9.1</b> Create the animation</a></li>
+<li class="chapter" data-level="9.2" data-path="animation.html"><a href="animation.html#rendered-animation"><i class="fa fa-check"></i><b>9.2</b> Rendered Animation</a></li>
+<li class="chapter" data-level="9.3" data-path="animation.html"><a href="animation.html#animate-a-bar-chart"><i class="fa fa-check"></i><b>9.3</b> Animate a bar chart</a></li>
+<li class="chapter" data-level="9.4" data-path="animation.html"><a href="animation.html#make-a-tree-map"><i class="fa fa-check"></i><b>9.4</b> Make a tree map</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="animation.html"><a href="animation.html#animate-a-tree-map"><i class="fa fa-check"></i><b>9.4.1</b> Animate a tree map</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="mapping-in-r.html"><a href="mapping-in-r.html"><i class="fa fa-check"></i><b>10</b> Mapping in R</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="mapping-in-r.html"><a href="mapping-in-r.html#map-alcohol-consumption-per-capita"><i class="fa fa-check"></i><b>10.1</b> Map alcohol consumption per capita</a></li>
+<li class="chapter" data-level="10.2" data-path="mapping-in-r.html"><a href="mapping-in-r.html#map-volcanoes"><i class="fa fa-check"></i><b>10.2</b> Map volcanoes</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>11</b> Shiny Apps</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="shiny-apps.html"><a href="shiny-apps.html#strange-online-food-data"><i class="fa fa-check"></i><b>11.1</b> Strange online food data</a></li>
+<li class="chapter" data-level="11.2" data-path="shiny-apps.html"><a href="shiny-apps.html#liberal-arts-college-rankings"><i class="fa fa-check"></i><b>11.2</b> Liberal arts college rankings</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="shiny-apps.html"><a href="shiny-apps.html#leaflet-map-of-college-locations"><i class="fa fa-check"></i><b>11.2.1</b> Leaflet map of college locations</a></li>
+<li class="chapter" data-level="11.2.2" data-path="shiny-apps.html"><a href="shiny-apps.html#graph-college-ranking-over-time"><i class="fa fa-check"></i><b>11.2.2</b> Graph college ranking over time</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-app-notes"><i class="fa fa-check"></i><b>11.3</b> Shiny App notes</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html"><i class="fa fa-check"></i><b>12</b> Hurricane Dorian</a>
+<ul>
+<li class="chapter" data-level="12.0.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#load-and-organize-data"><i class="fa fa-check"></i><b>12.0.1</b> Load and organize data</a></li>
+<li class="chapter" data-level="12.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#temporal-analysis"><i class="fa fa-check"></i><b>12.1</b> Temporal analysis</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#customize-bin-widths"><i class="fa fa-check"></i><b>12.1.1</b> Customize bin widths</a></li>
+<li class="chapter" data-level="12.1.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#customize-a-date-time-axis"><i class="fa fa-check"></i><b>12.1.2</b> Customize a date-time axis</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#text-analysis"><i class="fa fa-check"></i><b>12.2</b> Text analysis</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#graph-word-frequencies"><i class="fa fa-check"></i><b>12.2.1</b> Graph word frequencies</a></li>
+<li class="chapter" data-level="12.2.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#graph-word-associations"><i class="fa fa-check"></i><b>12.2.2</b> Graph word associations</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#geographic-analysis"><i class="fa fa-check"></i><b>12.3</b> Geographic analysis</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#construct-geographic-points-from-tweets"><i class="fa fa-check"></i><b>12.3.1</b> Construct geographic points from tweets</a></li>
+<li class="chapter" data-level="12.3.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#location-services"><i class="fa fa-check"></i><b>12.3.2</b> Location services</a></li>
+<li class="chapter" data-level="12.3.3" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#place-name"><i class="fa fa-check"></i><b>12.3.3</b> Place name</a></li>
+<li class="chapter" data-level="12.3.4" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#geographic-point-data"><i class="fa fa-check"></i><b>12.3.4</b> Geographic point data</a></li>
+<li class="chapter" data-level="12.3.5" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#aquire-census-data"><i class="fa fa-check"></i><b>12.3.5</b> Aquire Census data</a></li>
+<li class="chapter" data-level="12.3.6" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#select-counties-of-interest"><i class="fa fa-check"></i><b>12.3.6</b> Select counties of interest</a></li>
+<li class="chapter" data-level="12.3.7" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-population-density-and-tweet-points"><i class="fa fa-check"></i><b>12.3.7</b> Map population density and tweet points</a></li>
+<li class="chapter" data-level="12.3.8" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#join-tweets-to-counties"><i class="fa fa-check"></i><b>12.3.8</b> Join tweets to counties</a></li>
+<li class="chapter" data-level="12.3.9" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#calculate-county-tweet-rates"><i class="fa fa-check"></i><b>12.3.9</b> Calculate county tweet rates</a></li>
+<li class="chapter" data-level="12.3.10" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-tweet-rates-by-county"><i class="fa fa-check"></i><b>12.3.10</b> Map tweet rates by county</a></li>
+<li class="chapter" data-level="12.3.11" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#conclusions"><i class="fa fa-check"></i><b>12.3.11</b> Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-hurricane-tracks-with-tmap"><i class="fa fa-check"></i><b>12.4</b> Map hurricane tracks with tmap</a></li>
+<li class="chapter" data-level="12.5" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#acquire-hurricane-track-data"><i class="fa fa-check"></i><b>12.5</b> Acquire hurricane track data</a></li>
+<li class="chapter" data-level="12.6" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-2019-north-atlantic-storm-season"><i class="fa fa-check"></i><b>12.6</b> Map 2019 North Atlantic storm season</a></li>
+<li class="chapter" data-level="12.7" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-hurricane-dorian-track"><i class="fa fa-check"></i><b>12.7</b> Map Hurricane Dorian track</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html"><i class="fa fa-check"></i><b>13</b> Spatial Cluster Analysis</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#advice-for-saving-and-loading-data-in-r"><i class="fa fa-check"></i><b>13.1</b> Advice for saving and loading data in R</a></li>
+<li class="chapter" data-level="13.2" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#load-and-map-county-level-tweet-rate"><i class="fa fa-check"></i><b>13.2</b> Load and map county-level tweet rate</a></li>
+<li class="chapter" data-level="13.3" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#create-spatial-weight-matrix"><i class="fa fa-check"></i><b>13.3</b> Create Spatial Weight Matrix</a></li>
+<li class="chapter" data-level="13.4" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#calculate-getis-ord-g-statistic"><i class="fa fa-check"></i><b>13.4</b> Calculate Getis-Ord G* Statistic</a></li>
+<li class="chapter" data-level="13.5" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#map-hotpots"><i class="fa fa-check"></i><b>13.5</b> Map Hotpots</a></li>
+<li class="chapter" data-level="13.6" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#remove-counties-with-no-tweets"><i class="fa fa-check"></i><b>13.6</b> Remove counties with no tweets</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="hurricane-ida.html"><a href="hurricane-ida.html"><i class="fa fa-check"></i><b>14</b> Hurricane Ida</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Sciences Across the Disciplines: Geography</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="okcupid" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> OkCupid<a href="okcupid.html#okcupid" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Install the <code>here</code>, <code>tidyverse</code> and <code>scales</code> packages.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="okcupid.html#cb74-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;here&quot;</span>)</span>
+<span id="cb74-2"><a href="okcupid.html#cb74-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidytext&quot;</span>)</span>
+<span id="cb74-3"><a href="okcupid.html#cb74-3" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;scales&quot;</span>)</span></code></pre></div>
+<p>Load tidyverse package, plus the three packages above.</p>
+<div id="load-ok-cupid-data" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Load OK Cupid Data<a href="okcupid.html#load-ok-cupid-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Set up a path to store the data In Rmarkdown, a line with just a data object will print out that data object.<br />
+The <code>data_private</code> folder is included in our <code>.gitignore</code> file such that Git neither tracks nor attempts to push this large and sensitive data file to GitHub.com.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="okcupid.html#cb75-1" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="fu">here</span>(<span class="st">&quot;data_private&quot;</span>))) {<span class="fu">dir.create</span>(<span class="fu">here</span>(<span class="st">&quot;data_private&quot;</span>))}</span>
+<span id="cb75-2"><a href="okcupid.html#cb75-2" tabindex="-1"></a><span class="co"># set file path</span></span>
+<span id="cb75-3"><a href="okcupid.html#cb75-3" tabindex="-1"></a>okCupidFilePath <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">&quot;data_private&quot;</span>, <span class="st">&quot;profiles.csv&quot;</span>)</span>
+<span id="cb75-4"><a href="okcupid.html#cb75-4" tabindex="-1"></a><span class="co"># show the file path</span></span>
+<span id="cb75-5"><a href="okcupid.html#cb75-5" tabindex="-1"></a>okCupidFilePath</span></code></pre></div>
+<pre><code>## [1] &quot;C:/GitHub/opengisci/wt25_josephholler/data_private/profiles.csv&quot;</code></pre>
+<p>Download the file if it is not stored locally already.<br />
+Note that this code will not work indefinitely: the file will be removed once the course concludes.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="okcupid.html#cb77-1" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(okCupidFilePath)){</span>
+<span id="cb77-2"><a href="okcupid.html#cb77-2" tabindex="-1"></a>  <span class="fu">download.file</span>(<span class="st">&quot;https://geography.middlebury.edu/jholler/wt25/profiles.csv&quot;</span>,</span>
+<span id="cb77-3"><a href="okcupid.html#cb77-3" tabindex="-1"></a>                okCupidFilePath)</span>
+<span id="cb77-4"><a href="okcupid.html#cb77-4" tabindex="-1"></a>}</span></code></pre></div>
+<p>You can use <code>read_csv</code> to load CSV files into R.<br />
+The <code>file.choose()</code> function allows you to interactively pick a file, but this is not reproducible.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="okcupid.html#cb78-1" tabindex="-1"></a>okcupid_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.choose</span>())</span></code></pre></div>
+<p>Even better, use the <code>here</code> package for reproducible file paths</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="okcupid.html#cb79-1" tabindex="-1"></a>okcupid_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(okCupidFilePath)</span></code></pre></div>
+<p>Save the OK Cupid data in R’s compressed RDS data format</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="okcupid.html#cb80-1" tabindex="-1"></a>cupidRDSpath <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">&quot;data_private&quot;</span>, <span class="st">&quot;okCupid.RDS&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="okcupid.html#cb81-1" tabindex="-1"></a><span class="fu">saveRDS</span>(okcupid_data, cupidRDSpath)</span></code></pre></div>
+<p>Load the OK Cupid data from the RDS file</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="okcupid.html#cb82-1" tabindex="-1"></a>okcupid_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(cupidRDSpath)</span></code></pre></div>
+</div>
+<div id="height" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Height<a href="okcupid.html#height" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>How do people report their height?</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="okcupid.html#cb83-1" tabindex="-1"></a>okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb83-2"><a href="okcupid.html#cb83-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb83-3"><a href="okcupid.html#cb83-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> height))</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## Warning: Removed 3 rows containing non-finite outside the scale range
+## (`stat_bin()`).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<p>Clearly there are some inaccurate self-reported data in here, so lets’ restrict the range of the x-axis Tough decisions to make when graphing, so you need to find a balance in the data visualization goals and exclusion of some individuals from the data.</p>
+<p>Switch to <code>geom_bar()</code> to make one bar for each integer value in a bar chart</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="okcupid.html#cb86-1" tabindex="-1"></a>okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb86-2"><a href="okcupid.html#cb86-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb86-3"><a href="okcupid.html#cb86-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> height)) <span class="sc">+</span></span>
+<span id="cb86-4"><a href="okcupid.html#cb86-4" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">55</span>, <span class="dv">80</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<p>There are two different peaks for each gender’s mean, so let’s facet the graphs</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="okcupid.html#cb87-1" tabindex="-1"></a>okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb87-2"><a href="okcupid.html#cb87-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb87-3"><a href="okcupid.html#cb87-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> height)) <span class="sc">+</span></span>
+<span id="cb87-4"><a href="okcupid.html#cb87-4" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">55</span>, <span class="dv">80</span>) <span class="sc">+</span> </span>
+<span id="cb87-5"><a href="okcupid.html#cb87-5" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<p>There are more men than women on OKCupid. There are spikes rounding up to appealing heights.</p>
+</div>
+<div id="age" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Age<a href="okcupid.html#age" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="okcupid.html#cb88-1" tabindex="-1"></a>okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb88-2"><a href="okcupid.html#cb88-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb88-3"><a href="okcupid.html#cb88-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<span id="cb88-4"><a href="okcupid.html#cb88-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p>There are more men, but the distributions are very similar. How can we compare the two datasets to see if their patterns are similar? Try a density plot coded by color fill. Add transparency so that you can see. I would prefer to change the color (line) rather than the fill</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="okcupid.html#cb89-1" tabindex="-1"></a>okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb89-2"><a href="okcupid.html#cb89-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb89-3"><a href="okcupid.html#cb89-3" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">fill =</span> sex), <span class="at">alpha=</span><span class="fl">0.5</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+</div>
+<div id="diet-and-body-type" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Diet and Body Type<a href="okcupid.html#diet-and-body-type" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Count diet responses</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="okcupid.html#cb90-1" tabindex="-1"></a>okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb90-2"><a href="okcupid.html#cb90-2" tabindex="-1"></a>  <span class="fu">count</span>(diet)</span></code></pre></div>
+<pre><code>## # A tibble: 19 × 2
+##    diet                    n
+##    &lt;chr&gt;               &lt;int&gt;
+##  1 anything             6183
+##  2 halal                  11
+##  3 kosher                 11
+##  4 mostly anything     16585
+##  5 mostly halal           48
+##  6 mostly kosher          86
+##  7 mostly other         1007
+##  8 mostly vegan          338
+##  9 mostly vegetarian    3444
+## 10 other                 331
+## 11 strictly anything    5113
+## 12 strictly halal         18
+## 13 strictly kosher        18
+## 14 strictly other        452
+## 15 strictly vegan        228
+## 16 strictly vegetarian   875
+## 17 vegan                 136
+## 18 vegetarian            667
+## 19 &lt;NA&gt;                24395</code></pre>
+<p>Count body type responses</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="okcupid.html#cb92-1" tabindex="-1"></a>okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb92-2"><a href="okcupid.html#cb92-2" tabindex="-1"></a>  <span class="fu">count</span>(body_type)</span></code></pre></div>
+<pre><code>## # A tibble: 13 × 2
+##    body_type          n
+##    &lt;chr&gt;          &lt;int&gt;
+##  1 a little extra  2629
+##  2 athletic       11819
+##  3 average        14652
+##  4 curvy           3924
+##  5 fit            12711
+##  6 full figured    1009
+##  7 jacked           421
+##  8 overweight       444
+##  9 rather not say   198
+## 10 skinny          1777
+## 11 thin            4711
+## 12 used up          355
+## 13 &lt;NA&gt;            5296</code></pre>
+<p>We probably want to condense these categories to simplify graphing</p>
+<div id="collapse-diet-categories" class="section level3 hasAnchor" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> Collapse Diet Categories<a href="okcupid.html#collapse-diet-categories" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Use <code>case_when</code> to switch (simplify) diet type values</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="okcupid.html#cb94-1" tabindex="-1"></a>okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb94-2"><a href="okcupid.html#cb94-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diet_collapsed =</span> <span class="fu">case_when</span>(<span class="fu">str_detect</span>(diet, <span class="st">&quot;halal&quot;</span>) <span class="sc">~</span> <span class="st">&quot;halal&quot;</span>,</span>
+<span id="cb94-3"><a href="okcupid.html#cb94-3" tabindex="-1"></a>                                    <span class="fu">str_detect</span>(diet, <span class="st">&quot;kosher&quot;</span>) <span class="sc">~</span> <span class="st">&quot;kosher&quot;</span>,</span>
+<span id="cb94-4"><a href="okcupid.html#cb94-4" tabindex="-1"></a>                                    <span class="fu">str_detect</span>(diet, <span class="st">&quot;other&quot;</span>) <span class="sc">~</span> <span class="st">&quot;other&quot;</span>,</span>
+<span id="cb94-5"><a href="okcupid.html#cb94-5" tabindex="-1"></a>                                    <span class="fu">str_detect</span>(diet, <span class="st">&quot;vegan&quot;</span>) <span class="sc">~</span> <span class="st">&quot;vegan&quot;</span>,</span>
+<span id="cb94-6"><a href="okcupid.html#cb94-6" tabindex="-1"></a>                                    <span class="fu">str_detect</span>(diet, <span class="st">&quot;anything&quot;</span>) <span class="sc">~</span> <span class="st">&quot;anything&quot;</span>,</span>
+<span id="cb94-7"><a href="okcupid.html#cb94-7" tabindex="-1"></a>                                    <span class="fu">str_detect</span>(diet, <span class="st">&quot;vegetarian&quot;</span>) <span class="sc">~</span> <span class="st">&quot;vegetarian&quot;</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb94-8"><a href="okcupid.html#cb94-8" tabindex="-1"></a>  <span class="fu">count</span>(diet_collapsed, body_type) <span class="sc">|&gt;</span> </span>
+<span id="cb94-9"><a href="okcupid.html#cb94-9" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb94-10"><a href="okcupid.html#cb94-10" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">y =</span> body_type, <span class="at">x =</span> n, <span class="at">fill =</span> diet_collapsed), <span class="at">position =</span> <span class="st">&quot;fill&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+</div>
+</div>
+<div id="save-dataset-to-computer" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Save dataset to computer<a href="okcupid.html#save-dataset-to-computer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>First save a data object in the environment</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="okcupid.html#cb95-1" tabindex="-1"></a>okcupid_data_with_diet_collapsed <span class="ot">&lt;-</span> okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb95-2"><a href="okcupid.html#cb95-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diet_collapsed =</span> <span class="fu">case_when</span>(<span class="fu">str_detect</span>(diet, <span class="st">&quot;halal&quot;</span>) <span class="sc">~</span> <span class="st">&quot;halal&quot;</span>,</span>
+<span id="cb95-3"><a href="okcupid.html#cb95-3" tabindex="-1"></a>                                    <span class="fu">str_detect</span>(diet, <span class="st">&quot;kosher&quot;</span>) <span class="sc">~</span> <span class="st">&quot;kosher&quot;</span>,</span>
+<span id="cb95-4"><a href="okcupid.html#cb95-4" tabindex="-1"></a>                                    <span class="fu">str_detect</span>(diet, <span class="st">&quot;other&quot;</span>) <span class="sc">~</span> <span class="st">&quot;other&quot;</span>,</span>
+<span id="cb95-5"><a href="okcupid.html#cb95-5" tabindex="-1"></a>                                    <span class="fu">str_detect</span>(diet, <span class="st">&quot;vegan&quot;</span>) <span class="sc">~</span> <span class="st">&quot;vegan&quot;</span>,</span>
+<span id="cb95-6"><a href="okcupid.html#cb95-6" tabindex="-1"></a>                                    <span class="fu">str_detect</span>(diet, <span class="st">&quot;anything&quot;</span>) <span class="sc">~</span> <span class="st">&quot;anything&quot;</span>,</span>
+<span id="cb95-7"><a href="okcupid.html#cb95-7" tabindex="-1"></a>                                    <span class="fu">str_detect</span>(diet, <span class="st">&quot;vegetarian&quot;</span>) <span class="sc">~</span> <span class="st">&quot;vegetarian&quot;</span>))</span></code></pre></div>
+<p>Then save to a CSV file. By default, this would save to the working directory. The working directory can be changed with the <code>session</code> : <code>set working directory</code> option.<br />
+However, an even better solution is to use the <code>here</code> package.</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="okcupid.html#cb96-1" tabindex="-1"></a><span class="fu">write_csv</span>(okcupid_data_with_diet_collapsed, </span>
+<span id="cb96-2"><a href="okcupid.html#cb96-2" tabindex="-1"></a>          <span class="fu">here</span>(<span class="st">&quot;data_private&quot;</span>, <span class="st">&quot;okcupid_with_diet_collapsed.csv&quot;</span>))</span></code></pre></div>
+</div>
+<div id="heat-map-of-diet-and-body-type" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> Heat map of diet and body type<a href="okcupid.html#heat-map-of-diet-and-body-type" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We can change the scale of fill</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="okcupid.html#cb97-1" tabindex="-1"></a>okcupid_data_with_diet_collapsed <span class="sc">|&gt;</span> </span>
+<span id="cb97-2"><a href="okcupid.html#cb97-2" tabindex="-1"></a>  <span class="fu">count</span>(diet_collapsed, body_type) <span class="sc">|&gt;</span> </span>
+<span id="cb97-3"><a href="okcupid.html#cb97-3" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb97-4"><a href="okcupid.html#cb97-4" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">x =</span> diet_collapsed, <span class="at">y =</span> body_type, <span class="at">fill =</span> n))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+<p>This data would look better on a log scale, which can be achieved with the <code>log10_trans()</code> function from the <code>scales</code> package.</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="okcupid.html#cb98-1" tabindex="-1"></a>okcupid_data_with_diet_collapsed <span class="sc">|&gt;</span> </span>
+<span id="cb98-2"><a href="okcupid.html#cb98-2" tabindex="-1"></a>  <span class="fu">count</span>(diet_collapsed, body_type) <span class="sc">|&gt;</span> </span>
+<span id="cb98-3"><a href="okcupid.html#cb98-3" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb98-4"><a href="okcupid.html#cb98-4" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">x =</span> diet_collapsed, <span class="at">y =</span> body_type, <span class="at">fill =</span> n)) <span class="sc">+</span></span>
+<span id="cb98-5"><a href="okcupid.html#cb98-5" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">trans =</span> <span class="fu">log10_trans</span>())</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+</div>
+<div id="text-mining" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> Text mining<a href="okcupid.html#text-mining" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>anonymize the data</li>
+<li>consider ethics / legality of reposting and how to repost</li>
+</ul>
+<div id="essay-data-dictionary" class="section level3 hasAnchor" number="5.7.1">
+<h3><span class="header-section-number">5.7.1</span> Essay data dictionary<a href="okcupid.html#essay-data-dictionary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Variable</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">essay0</td>
+<td align="center">My self summary</td>
+</tr>
+<tr class="even">
+<td align="center">essay1</td>
+<td align="center">What I’m doing with my life</td>
+</tr>
+<tr class="odd">
+<td align="center">essay2</td>
+<td align="center">I’m really good at</td>
+</tr>
+<tr class="even">
+<td align="center">essay3</td>
+<td align="center">The first thing people usually notice about me</td>
+</tr>
+<tr class="odd">
+<td align="center">essay4</td>
+<td align="center">Favorite books, movies, show, music, and food</td>
+</tr>
+<tr class="even">
+<td align="center">essay5</td>
+<td align="center">The six things I could never do without</td>
+</tr>
+<tr class="odd">
+<td align="center">essay6</td>
+<td align="center">I spend a lot of time thinking about</td>
+</tr>
+<tr class="even">
+<td align="center">essay7</td>
+<td align="center">On a typical Friday night I am</td>
+</tr>
+<tr class="odd">
+<td align="center">essay8</td>
+<td align="center">The most private thing I am willing to admit</td>
+</tr>
+<tr class="even">
+<td align="center">essay9</td>
+<td align="center">You should message me if…</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="what-are-people-really-good-at" class="section level3 hasAnchor" number="5.7.2">
+<h3><span class="header-section-number">5.7.2</span> What are people really good at?<a href="okcupid.html#what-are-people-really-good-at" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This is stored in essay2 Let’s look at a few responses With markdown, you can keep re-running the cell</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="okcupid.html#cb99-1" tabindex="-1"></a>okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb99-2"><a href="okcupid.html#cb99-2" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb99-3"><a href="okcupid.html#cb99-3" tabindex="-1"></a>  <span class="fu">pull</span>(essay2)</span></code></pre></div>
+<pre><code>## [1] &quot;i was a national certified massage therapist so i can be really\r\ngood at massage therapy. plus im good at writing songs.&quot;</code></pre>
+<p>Let’s scale up the text analysis</p>
+<p>How many people are good at sports? <code>str_detect</code> searches for a text string<br />
+including <code>|</code> means <code>or</code></p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="okcupid.html#cb101-1" tabindex="-1"></a>okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb101-2"><a href="okcupid.html#cb101-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_good_at_sports =</span> <span class="fu">str_detect</span>(essay2, <span class="st">&quot;sports|soccer|baseball|football|basketball&quot;</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb101-3"><a href="okcupid.html#cb101-3" tabindex="-1"></a>  <span class="fu">count</span>(is_good_at_sports)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##   is_good_at_sports     n
+##   &lt;lgl&gt;             &lt;int&gt;
+## 1 FALSE             47737
+## 2 TRUE               2571
+## 3 NA                 9638</code></pre>
+<p>What is the relationship between body type and people who say they are good at sports?</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="okcupid.html#cb103-1" tabindex="-1"></a>okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb103-2"><a href="okcupid.html#cb103-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_good_at_sports =</span> <span class="fu">str_detect</span>(essay2, <span class="st">&quot;sports|soccer|baseball|football|basketball&quot;</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb103-3"><a href="okcupid.html#cb103-3" tabindex="-1"></a>  <span class="fu">count</span>(is_good_at_sports, body_type) <span class="sc">|&gt;</span> </span>
+<span id="cb103-4"><a href="okcupid.html#cb103-4" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb103-5"><a href="okcupid.html#cb103-5" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">y =</span> body_type, <span class="at">x =</span> n, <span class="at">fill =</span> is_good_at_sports), <span class="at">position =</span> <span class="st">&quot;fill&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<p>Remove the missing data with <code>filter(!is.na(essay2))</code></p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="okcupid.html#cb104-1" tabindex="-1"></a>okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb104-2"><a href="okcupid.html#cb104-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_good_at_sports =</span> <span class="fu">str_detect</span>(essay2, <span class="st">&quot;sports|soccer|baseball|football|basketball&quot;</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb104-3"><a href="okcupid.html#cb104-3" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(essay2)) <span class="sc">|&gt;</span> </span>
+<span id="cb104-4"><a href="okcupid.html#cb104-4" tabindex="-1"></a>  <span class="fu">count</span>(is_good_at_sports, body_type) <span class="sc">|&gt;</span> </span>
+<span id="cb104-5"><a href="okcupid.html#cb104-5" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb104-6"><a href="okcupid.html#cb104-6" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">y =</span> body_type, <span class="at">x =</span> n, <span class="at">fill =</span> is_good_at_sports), <span class="at">position =</span> <span class="st">&quot;fill&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<p>People who say they’re athletic or jacked are more likely to say they’re good at some sport</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="okcupid.html#cb105-1" tabindex="-1"></a>okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb105-2"><a href="okcupid.html#cb105-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_good_at_sports =</span> <span class="fu">str_detect</span>(essay2, <span class="st">&quot;sports|soccer|baseball|football|basketball&quot;</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb105-3"><a href="okcupid.html#cb105-3" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(essay2)) <span class="sc">|&gt;</span> </span>
+<span id="cb105-4"><a href="okcupid.html#cb105-4" tabindex="-1"></a>  <span class="fu">count</span>(is_good_at_sports, body_type) <span class="sc">|&gt;</span> </span>
+<span id="cb105-5"><a href="okcupid.html#cb105-5" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb105-6"><a href="okcupid.html#cb105-6" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">y =</span> is_good_at_sports, <span class="at">x =</span> n, <span class="at">fill =</span> body_type), <span class="at">position =</span> <span class="st">&quot;fill&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<p>A large proportion of the folks who mentioned being good at a sport thought they had an athletic body type</p>
+</div>
+<div id="analyze-word-usage-in-essays" class="section level3 hasAnchor" number="5.7.3">
+<h3><span class="header-section-number">5.7.3</span> Analyze word usage in essays<a href="okcupid.html#analyze-word-usage-in-essays" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="okcupid.html#cb106-1" tabindex="-1"></a>okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb106-2"><a href="okcupid.html#cb106-2" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(<span class="at">input =</span> essay2,</span>
+<span id="cb106-3"><a href="okcupid.html#cb106-3" tabindex="-1"></a>                <span class="at">output =</span> <span class="st">&quot;word&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb106-4"><a href="okcupid.html#cb106-4" tabindex="-1"></a>  <span class="fu">count</span>(word)</span></code></pre></div>
+<pre><code>## # A tibble: 33,824 × 2
+##    word       n
+##    &lt;chr&gt;  &lt;int&gt;
+##  1 0         41
+##  2 0.13       1
+##  3 0.334      1
+##  4 0.99       1
+##  5 00         6
+##  6 000000     1
+##  7 007        2
+##  8 00am       1
+##  9 00s        2
+## 10 00t        1
+## # ℹ 33,814 more rows</code></pre>
+<p>Let’s arrange the dataset to sort by n Also filter by stop_words</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="okcupid.html#cb108-1" tabindex="-1"></a>essay2word_counts <span class="ot">&lt;-</span></span>
+<span id="cb108-2"><a href="okcupid.html#cb108-2" tabindex="-1"></a>  okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb108-3"><a href="okcupid.html#cb108-3" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(<span class="at">input =</span> essay2,</span>
+<span id="cb108-4"><a href="okcupid.html#cb108-4" tabindex="-1"></a>                <span class="at">output =</span> <span class="st">&quot;word&quot;</span>,</span>
+<span id="cb108-5"><a href="okcupid.html#cb108-5" tabindex="-1"></a>                <span class="at">format =</span> <span class="st">&quot;html&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb108-6"><a href="okcupid.html#cb108-6" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">|&gt;</span> </span>
+<span id="cb108-7"><a href="okcupid.html#cb108-7" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>n) <span class="sc">|&gt;</span> </span>
+<span id="cb108-8"><a href="okcupid.html#cb108-8" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(word <span class="sc">%in%</span> stop_words<span class="sc">$</span>word))</span>
+<span id="cb108-9"><a href="okcupid.html#cb108-9" tabindex="-1"></a></span>
+<span id="cb108-10"><a href="okcupid.html#cb108-10" tabindex="-1"></a>essay2word_counts</span></code></pre></div>
+<pre><code>## # A tibble: 31,253 × 2
+##    word          n
+##    &lt;chr&gt;     &lt;int&gt;
+##  1 people    15118
+##  2 cooking    7042
+##  3 listening  6497
+##  4 laugh      4776
+##  5 love       4400
+##  6 friends    3961
+##  7 time       3899
+##  8 pretty     3368
+##  9 finding    3322
+## 10 playing    3157
+## # ℹ 31,243 more rows</code></pre>
+<p>Interestingly, I’m getting results of conjunctions because I used the html filter,
+but those could be filtered out as well.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="okcupid.html#cb110-1" tabindex="-1"></a>essay2word_counts <span class="sc">|&gt;</span> </span>
+<span id="cb110-2"><a href="okcupid.html#cb110-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(word <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;br&quot;</span>, <span class="st">&quot;href&quot;</span>, <span class="st">&quot;ilink&quot;</span>, <span class="st">&quot;ve&quot;</span>, <span class="st">&quot;don&quot;</span>)), </span>
+<span id="cb110-3"><a href="okcupid.html#cb110-3" tabindex="-1"></a>           <span class="sc">!</span><span class="fu">is.na</span>(word)) <span class="sc">|&gt;</span> </span>
+<span id="cb110-4"><a href="okcupid.html#cb110-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">20</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb110-5"><a href="okcupid.html#cb110-5" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb110-6"><a href="okcupid.html#cb110-6" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">y=</span> <span class="fu">reorder</span>(word, n), <span class="at">x =</span> n))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+<p>Try again with essay 8</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="okcupid.html#cb111-1" tabindex="-1"></a>essay8word_counts <span class="ot">&lt;-</span></span>
+<span id="cb111-2"><a href="okcupid.html#cb111-2" tabindex="-1"></a>  okcupid_data <span class="sc">|&gt;</span> </span>
+<span id="cb111-3"><a href="okcupid.html#cb111-3" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(<span class="at">input =</span> essay8,</span>
+<span id="cb111-4"><a href="okcupid.html#cb111-4" tabindex="-1"></a>                <span class="at">output =</span> <span class="st">&quot;word&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb111-5"><a href="okcupid.html#cb111-5" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">|&gt;</span> </span>
+<span id="cb111-6"><a href="okcupid.html#cb111-6" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>n) <span class="sc">|&gt;</span> </span>
+<span id="cb111-7"><a href="okcupid.html#cb111-7" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(word <span class="sc">%in%</span> stop_words<span class="sc">$</span>word))</span>
+<span id="cb111-8"><a href="okcupid.html#cb111-8" tabindex="-1"></a></span>
+<span id="cb111-9"><a href="okcupid.html#cb111-9" tabindex="-1"></a>essay8word_counts</span></code></pre></div>
+<pre><code>## # A tibble: 29,029 × 2
+##    word        n
+##    &lt;chr&gt;   &lt;int&gt;
+##  1 &lt;NA&gt;    19214
+##  2 br      16439
+##  3 private  3858
+##  4 love     2958
+##  5 people   2420
+##  6 time     2095
+##  7 admit    1687
+##  8 person   1656
+##  9 life     1488
+## 10 pretty   1480
+## # ℹ 29,019 more rows</code></pre>
+<p>This time, do it the same way as shown, without altering the mode.</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="okcupid.html#cb113-1" tabindex="-1"></a>essay8word_counts <span class="sc">|&gt;</span> </span>
+<span id="cb113-2"><a href="okcupid.html#cb113-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(word <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;br&quot;</span>, <span class="st">&quot;href&quot;</span>, <span class="st">&quot;ilink&quot;</span>)), </span>
+<span id="cb113-3"><a href="okcupid.html#cb113-3" tabindex="-1"></a>           <span class="sc">!</span><span class="fu">is.na</span>(word)) <span class="sc">|&gt;</span> </span>
+<span id="cb113-4"><a href="okcupid.html#cb113-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">20</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb113-5"><a href="okcupid.html#cb113-5" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb113-6"><a href="okcupid.html#cb113-6" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">y=</span> <span class="fu">reorder</span>(word, n), <span class="at">x =</span> n))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+<p>This Rmd did not initially knit without separate installation of <code>hunspell</code> package.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="wrangle-and-graph-new-york-city-flights.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="baby-names.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 11 Shiny Apps | Data Sciences Across the Disciplines: Geography</title>
+  <meta name="description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 11 Shiny Apps | Data Sciences Across the Disciplines: Geography" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  <meta name="github-repo" content="opengisci/wt25_josephholler/" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 11 Shiny Apps | Data Sciences Across the Disciplines: Geography" />
+  
+  <meta name="twitter:description" content="Notes for winter 2025 geography flavor of data sciences across the disciplines." />
+  
+
+<meta name="author" content="Joseph Holler" />
+<meta name="author" content="Alex Lyford" />
+
+
+<meta name="date" content="2025-01-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="mapping-in-r.html"/>
+<link rel="next" href="hurricane-dorian.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="r-and-calculations.html"><a href="r-and-calculations.html"><i class="fa fa-check"></i><b>2</b> R and Calculations</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="r-and-calculations.html"><a href="r-and-calculations.html#r-is-a-calculator"><i class="fa fa-check"></i><b>2.1</b> R is a calculator</a></li>
+<li class="chapter" data-level="2.2" data-path="r-and-calculations.html"><a href="r-and-calculations.html#functions"><i class="fa fa-check"></i><b>2.2</b> Functions</a></li>
+<li class="chapter" data-level="2.3" data-path="r-and-calculations.html"><a href="r-and-calculations.html#store-objects-for-future-use-in-environment"><i class="fa fa-check"></i><b>2.3</b> Store objects for future use in environment</a></li>
+<li class="chapter" data-level="2.4" data-path="r-and-calculations.html"><a href="r-and-calculations.html#mean-function-for-averages"><i class="fa fa-check"></i><b>2.4</b> Mean function for averages</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html"><i class="fa fa-check"></i><b>3</b> Graph values and qualities of diamonds</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#install-the-tidyverse-package"><i class="fa fa-check"></i><b>3.1</b> Install the tidyverse package</a></li>
+<li class="chapter" data-level="3.2" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#explore-diamonds-dataset"><i class="fa fa-check"></i><b>3.2</b> Explore Diamonds Dataset</a></li>
+<li class="chapter" data-level="3.3" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#facet-the-data"><i class="fa fa-check"></i><b>3.3</b> Facet the data</a></li>
+<li class="chapter" data-level="3.4" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#restart-r-and-remake-last-graph"><i class="fa fa-check"></i><b>3.4</b> Restart R and Remake last graph</a></li>
+<li class="chapter" data-level="3.5" data-path="graph-values-and-qualities-of-diamonds.html"><a href="graph-values-and-qualities-of-diamonds.html#explore-gap-in-prices-between-1k-and-2k"><i class="fa fa-check"></i><b>3.5</b> Explore gap in prices between 1k and 2k</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html"><i class="fa fa-check"></i><b>4</b> Wrangle and graph New York City flights</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#which-carriers-should-travelers-avoid"><i class="fa fa-check"></i><b>4.1</b> Which carriers should travelers avoid?</a></li>
+<li class="chapter" data-level="4.2" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#data-wrangling"><i class="fa fa-check"></i><b>4.2</b> Data Wrangling</a></li>
+<li class="chapter" data-level="4.3" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#on-average-how-long-are-flights-delayed"><i class="fa fa-check"></i><b>4.3</b> On average, how long are flights delayed?</a></li>
+<li class="chapter" data-level="4.4" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#pipe-operator"><i class="fa fa-check"></i><b>4.4</b> Pipe Operator</a></li>
+<li class="chapter" data-level="4.5" data-path="wrangle-and-graph-new-york-city-flights.html"><a href="wrangle-and-graph-new-york-city-flights.html#warmup-question"><i class="fa fa-check"></i><b>4.5</b> Warmup Question</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="okcupid.html"><a href="okcupid.html"><i class="fa fa-check"></i><b>5</b> OkCupid</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="okcupid.html"><a href="okcupid.html#load-ok-cupid-data"><i class="fa fa-check"></i><b>5.1</b> Load OK Cupid Data</a></li>
+<li class="chapter" data-level="5.2" data-path="okcupid.html"><a href="okcupid.html#height"><i class="fa fa-check"></i><b>5.2</b> Height</a></li>
+<li class="chapter" data-level="5.3" data-path="okcupid.html"><a href="okcupid.html#age"><i class="fa fa-check"></i><b>5.3</b> Age</a></li>
+<li class="chapter" data-level="5.4" data-path="okcupid.html"><a href="okcupid.html#diet-and-body-type"><i class="fa fa-check"></i><b>5.4</b> Diet and Body Type</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="okcupid.html"><a href="okcupid.html#collapse-diet-categories"><i class="fa fa-check"></i><b>5.4.1</b> Collapse Diet Categories</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="okcupid.html"><a href="okcupid.html#save-dataset-to-computer"><i class="fa fa-check"></i><b>5.5</b> Save dataset to computer</a></li>
+<li class="chapter" data-level="5.6" data-path="okcupid.html"><a href="okcupid.html#heat-map-of-diet-and-body-type"><i class="fa fa-check"></i><b>5.6</b> Heat map of diet and body type</a></li>
+<li class="chapter" data-level="5.7" data-path="okcupid.html"><a href="okcupid.html#text-mining"><i class="fa fa-check"></i><b>5.7</b> Text mining</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="okcupid.html"><a href="okcupid.html#essay-data-dictionary"><i class="fa fa-check"></i><b>5.7.1</b> Essay data dictionary</a></li>
+<li class="chapter" data-level="5.7.2" data-path="okcupid.html"><a href="okcupid.html#what-are-people-really-good-at"><i class="fa fa-check"></i><b>5.7.2</b> What are people really good at?</a></li>
+<li class="chapter" data-level="5.7.3" data-path="okcupid.html"><a href="okcupid.html#analyze-word-usage-in-essays"><i class="fa fa-check"></i><b>5.7.3</b> Analyze word usage in essays</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="baby-names.html"><a href="baby-names.html"><i class="fa fa-check"></i><b>6</b> Baby Names</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="baby-names.html"><a href="baby-names.html#bens-over-time"><i class="fa fa-check"></i><b>6.1</b> Bens over time</a></li>
+<li class="chapter" data-level="6.2" data-path="baby-names.html"><a href="baby-names.html#babies-over-time"><i class="fa fa-check"></i><b>6.2</b> Babies over time</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="web-scraping.html"><a href="web-scraping.html"><i class="fa fa-check"></i><b>7</b> Web Scraping</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="web-scraping.html"><a href="web-scraping.html#scrape-all-paragraph-text-from-a-webpage"><i class="fa fa-check"></i><b>7.1</b> Scrape all paragraph text from a webpage</a></li>
+<li class="chapter" data-level="7.2" data-path="web-scraping.html"><a href="web-scraping.html#scrape-a-specific-item-from-a-webpage"><i class="fa fa-check"></i><b>7.2</b> Scrape a specific item from a webpage</a></li>
+<li class="chapter" data-level="7.3" data-path="web-scraping.html"><a href="web-scraping.html#ethics-of-web-scraping"><i class="fa fa-check"></i><b>7.3</b> Ethics of web scraping</a></li>
+<li class="chapter" data-level="7.4" data-path="web-scraping.html"><a href="web-scraping.html#scrape-data"><i class="fa fa-check"></i><b>7.4</b> Scrape data</a></li>
+<li class="chapter" data-level="7.5" data-path="web-scraping.html"><a href="web-scraping.html#cardinal-sin-of-data-science"><i class="fa fa-check"></i><b>7.5</b> Cardinal sin of data science</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html"><i class="fa fa-check"></i><b>8</b> Life expectancy and GDP from graphs to animation</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#make-the-same-graph-but-for-three-random-countries"><i class="fa fa-check"></i><b>8.1</b> Make the same graph but for three random countries</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#join-the-life-expectancy-data-together-with-income-data"><i class="fa fa-check"></i><b>8.1.1</b> Join the life expectancy data together with income data</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#size-points-by-population"><i class="fa fa-check"></i><b>8.2</b> Size points by population</a></li>
+<li class="chapter" data-level="8.3" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#web-scrape-region-data"><i class="fa fa-check"></i><b>8.3</b> Web scrape region data</a></li>
+<li class="chapter" data-level="8.4" data-path="life-expectancy-and-gdp-from-graphs-to-animation.html"><a href="life-expectancy-and-gdp-from-graphs-to-animation.html#life-expectancy-gdp-and-region"><i class="fa fa-check"></i><b>8.4</b> Life expectancy, GDP and Region</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="animation.html"><a href="animation.html"><i class="fa fa-check"></i><b>9</b> Animation</a>
+<ul>
+<li class="chapter" data-level="9.0.1" data-path="animation.html"><a href="animation.html#graph-all-years"><i class="fa fa-check"></i><b>9.0.1</b> Graph all years</a></li>
+<li class="chapter" data-level="9.1" data-path="animation.html"><a href="animation.html#create-the-animation"><i class="fa fa-check"></i><b>9.1</b> Create the animation</a></li>
+<li class="chapter" data-level="9.2" data-path="animation.html"><a href="animation.html#rendered-animation"><i class="fa fa-check"></i><b>9.2</b> Rendered Animation</a></li>
+<li class="chapter" data-level="9.3" data-path="animation.html"><a href="animation.html#animate-a-bar-chart"><i class="fa fa-check"></i><b>9.3</b> Animate a bar chart</a></li>
+<li class="chapter" data-level="9.4" data-path="animation.html"><a href="animation.html#make-a-tree-map"><i class="fa fa-check"></i><b>9.4</b> Make a tree map</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="animation.html"><a href="animation.html#animate-a-tree-map"><i class="fa fa-check"></i><b>9.4.1</b> Animate a tree map</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="mapping-in-r.html"><a href="mapping-in-r.html"><i class="fa fa-check"></i><b>10</b> Mapping in R</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="mapping-in-r.html"><a href="mapping-in-r.html#map-alcohol-consumption-per-capita"><i class="fa fa-check"></i><b>10.1</b> Map alcohol consumption per capita</a></li>
+<li class="chapter" data-level="10.2" data-path="mapping-in-r.html"><a href="mapping-in-r.html#map-volcanoes"><i class="fa fa-check"></i><b>10.2</b> Map volcanoes</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>11</b> Shiny Apps</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="shiny-apps.html"><a href="shiny-apps.html#strange-online-food-data"><i class="fa fa-check"></i><b>11.1</b> Strange online food data</a></li>
+<li class="chapter" data-level="11.2" data-path="shiny-apps.html"><a href="shiny-apps.html#liberal-arts-college-rankings"><i class="fa fa-check"></i><b>11.2</b> Liberal arts college rankings</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="shiny-apps.html"><a href="shiny-apps.html#leaflet-map-of-college-locations"><i class="fa fa-check"></i><b>11.2.1</b> Leaflet map of college locations</a></li>
+<li class="chapter" data-level="11.2.2" data-path="shiny-apps.html"><a href="shiny-apps.html#graph-college-ranking-over-time"><i class="fa fa-check"></i><b>11.2.2</b> Graph college ranking over time</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-app-notes"><i class="fa fa-check"></i><b>11.3</b> Shiny App notes</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html"><i class="fa fa-check"></i><b>12</b> Hurricane Dorian</a>
+<ul>
+<li class="chapter" data-level="12.0.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#load-and-organize-data"><i class="fa fa-check"></i><b>12.0.1</b> Load and organize data</a></li>
+<li class="chapter" data-level="12.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#temporal-analysis"><i class="fa fa-check"></i><b>12.1</b> Temporal analysis</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#customize-bin-widths"><i class="fa fa-check"></i><b>12.1.1</b> Customize bin widths</a></li>
+<li class="chapter" data-level="12.1.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#customize-a-date-time-axis"><i class="fa fa-check"></i><b>12.1.2</b> Customize a date-time axis</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#text-analysis"><i class="fa fa-check"></i><b>12.2</b> Text analysis</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#graph-word-frequencies"><i class="fa fa-check"></i><b>12.2.1</b> Graph word frequencies</a></li>
+<li class="chapter" data-level="12.2.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#graph-word-associations"><i class="fa fa-check"></i><b>12.2.2</b> Graph word associations</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#geographic-analysis"><i class="fa fa-check"></i><b>12.3</b> Geographic analysis</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#construct-geographic-points-from-tweets"><i class="fa fa-check"></i><b>12.3.1</b> Construct geographic points from tweets</a></li>
+<li class="chapter" data-level="12.3.2" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#location-services"><i class="fa fa-check"></i><b>12.3.2</b> Location services</a></li>
+<li class="chapter" data-level="12.3.3" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#place-name"><i class="fa fa-check"></i><b>12.3.3</b> Place name</a></li>
+<li class="chapter" data-level="12.3.4" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#geographic-point-data"><i class="fa fa-check"></i><b>12.3.4</b> Geographic point data</a></li>
+<li class="chapter" data-level="12.3.5" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#aquire-census-data"><i class="fa fa-check"></i><b>12.3.5</b> Aquire Census data</a></li>
+<li class="chapter" data-level="12.3.6" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#select-counties-of-interest"><i class="fa fa-check"></i><b>12.3.6</b> Select counties of interest</a></li>
+<li class="chapter" data-level="12.3.7" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-population-density-and-tweet-points"><i class="fa fa-check"></i><b>12.3.7</b> Map population density and tweet points</a></li>
+<li class="chapter" data-level="12.3.8" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#join-tweets-to-counties"><i class="fa fa-check"></i><b>12.3.8</b> Join tweets to counties</a></li>
+<li class="chapter" data-level="12.3.9" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#calculate-county-tweet-rates"><i class="fa fa-check"></i><b>12.3.9</b> Calculate county tweet rates</a></li>
+<li class="chapter" data-level="12.3.10" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-tweet-rates-by-county"><i class="fa fa-check"></i><b>12.3.10</b> Map tweet rates by county</a></li>
+<li class="chapter" data-level="12.3.11" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#conclusions"><i class="fa fa-check"></i><b>12.3.11</b> Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-hurricane-tracks-with-tmap"><i class="fa fa-check"></i><b>12.4</b> Map hurricane tracks with tmap</a></li>
+<li class="chapter" data-level="12.5" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#acquire-hurricane-track-data"><i class="fa fa-check"></i><b>12.5</b> Acquire hurricane track data</a></li>
+<li class="chapter" data-level="12.6" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-2019-north-atlantic-storm-season"><i class="fa fa-check"></i><b>12.6</b> Map 2019 North Atlantic storm season</a></li>
+<li class="chapter" data-level="12.7" data-path="hurricane-dorian.html"><a href="hurricane-dorian.html#map-hurricane-dorian-track"><i class="fa fa-check"></i><b>12.7</b> Map Hurricane Dorian track</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html"><i class="fa fa-check"></i><b>13</b> Spatial Cluster Analysis</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#advice-for-saving-and-loading-data-in-r"><i class="fa fa-check"></i><b>13.1</b> Advice for saving and loading data in R</a></li>
+<li class="chapter" data-level="13.2" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#load-and-map-county-level-tweet-rate"><i class="fa fa-check"></i><b>13.2</b> Load and map county-level tweet rate</a></li>
+<li class="chapter" data-level="13.3" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#create-spatial-weight-matrix"><i class="fa fa-check"></i><b>13.3</b> Create Spatial Weight Matrix</a></li>
+<li class="chapter" data-level="13.4" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#calculate-getis-ord-g-statistic"><i class="fa fa-check"></i><b>13.4</b> Calculate Getis-Ord G* Statistic</a></li>
+<li class="chapter" data-level="13.5" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#map-hotpots"><i class="fa fa-check"></i><b>13.5</b> Map Hotpots</a></li>
+<li class="chapter" data-level="13.6" data-path="spatial-cluster-analysis.html"><a href="spatial-cluster-analysis.html#remove-counties-with-no-tweets"><i class="fa fa-check"></i><b>13.6</b> Remove counties with no tweets</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="hurricane-ida.html"><a href="hurricane-ida.html"><i class="fa fa-check"></i><b>14</b> Hurricane Ida</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Sciences Across the Disciplines: Geography</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="shiny-apps" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">Chapter 11</span> Shiny Apps<a href="shiny-apps.html#shiny-apps" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="shiny-apps.html#cb220-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidygeocoder&quot;</span>)</span></code></pre></div>
+<p>It is wise to plan out the data and visualizations for a Shiny App in a normal R script.
+Once you’re satisfied with the data and visualization approaches, transfer them into an app.
+The app should be self-contained in its own folder for easy transfer to <a href="https://www.shinyapps.io/">shinyapps.io</a>.</p>
+<p>Load packages</p>
+<div id="strange-online-food-data" class="section level2 hasAnchor" number="11.1">
+<h2><span class="header-section-number">11.1</span> Strange online food data<a href="shiny-apps.html#strange-online-food-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Create an initial app in an <code>exploration</code> folder.</p>
+<p>It’s from Kaggle! Load it in…</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="shiny-apps.html#cb221-1" tabindex="-1"></a>food <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;apps&quot;</span>, <span class="st">&quot;exploration&quot;</span>, <span class="st">&quot;onlinefoods.csv&quot;</span>))</span></code></pre></div>
+<pre><code>## New names:
+## Rows: 388 Columns: 13
+## ── Column specification
+## ───────────────────────────────────────────── Delimiter: &quot;,&quot; chr
+## (8): Gender, Marital Status, Occupation, Monthly Income, Educational
+## Qua... dbl (5): Age, Family size, latitude, longitude, Pin code
+## ℹ Use `spec()` to retrieve the full column specification for this
+## data. ℹ Specify the column types or set `show_col_types = FALSE` to
+## quiet this message.
+## • `` -&gt; `...13`</code></pre>
+<p>Make a bar graph of income and education</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="shiny-apps.html#cb223-1" tabindex="-1"></a>food <span class="sc">|&gt;</span> </span>
+<span id="cb223-2"><a href="shiny-apps.html#cb223-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb223-3"><a href="shiny-apps.html#cb223-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Monthly Income</span><span class="st">`</span>,</span>
+<span id="cb223-4"><a href="shiny-apps.html#cb223-4" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">`</span><span class="at">Educational Qualifications</span><span class="st">`</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
+</div>
+<div id="liberal-arts-college-rankings" class="section level2 hasAnchor" number="11.2">
+<h2><span class="header-section-number">11.2</span> Liberal arts college rankings<a href="shiny-apps.html#liberal-arts-college-rankings" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s build a more serious app of Liberal Arts Colleges U.S. News rankings in our <code>liberalarts</code> folder.</p>
+<p>We can geocode with the <code>tidygeocoder</code> package.</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="shiny-apps.html#cb224-1" tabindex="-1"></a>examplePlaces <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb224-2"><a href="shiny-apps.html#cb224-2" tabindex="-1"></a>  <span class="at">location =</span> <span class="fu">c</span>(<span class="st">&quot;Middlebury College&quot;</span>, <span class="st">&quot;Williams College&quot;</span>))</span>
+<span id="cb224-3"><a href="shiny-apps.html#cb224-3" tabindex="-1"></a>examplePlacesCoded <span class="ot">&lt;-</span> examplePlaces <span class="sc">|&gt;</span> </span>
+<span id="cb224-4"><a href="shiny-apps.html#cb224-4" tabindex="-1"></a>  <span class="fu">geocode</span>(location)</span></code></pre></div>
+<pre><code>## Passing 2 addresses to the Nominatim single address geocoder</code></pre>
+<pre><code>## Query completed in: 2 seconds</code></pre>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="shiny-apps.html#cb227-1" tabindex="-1"></a>examplePlacesCoded</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+##   location             lat  long
+##   &lt;chr&gt;              &lt;dbl&gt; &lt;dbl&gt;
+## 1 Middlebury College  44.0 -73.2
+## 2 Williams College    42.7 -73.2</code></pre>
+<p>We can geocode addresses composed of college names and their states.<br />
+Geocoding takes some time, and often requires an API with a software-as-service subscription.</p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="shiny-apps.html#cb229-1" tabindex="-1"></a>college_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;apps&quot;</span>, <span class="st">&quot;liberalarts&quot;</span>, <span class="st">&quot;usnews.csv&quot;</span>))</span>
+<span id="cb229-2"><a href="shiny-apps.html#cb229-2" tabindex="-1"></a></span>
+<span id="cb229-3"><a href="shiny-apps.html#cb229-3" tabindex="-1"></a>college_data_with_locations <span class="ot">&lt;-</span> college_data <span class="sc">|&gt;</span> </span>
+<span id="cb229-4"><a href="shiny-apps.html#cb229-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">location =</span> <span class="fu">paste0</span>(<span class="st">`</span><span class="at">College Name</span><span class="st">`</span>, <span class="st">&quot;, &quot;</span>, State)) <span class="sc">|&gt;</span> </span>
+<span id="cb229-5"><a href="shiny-apps.html#cb229-5" tabindex="-1"></a>  <span class="fu">geocode</span>(<span class="at">address =</span> location)</span></code></pre></div>
+<p>Always save geocoding results as a data object <em>and</em> immediately save as a data file. You don’t want to repeat geocoding if at all possible.</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="shiny-apps.html#cb230-1" tabindex="-1"></a><span class="fu">saveRDS</span>(college_data_with_locations,</span>
+<span id="cb230-2"><a href="shiny-apps.html#cb230-2" tabindex="-1"></a>        <span class="fu">here</span>(<span class="st">&quot;apps&quot;</span>, <span class="st">&quot;liberalarts&quot;</span>, <span class="st">&quot;LA_CollegesUS.RDS&quot;</span>))</span></code></pre></div>
+<p>Load geocoded results</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="shiny-apps.html#cb231-1" tabindex="-1"></a>college_data_with_locations <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
+<span id="cb231-2"><a href="shiny-apps.html#cb231-2" tabindex="-1"></a>  <span class="fu">here</span>(<span class="st">&quot;apps&quot;</span>, <span class="st">&quot;liberalarts&quot;</span>, <span class="st">&quot;LA_CollegesUS.RDS&quot;</span>))</span></code></pre></div>
+<p>Did everything geocode?</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="shiny-apps.html#cb232-1" tabindex="-1"></a>college_data_with_locations <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(lat))</span></code></pre></div>
+<pre><code>## # A tibble: 27 × 44
+##    `College Name`     State `IPEDS ID` `2023` `2022` `2021` `2020` `2019` `2018`
+##    &lt;chr&gt;              &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; 
+##  1 Franklin and Mars… PA        212577 39     42     43     38     36     39    
+##  2 Sewanee-Universit… TN        221519 51     50     47     43     49     41    
+##  3 Washington and Je… PA        216667 94     92     96     92     103    106   
+##  4 Concordia College… MN        173300 145    141    130    132    127    117   
+##  5 Ava Maria Univers… FL        442295 T2 (1… T2 (1… T2 (1… T2 (1… T2 (1… &lt;NA&gt;  
+##  6 University of Pue… PR        243151 T2 (1… T2 (1… 166    &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;  
+##  7 Albert Magnus Col… CT        128498 &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;  
+##  8 Albertson College  ID        142294 &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;  
+##  9 Borromeo College … OH        203368 &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;  
+## 10 Carson-Newman Col… TN        219806 &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;  
+## # ℹ 17 more rows
+## # ℹ 35 more variables: `2017` &lt;chr&gt;, `2016` &lt;dbl&gt;, `2015` &lt;dbl&gt;, `2014` &lt;chr&gt;,
+## #   `2013` &lt;chr&gt;, `2012` &lt;chr&gt;, `2011` &lt;dbl&gt;, `2010` &lt;dbl&gt;, `2009` &lt;dbl&gt;,
+## #   `2008` &lt;chr&gt;, `2007` &lt;chr&gt;, `2006` &lt;chr&gt;, `2005` &lt;chr&gt;, `2004` &lt;chr&gt;,
+## #   `2003` &lt;chr&gt;, `2002` &lt;dbl&gt;, `2001` &lt;chr&gt;, `2000` &lt;chr&gt;, `1999` &lt;chr&gt;,
+## #   `1998` &lt;chr&gt;, `1997` &lt;chr&gt;, `1996` &lt;chr&gt;, `1995` &lt;chr&gt;, `1994` &lt;chr&gt;,
+## #   `1993` &lt;chr&gt;, `1992` &lt;chr&gt;, `1991` &lt;chr&gt;, `1990` &lt;dbl&gt;, `1989` &lt;dbl&gt;, …</code></pre>
+<p>Apparently not! For example, OSM has Franklin &amp; Marshall College with an ampersand, and it does not find the college with an “and”.</p>
+<p>Moving on anyway…</p>
+<div id="leaflet-map-of-college-locations" class="section level3 hasAnchor" number="11.2.1">
+<h3><span class="header-section-number">11.2.1</span> Leaflet map of college locations<a href="shiny-apps.html#leaflet-map-of-college-locations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="shiny-apps.html#cb234-1" tabindex="-1"></a>college_data_with_locations <span class="sc">|&gt;</span> </span>
+<span id="cb234-2"><a href="shiny-apps.html#cb234-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(lat)) <span class="sc">|&gt;</span> </span>
+<span id="cb234-3"><a href="shiny-apps.html#cb234-3" tabindex="-1"></a>  <span class="fu">leaflet</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb234-4"><a href="shiny-apps.html#cb234-4" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb234-5"><a href="shiny-apps.html#cb234-5" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">label =</span> <span class="sc">~</span><span class="st">`</span><span class="at">College Name</span><span class="st">`</span>,</span>
+<span id="cb234-6"><a href="shiny-apps.html#cb234-6" tabindex="-1"></a>             <span class="at">lng =</span> <span class="sc">~</span>long,</span>
+<span id="cb234-7"><a href="shiny-apps.html#cb234-7" tabindex="-1"></a>             <span class="at">lat =</span> <span class="sc">~</span>lat)</span></code></pre></div>
+<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-f5c2ade70dece8f4850e" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-f5c2ade70dece8f4850e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[42.7130236,42.3703768,34.0974775,39.9029154,42.29177605,43.90869735,44.47183535,38.98193430000001,34.0999577,41.3927227,44.00366955,37.7929993,42.31622385,41.6854718,35.5032193,41.75111985,43.0537974,40.8094864,42.8154037,40.0071506,38.9912381,37.57586225,41.5559033,44.56118735,44.10656935,37.5717496,38.8480439,44.9376942,34.10614005,33.55467520000001,40.0286808,40.3725696,42.23668645,34.10471765,34.10391835,42.25532845,40.9515356,34.12719495,40.07300505,40.6986835,41.29571765,43.09871785354964,41.74715485,39.63804945,34.92577435,34.4300932,41.9318835,42.8175752,46.0705665,40.20281155,38.9478261,33.74519965,37.64504454999999,41.37913335,35.15564375,29.4616913,40.0367517,42.0225482,39.8374688,38.98228315,33.7688851,44.2607247,35.66744105,44.4640025,41.86963745,42.29075735,44.5875837,37.79133385,34.96115815,42.8570498,40.9419283,45.48149925,40.9344239,41.6480894,40.81161765,40.59758265,27.3859013,44.9355889,42.5009819,39.8204275,44.3217869,42.92044325,42.24761745,30.6371513,47.26149205,39.218376,40.5012255,38.1903261,42.05997765,40.1954088,41.9670817,41.5015277,45.5594818,37.24237495,45.44850495,45.58088975,41.9253978,41.70747445,38.71651765,35.1008234,37.3573684,42.78672450000001,38.053107,33.6474084,43.3169528,37.7625105,33.97784155,33.51618545,40.76053795,39.408995,41.2454429,40.292858,42.98355764999999,44.44398870000001,40.79688725,44.4952594,42.32502175,45.1984734,37.2486963,40.28999185,33.74737405,34.46275055,37.43933375,36.0861216,41.1182434,34.45040795,27.71426575,42.4273404,39.7291655,42.6916179,35.79821395,40.9144918,42.2437255,32.32196355,43.84102355,41.0476826,45.5902344,35.61631555,41.99059715,39.47660655,42.45997815,41.4036435,34.95511165,39.9351075,36.13218790000001,38.30079105,42.34068480000001,36.16707125,42.5888528,40.76893065,32.4036241,40.3627666,34.01046295,36.0675102,40.20580445,44.16674125,29.21185355,40.79519845,38.3772626,40.1348177,32.4842248,39.93310325,33.49941805,29.9962374,41.8712713,38.20692074999999,36.0918026,41.6980783,35.24379475,35.6282633,35.7764261,39.7982082,35.751472,34.758802,33.8763258,34.1307617,40.7382996,34.77623250000001,41.3662127,37.74181535,37.55532895,40.7066535,44.7091327,40.27567735,35.03221005,34.04497585,36.9740613,37.5617598,36.86802,35.6134478,42.73114305,42.74411755,38.8489337,34.9357023,41.89849465,42.255862,43.38147395,34.12689245,39.8033165,34.7349723,37.8633341,41.8489153,42.4460379,38.77624315,42.23407975000001,35.4056655,42.2069757,39.57489275,34.290842,38.0761894,36.14145385,39.28959765,35.237431,32.1862441,21.642385,44.47782865000001,36.6537668,42.93152506478807,46.6018191,43.00395265,42.6228012,40.5870414,40.0865064,36.4340869,38.94998615,32.79959415,37.0637197,42.50961785,33.7953227,43.653187,40.91285705,44.39407415,38.30874195,38.93325345,40.62131545,38.47216285,40.149469,42.1001842,36.77191045,34.33219835,37.22175245,47.25648945,36.93142245,37.27719755,42.7793366,44.28108915,41.56248295,43.5171266,36.0713888,41.1553489,44.96651135,40.5943839,41.3136471,32.3493496,30.2646724,40.49242715,32.5916138,32.62940855,37.7433245,11.1692622,33.03381105,35.6236835,40.3345578,36.15271495,37.1020748,40.88857575,31.1784566,39.73089025,41.0313935,41.80430205,42.8388598,33.73447065,39.5852104,38.37222595,42.66688065,39.7450668,39.842988,40.6182869,39.9961837,37.3595739,40.83827205,35.070227,46.5792721,42.4406147,38.5702492,33.46943155,34.73807675,42.3191417,41.8442938,42.2681514,42.2683388,40.03394145,42.72769795,32.8429024,30.03127035,40.310888,38.73140245,39.43647455,42.7192659,40.61422125,30.6920656,35.78204187737252,40.69306659999999,40.28999185,38.9505943,44.65177415,38.2199775,33.19784735,40.79377495,33.4325135,29.3166999,29.57399695,41.41321855,42.8067883,39.02091849999999,32.8487635,19.69998715,46.670963,40.90423869999999,41.94475545,18.422431,32.15206515,44.53284245,42.6468292,46.71780889999999,32.87468185,38.3793907,38.99047564999999,39.5852104,39.2513794,35.7895729,34.9871011,43.03726535,29.9638897],[-73.2030082,-72.51606918233441,-117.7117275441894,-75.35524190658495,-71.30327516361049,-69.96142281131719,-93.14145805901515,-76.48217092773127,-117.7061791541111,-73.95986305044411,-73.17295278964315,-79.44773490479687,-72.64039315198599,-73.89349332938956,-80.83393027613258,-92.71984863278584,-75.40693894376341,-73.96355097608796,-75.53958155911818,-75.30694232576307,-104.8588345994012,-77.54129937158409,-72.65598837890627,-69.65845830581773,-70.20282870728443,-84.29021109999999,-104.8239509314005,-93.16929174410551,-117.7087281497148,-117.7347404585082,-75.31545509261818,-82.39427459529426,-71.80702483708313,-117.7050428284479,-117.7093442200858,-72.56966884397315,-76.8879603368278,-118.209920299892,-82.52248588003852,-75.20924604652205,-82.22156959263393,-73.78422856497147,-72.69011994734595,-86.86687365754466,-82.4385258125221,-119.0868049,-84.63023056564805,-73.92839165453219,-118.3303177501461,-77.19957403793873,-90.3498362,-84.41128662499472,-84.78112961230431,-72.10653061495535,-89.98893549446169,-98.48350834832186,-86.90726990345898,-73.91072422119606,-77.23964053600594,-76.49223748074706,-84.2944452,-88.39889100394868,-105.9121130333472,-93.18717908824593,-88.09755524953694,-85.59936465969835,-75.14814464114032,-79.43551519617112,-81.93532160934096,-76.98719739224848,-90.3722582708558,-122.6310136075346,-73.8449773273052,-80.14529767068235,-81.93385832136877,-75.5104839064264,-82.56020377813721,-123.0308129250331,-89.0157777411969,-84.91323124235393,-93.97408267403767,-73.23852531543986,-87.8294820650179,-97.66274097607483,-122.4809509409974,-76.06925670472985,-78.01516280060704,-76.42523646075932,-71.07932570575417,-75.45531988939918,-71.18309317866741,-90.55036987078799,-94.31829628825939,-78.46056918726649,-122.6700383929096,-94.39463248577982,-91.42398552745183,-86.25628011081898,-85.46164277066788,-92.44205084020781,-79.94365952263512,-86.09964267156195,-84.49398715778406,-96.59801788312646,-91.79850254143065,-77.47954212782594,-118.0302220955009,-86.85584696849322,-74.42816053099715,-76.59287091567526,-76.99988254888089,-83.06427625448865,-71.50775001609811,-88.06734519725286,-76.87503742803381,-73.16559401843895,-72.52940222329684,-123.1981383587192,-80.0373641,-79.40458638581239,-84.41609506200462,-81.86717708775335,-79.17093485132823,-80.23981471121351,-80.32868957389215,-119.6615296705456,-82.68554318351735,-78.15435890000001,-90.24647315398731,-73.10450060211176,-78.68893690156162,-90.63839026946083,-84.74290095493066,-90.1798225329653,-88.85393861210508,-73.70235628626415,-95.89930909498798,-82.56762567992186,-91.65696644701376,-86.03725773127834,-75.07146882680061,-92.93159877729258,-85.3805983630227,-83.81305544869264,-86.8442317103349,-77.47342646218542,-71.1029058793161,-86.80390651935417,-70.8203006,-73.959696351204,-90.16190833622376,-75.91176286761947,-81.0199355569104,-79.77963822343997,-80.56165856727861,-93.99104281930205,-81.03198250103571,-74.19382455603869,-78.96809814655431,-75.0600025,-93.73171274297073,-75.52916874086121,-80.85315432801221,-90.0653677710487,-87.62506935993366,-84.55403434882237,-79.8872571,-86.25322329862374,-80.85543225981756,-88.80669166676904,-91.62423939520048,-86.10400095092592,-83.9642249,-86.65459911789776,-84.33438909561954,-93.05250677656251,-74.1688651,-89.44731846573404,-93.56605409912439,-79.34037954670688,-79.08333233590929,-74.01238069999999,-67.45654323568989,-79.53354982510979,-97.9549628941034,-118.0830001950614,-82.55936282039846,-77.45105977399695,-76.18774403551819,-82.44067819999999,-92.48568382574045,-76.6934132168704,-91.95683940314461,-83.84596813095078,-84.06083239910039,-77.78570870524911,-84.67134903000149,-118.4722601502701,-83.90917382137056,-92.28983560682489,-84.66528114627815,-90.18459381297211,-71.6848648,-95.17939500727704,-87.83031664713889,-80.58487220633589,-73.37509855012729,-95.11379211168317,-85.18907891026478,-97.34339387481224,-88.51552576233773,-89.871577121424,-82.72641122025428,-82.58389674644515,-157.9259550896773,-73.20799159386186,-121.7973445957165,-85.5844893191195,-112.0385010582579,-88.22926408934816,-87.82229092011687,-75.5196287,-75.22687890420772,-77.09650067197137,-78.14444352104016,-116.9054504243465,-76.49557123029852,-90.69069442289413,-79.01267851975504,-116.6768932329386,-73.9069680173387,-68.21999264324018,-104.5768455442726,-79.84355971087138,-96.94717593126433,-78.87794515329837,-76.59008613453307,-76.81411969667718,-81.83451182314374,-82.39299839413458,-93.26497163536374,-122.4545622453709,-80.02813058907365,-107.8676300494191,-72.0558917,-72.44091562772221,-85.82522495563299,-73.2402675,-79.80085580232139,-80.07874861795668,-93.16458641389622,-98.36549671078185,-81.14306812554344,-86.28521194328175,-97.72234831668288,-88.99042108232373,-95.17662947884401,-87.31309343033141,-87.12062019141567,78.2037212,-85.04675027949351,-88.828114,-76.51374559549934,-81.88158941244929,-85.29968609783923,-72.44510800802922,-92.4153821,-90.22311043541976,-73.7155858,-77.06977799547596,-72.73477339999999,-118.3331393322387,-77.0037145296605,-97.64194995634703,-71.12292177692487,-105.0077431,-88.974262809366,-75.38230096836804,-81.7367946,-121.8163156040778,-96.64793041546318,-82.37443307070124,-90.87487038598911,-84.92375164373317,-122.4404486,-81.99560322689779,-92.28149833764051,-71.15722177785327,-71.43548862523096,-71.4339502,-89.01867338002917,-75.32934057751807,-73.69334323810997,-116.978168125627,-99.13024647445343,-79.55688656928012,-82.99232084411008,-77.80973550201296,-73.7511920123242,-122.3321005741095,-88.13570396556952,-78.61891305326316,-73.99220306902977,-79.40458638581239,-92.3229551,-72.38233221619343,-98.20912245441116,-87.58572785618387,-73.56766954473206,-86.11488779398088,-94.8187261023558,-97.98518002903403,-80.3857097541329,-71.48317304223559,-84.56769555987898,-96.92256763370509,-155.0845188330478,-68.01803321830094,-81.1106865488107,-78.67271518248876,-66.05589153199779,-80.76347894433476,-87.91988435020841,-87.85040546563803,-92.08842199623356,-83.71679389395865,-81.76806034458825,-80.21826091194856,-77.0037145296605,-94.41122222903627,-78.63722585982836,-80.43731492196923,-88.02194662020278,-90.10922358519306],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,["Williams College","Amherst College","Pomona College","Swarthmore College","Wellesley College","Bowdoin College","Carleton College","United States Naval Academy","Claremont McKenna College","United States Military Academy","Middlebury College","Washington and Lee University","Smith College","Vassar College","Davidson College","Grinnell College","Hamilton College","Barnard College","Colgate University","Haverford College","United States Air Force Academy","University of Richmond","Wesleyan University","Colby College","Bates College","Berea College","Colorado College","Macalester College","Harvey Mudd College","Soka University of America","Bryn Mawr College","Kenyon College","College of the Holy Cross","Pitzer College","Scripps College","Mount Holyoke College","Bucknell University","Occidental College","Denison University","Lafayette College","Oberlin College and Conservatory","Skidmore College","Trinity College","DePauw University","Furman University","Thomas Aquinas College","Hillsdale College","Union College","Whitman College","Dickinson College","Principia College","Spelman College","Centre College","Connecticut College","Rhodes College","Trinity University","Wabash College","Bard College","Gettysburg College","St. John's College","Agnes Scott College","Lawrence University","St. John's College","St. Olaf College","Wheaton College","Kalamazoo College","St. Lawrence University","Virginia Military Institute","Wofford College","Hobart and William Smith College","Knox College","Reed College","Sarah Lawrence College","Allegheny College","College of Wooster","Muhlenberg College","New College of Florida","Willamette University","Beloit College","Earlham College","Gustavus Adolphus College","Bennington College","Lake Forest College","Southwestern University","University of Puget Sound","Washington College","Juniata College","St. Mary's College of Maryland","Stonehill College","Ursinus College","Wheaton College","Augustana College","College of St. Benedict","Hampden-Sydney College","Lewis and Clark College","St. John's University","Cornell College","Saint Mary's College","Hanover College","Hendrix College","Hollins University","Hope College","Transylvania University","Austin College","Luther College","Randolph-Macon College","Whittier College","Birmingham-Southern College","Drew University","Goucher College","Lycoming College","Ohio Wesleyan University","Saint Anselm College","St. Norbert College","Susquehanna University","Saint Michael's College","Hampshire College","Linfield College","Roanoke College","Saint Vincent College","Morehouse College","Presbyterian College","Randolph College","Salem College","Westminster College","Westmont College","Eckerd College","Houghton College","Illinois College","Massachusetts College of Liberal Arts","Meredith College","Monmouth College","Albion College","Millsaps College","Ripon College","SUNY-Purchase College","University of Minnesota-Morris","University of North Carolina-Asheville","Coe College","Franklin College","Hartwick College","Central College","Covenant College","Wittenberg University","Aquinas College","University of Mary Washington","Emmanuel College","Fisk University","Gordon College","Marymount Manhattan College","Tougaloo College","Albright College","Allen University","Bennett College","Bethany College","Bethany Lutheran College","Bethune-Cookman University","Bloomfield College","Bridgewater College","Bryn Athyn College of the New Church","Centenary College of Louisiana","Cheyney University of Pennsylvania","Claflin University","Dillard University","East-West University","Georgetown College","Guilford College","Holy Cross College","Johnson C. Smith University","Lane College","Lyon College","Martin University","Maryville College","Oakwood University","Oglethorpe University","Ouachita Baptist University","Pillar College","Rust College","Simpson College","Southern Virginia University","Sweet Briar College","The King's College","University of Maine-Machias","University of Pittsburgh-Greensburg","University of Science and Arts of Oklahoma","University of the West","University of Virginia-Wise","Virginia Union University","Virginia Wesleyan University","Warren Wilson College","Wartburg College","Wells College","Westminster College","Young Harris College","Adrian College","Alfred University","Alma College","American Jewish University","Antioch University","Arkansas Baptist College","Asbury University","Ashford University","Atlantic Union College","Baker University","Barat College","Barber Scotia College","Bard College at Simon's Rock","Benedictine College","Berry College","Bethel College","Bethel University","Blackburn College","Brevard College","Brewton-Parker College","Brigham Young University-Hawaii","Burlington College","California State University-Monterey Bay","Calvin College","Carroll College","Carroll University","Carthage College","Cedar Crest College","Chestnut Hill College","Chowan University","Christendom College","Christian Heritage College","Christopher Newport University","Clarke University","Coastal Carolina University","College of Idaho","College of Mount St. Vincent","College of the Atlantic","Colorado State University-Pueblo","Davis and Elkins College","Doane University","Eastern Mennonite University","Elizabethtown College","Elmira College","Emory and Henry College","Erskine College","Evangel University","Evergreen State College","Ferrum College","Fort Lewis College","Franklin Pierce University","Goddard College","Goshen College","Green Mountain College","Greensboro College","Grove City College","Hamline University","Hastings College","Hiram College","Huntingdon College","Huston-Tillotson University","Illinois Wesleyan University","Jarvis Christian College","Judson College","Kentucky Wesleyan College","King College","LaGrange College","Lambuth University","Lebanon Valley College","Lees-McRae College","Lindsey Wilson College","Long Island University-Southampton College","Louisiana State University-Alexandria","MacMurray College","Manhattanville College","Mansfield University of Pennsylvania","Marlboro College","Marymount California University","McDaniel College","McPherson College","Merrimack College","Metropolitan State College of Denver","Millikin University","Moravian College","Muskingum College","National Hispanic University","Nebraska Wesleyan University","North Greenville University","Northland College","Olivet College","Pacific Union College","Paine College","Philander Smith College","Pine Manor College","Providence College","Regis College","Rockford College","Rosemont College","Russell Sage College","San Diego Christian College","Schreiner University","Seton Hill University","Shawnee State University","Shepherd University","Siena College","Simpson University","Spring Hill College","St. Augustine's College","St. Francis College","St. Vincent College","Stephens College","Sterling College","Sterling College","Stillman College","SUNY-Old Westbury","Talladega College","Texas A&amp;M University-Galveston","Texas Lutheran University","Thiel College","Thomas More College of Liberal Arts","Thomas More University","University of Dallas","University of Hawaii-Hilo","University of Main-Presque Isle","University of Mount Union","University of Pittsburgh-Bradford","University of Puerto Rico-Ponce","University of South Carolina-Beaufort","University of Wisconsin-Green Bay","University of Wisconsin-Parkside","University of Wisconsin-Superior","Wesleyan College","West Virginia State University","West Virginia Wesleyan College","Western Maryland College","William Jewell College","William Peace University","Wingate University","Wisconsin Lutheran College","Xavier University of Louisiana"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[11.1692622,47.26149205],"lng":[-157.9259550896773,78.2037212]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="graph-college-ranking-over-time" class="section level3 hasAnchor" number="11.2.2">
+<h3><span class="header-section-number">11.2.2</span> Graph college ranking over time<a href="shiny-apps.html#graph-college-ranking-over-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s build a graph of college ranking over time.
+As usual, we’ll have to do some data wrangling first,
+including converting text to numbers and pivoting.
+While converting text, we need to decide what to do with tied rankings.</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="shiny-apps.html#cb235-1" tabindex="-1"></a>college_ranks <span class="ot">&lt;-</span> college_data_with_locations <span class="sc">|&gt;</span></span>
+<span id="cb235-2"><a href="shiny-apps.html#cb235-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>State, <span class="sc">-</span><span class="st">`</span><span class="at">IPEDS ID</span><span class="st">`</span>, <span class="sc">-</span>lat, <span class="sc">-</span>long, <span class="sc">-</span>location) <span class="sc">|&gt;</span></span>
+<span id="cb235-3"><a href="shiny-apps.html#cb235-3" tabindex="-1"></a>  <span class="fu">mutate_all</span>(as.character) <span class="sc">|&gt;</span> </span>
+<span id="cb235-4"><a href="shiny-apps.html#cb235-4" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span><span class="st">`</span><span class="at">College Name</span><span class="st">`</span>,</span>
+<span id="cb235-5"><a href="shiny-apps.html#cb235-5" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb235-6"><a href="shiny-apps.html#cb235-6" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;Ranking&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb235-7"><a href="shiny-apps.html#cb235-7" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Ranking), Ranking <span class="sc">!=</span> <span class="st">&quot;?&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb235-8"><a href="shiny-apps.html#cb235-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rankhigh =</span> <span class="fu">case_when</span>(<span class="fu">str_detect</span>(Ranking, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">(&quot;</span>) <span class="sc">~</span> <span class="fu">str_extract</span>(Ranking, <span class="st">&quot;(?&lt;=</span><span class="sc">\\</span><span class="st">()[:digit:]+&quot;</span>),</span>
+<span id="cb235-9"><a href="shiny-apps.html#cb235-9" tabindex="-1"></a>                              <span class="at">.default =</span> Ranking),</span>
+<span id="cb235-10"><a href="shiny-apps.html#cb235-10" tabindex="-1"></a>         <span class="at">ranklow =</span> <span class="fu">case_when</span>(<span class="fu">str_detect</span>(Ranking, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">(&quot;</span>) <span class="sc">~</span> <span class="fu">str_extract</span>(Ranking, <span class="st">&quot;(?&lt;=-)[:digit:]+&quot;</span>),</span>
+<span id="cb235-11"><a href="shiny-apps.html#cb235-11" tabindex="-1"></a>                              <span class="at">.default =</span> Ranking),</span>
+<span id="cb235-12"><a href="shiny-apps.html#cb235-12" tabindex="-1"></a>         <span class="at">rankhigh =</span> <span class="fu">as.numeric</span>(rankhigh),</span>
+<span id="cb235-13"><a href="shiny-apps.html#cb235-13" tabindex="-1"></a>         <span class="at">ranklow =</span> <span class="fu">as.numeric</span>(ranklow),</span>
+<span id="cb235-14"><a href="shiny-apps.html#cb235-14" tabindex="-1"></a>         <span class="at">Year =</span> <span class="fu">as.numeric</span>(Year))</span>
+<span id="cb235-15"><a href="shiny-apps.html#cb235-15" tabindex="-1"></a></span>
+<span id="cb235-16"><a href="shiny-apps.html#cb235-16" tabindex="-1"></a>college_ranks <span class="sc">|&gt;</span> <span class="fu">saveRDS</span>(<span class="fu">here</span>(<span class="st">&quot;apps&quot;</span>, <span class="st">&quot;liberalarts&quot;</span>, <span class="st">&quot;collegeRanks.RDS&quot;</span>))</span></code></pre></div>
+<p>Filter ranks for a single college</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="shiny-apps.html#cb236-1" tabindex="-1"></a>selected_college_data <span class="ot">&lt;-</span> college_ranks <span class="sc">|&gt;</span></span>
+<span id="cb236-2"><a href="shiny-apps.html#cb236-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">College Name</span><span class="st">`</span> <span class="sc">==</span> <span class="st">&quot;Middlebury College&quot;</span>) </span>
+<span id="cb236-3"><a href="shiny-apps.html#cb236-3" tabindex="-1"></a></span>
+<span id="cb236-4"><a href="shiny-apps.html#cb236-4" tabindex="-1"></a>selected_college_data</span></code></pre></div>
+<pre><code>## # A tibble: 36 × 5
+##    `College Name`      Year Ranking rankhigh ranklow
+##    &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Middlebury College  2023 11            11      11
+##  2 Middlebury College  2022 9              9       9
+##  3 Middlebury College  2021 9              9       9
+##  4 Middlebury College  2020 7              7       7
+##  5 Middlebury College  2019 5              5       5
+##  6 Middlebury College  2018 6              6       6
+##  7 Middlebury College  2017 4              4       4
+##  8 Middlebury College  2016 4              4       4
+##  9 Middlebury College  2015 7              7       7
+## 10 Middlebury College  2014 4              4       4
+## # ℹ 26 more rows</code></pre>
+<p>Now graph the ranks for a single college over time.
+Notice how the x and y axis limits are set based on the whole dataset, not just the single college.</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="shiny-apps.html#cb238-1" tabindex="-1"></a>selected_college_data <span class="sc">|&gt;</span> </span>
+<span id="cb238-2"><a href="shiny-apps.html#cb238-2" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb238-3"><a href="shiny-apps.html#cb238-3" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> rankhigh)) <span class="sc">+</span></span>
+<span id="cb238-4"><a href="shiny-apps.html#cb238-4" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> ranklow)) <span class="sc">+</span></span>
+<span id="cb238-5"><a href="shiny-apps.html#cb238-5" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="fu">max</span>(college_ranks<span class="sc">$</span>ranklow), <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb238-6"><a href="shiny-apps.html#cb238-6" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="fu">min</span>(college_ranks<span class="sc">$</span>Year), <span class="fu">max</span>(college_ranks<span class="sc">$</span>Year)))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-169-1.png" width="672" />
+### Revisit map to show colleges with ranking data</p>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="shiny-apps.html#cb239-1" tabindex="-1"></a>n_rankings <span class="ot">&lt;-</span> college_ranks <span class="sc">|&gt;</span> <span class="fu">count</span>(<span class="st">`</span><span class="at">College Name</span><span class="st">`</span>, <span class="at">sort =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb239-2"><a href="shiny-apps.html#cb239-2" tabindex="-1"></a>n_rankings</span></code></pre></div>
+<pre><code>## # A tibble: 356 × 2
+##    `College Name`                       n
+##    &lt;chr&gt;                            &lt;int&gt;
+##  1 Wheaton College                     64
+##  2 St. John&#39;s College                  59
+##  3 Westminster College                 48
+##  4 Amherst College                     38
+##  5 Carleton College                    38
+##  6 Haverford College                   38
+##  7 Oberlin College and Conservatory    38
+##  8 Pomona College                      38
+##  9 Swarthmore College                  38
+## 10 Wellesley College                   38
+## # ℹ 346 more rows</code></pre>
+<p>Join number of rankings to college data</p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="shiny-apps.html#cb241-1" tabindex="-1"></a>college_locations_ranks <span class="ot">&lt;-</span> college_data_with_locations <span class="sc">|&gt;</span> </span>
+<span id="cb241-2"><a href="shiny-apps.html#cb241-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">College Name</span><span class="st">`</span>, State, location, lat, long) <span class="sc">|&gt;</span> </span>
+<span id="cb241-3"><a href="shiny-apps.html#cb241-3" tabindex="-1"></a>  <span class="fu">left_join</span>(n_rankings, <span class="at">by =</span> <span class="st">&quot;College Name&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb241-4"><a href="shiny-apps.html#cb241-4" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(lat))</span>
+<span id="cb241-5"><a href="shiny-apps.html#cb241-5" tabindex="-1"></a></span>
+<span id="cb241-6"><a href="shiny-apps.html#cb241-6" tabindex="-1"></a>college_locations_ranks <span class="sc">|&gt;</span> <span class="fu">saveRDS</span>(<span class="fu">here</span>(<span class="st">&quot;apps&quot;</span>, <span class="st">&quot;liberalarts&quot;</span>, <span class="st">&quot;collegeLocations.RDS&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="shiny-apps.html#cb242-1" tabindex="-1"></a>college_locations_ranks <span class="sc">|&gt;</span> </span>
+<span id="cb242-2"><a href="shiny-apps.html#cb242-2" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;=</span> <span class="dv">5</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb242-3"><a href="shiny-apps.html#cb242-3" tabindex="-1"></a>  <span class="fu">leaflet</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb242-4"><a href="shiny-apps.html#cb242-4" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb242-5"><a href="shiny-apps.html#cb242-5" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">label =</span> <span class="sc">~</span><span class="st">`</span><span class="at">College Name</span><span class="st">`</span>,</span>
+<span id="cb242-6"><a href="shiny-apps.html#cb242-6" tabindex="-1"></a>             <span class="at">lng =</span> <span class="sc">~</span>long,</span>
+<span id="cb242-7"><a href="shiny-apps.html#cb242-7" tabindex="-1"></a>             <span class="at">lat =</span> <span class="sc">~</span>lat)</span></code></pre></div>
+<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-1ffe4f4e04df2f2e994c" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-1ffe4f4e04df2f2e994c">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[42.7130236,42.3703768,34.0974775,39.9029154,42.29177605,43.90869735,44.47183535,38.98193430000001,34.0999577,41.3927227,44.00366955,37.7929993,42.31622385,41.6854718,35.5032193,41.75111985,43.0537974,40.8094864,42.8154037,40.0071506,38.9912381,37.57586225,41.5559033,44.56118735,44.10656935,37.5717496,38.8480439,44.9376942,34.10614005,33.55467520000001,40.0286808,40.3725696,42.23668645,34.10471765,34.10391835,42.25532845,40.9515356,34.12719495,40.07300505,40.6986835,41.29571765,43.09871785354964,41.74715485,39.63804945,34.92577435,34.4300932,41.9318835,42.8175752,46.0705665,40.20281155,38.9478261,33.74519965,37.64504454999999,41.37913335,35.15564375,40.0367517,42.0225482,39.8374688,38.98228315,33.7688851,44.2607247,35.66744105,44.4640025,41.86963745,42.29075735,44.5875837,37.79133385,34.96115815,42.8570498,40.9419283,45.48149925,40.9344239,41.6480894,40.81161765,40.59758265,27.3859013,44.9355889,42.5009819,39.8204275,44.3217869,42.92044325,42.24761745,30.6371513,47.26149205,39.218376,40.5012255,38.1903261,42.05997765,40.1954088,41.9670817,41.5015277,45.5594818,37.24237495,45.44850495,45.58088975,41.9253978,41.70747445,38.71651765,35.1008234,37.3573684,42.78672450000001,38.053107,33.6474084,43.3169528,37.7625105,33.97784155,33.51618545,40.76053795,39.408995,41.2454429,40.292858,42.98355764999999,44.44398870000001,40.79688725,44.4952594,42.32502175,45.1984734,37.2486963,40.28999185,33.74737405,34.46275055,37.43933375,36.0861216,41.1182434,34.45040795,27.71426575,42.4273404,39.7291655,42.6916179,35.79821395,40.9144918,42.2437255,32.32196355,43.84102355,41.0476826,45.5902344,35.61631555,41.99059715,39.47660655,42.45997815,41.4036435,34.95511165,39.9351075,42.34068480000001,36.16707125,42.5888528,40.76893065,32.4036241,40.3627666,34.01046295,36.0675102,40.20580445,44.16674125,29.21185355,40.79519845,38.3772626,40.1348177,32.4842248,39.93310325,29.9962374,41.8712713,38.20692074999999,36.0918026,35.24379475,35.6282633,35.7764261,35.751472,33.8763258,34.1307617,41.3662127,37.74181535,37.55532895,40.7066535,44.7091327,40.27567735,35.03221005,36.9740613,37.5617598,36.86802,35.6134478,42.73114305,42.74411755,38.8489337,34.9357023,41.89849465,43.38147395,39.8033165,34.7349723,42.2069757,34.290842,36.14145385,39.28959765,42.93152506478807,42.6228012,38.94998615,37.0637197,33.7953227,43.653187,44.39407415,40.62131545,38.47216285,40.149469,36.77191045,34.33219835,47.25648945,37.27719755,42.7793366,41.56248295,36.0713888,41.1553489,44.96651135,40.5943839,41.3136471,32.3493496,40.49242715,32.62940855,11.1692622,36.15271495,37.1020748,41.0313935,42.8388598,39.5852104,40.6182869,39.9961837,40.83827205,46.5792721,42.4406147,33.46943155,42.3191417,40.03394145,30.03127035,40.310888,38.73140245,39.43647455,42.7192659,35.78204187737252,40.28999185,38.9505943,33.4325135,29.3166999,32.8487635,19.69998715,46.670963,41.94475545,42.6468292,32.87468185,38.99047564999999,39.5852104,39.2513794,43.03726535],[-73.2030082,-72.51606918233441,-117.7117275441894,-75.35524190658495,-71.30327516361049,-69.96142281131719,-93.14145805901515,-76.48217092773127,-117.7061791541111,-73.95986305044411,-73.17295278964315,-79.44773490479687,-72.64039315198599,-73.89349332938956,-80.83393027613258,-92.71984863278584,-75.40693894376341,-73.96355097608796,-75.53958155911818,-75.30694232576307,-104.8588345994012,-77.54129937158409,-72.65598837890627,-69.65845830581773,-70.20282870728443,-84.29021109999999,-104.8239509314005,-93.16929174410551,-117.7087281497148,-117.7347404585082,-75.31545509261818,-82.39427459529426,-71.80702483708313,-117.7050428284479,-117.7093442200858,-72.56966884397315,-76.8879603368278,-118.209920299892,-82.52248588003852,-75.20924604652205,-82.22156959263393,-73.78422856497147,-72.69011994734595,-86.86687365754466,-82.4385258125221,-119.0868049,-84.63023056564805,-73.92839165453219,-118.3303177501461,-77.19957403793873,-90.3498362,-84.41128662499472,-84.78112961230431,-72.10653061495535,-89.98893549446169,-86.90726990345898,-73.91072422119606,-77.23964053600594,-76.49223748074706,-84.2944452,-88.39889100394868,-105.9121130333472,-93.18717908824593,-88.09755524953694,-85.59936465969835,-75.14814464114032,-79.43551519617112,-81.93532160934096,-76.98719739224848,-90.3722582708558,-122.6310136075346,-73.8449773273052,-80.14529767068235,-81.93385832136877,-75.5104839064264,-82.56020377813721,-123.0308129250331,-89.0157777411969,-84.91323124235393,-93.97408267403767,-73.23852531543986,-87.8294820650179,-97.66274097607483,-122.4809509409974,-76.06925670472985,-78.01516280060704,-76.42523646075932,-71.07932570575417,-75.45531988939918,-71.18309317866741,-90.55036987078799,-94.31829628825939,-78.46056918726649,-122.6700383929096,-94.39463248577982,-91.42398552745183,-86.25628011081898,-85.46164277066788,-92.44205084020781,-79.94365952263512,-86.09964267156195,-84.49398715778406,-96.59801788312646,-91.79850254143065,-77.47954212782594,-118.0302220955009,-86.85584696849322,-74.42816053099715,-76.59287091567526,-76.99988254888089,-83.06427625448865,-71.50775001609811,-88.06734519725286,-76.87503742803381,-73.16559401843895,-72.52940222329684,-123.1981383587192,-80.0373641,-79.40458638581239,-84.41609506200462,-81.86717708775335,-79.17093485132823,-80.23981471121351,-80.32868957389215,-119.6615296705456,-82.68554318351735,-78.15435890000001,-90.24647315398731,-73.10450060211176,-78.68893690156162,-90.63839026946083,-84.74290095493066,-90.1798225329653,-88.85393861210508,-73.70235628626415,-95.89930909498798,-82.56762567992186,-91.65696644701376,-86.03725773127834,-75.07146882680061,-92.93159877729258,-85.3805983630227,-83.81305544869264,-71.1029058793161,-86.80390651935417,-70.8203006,-73.959696351204,-90.16190833622376,-75.91176286761947,-81.0199355569104,-79.77963822343997,-80.56165856727861,-93.99104281930205,-81.03198250103571,-74.19382455603869,-78.96809814655431,-75.0600025,-93.73171274297073,-75.52916874086121,-90.0653677710487,-87.62506935993366,-84.55403434882237,-79.8872571,-80.85543225981756,-88.80669166676904,-91.62423939520048,-83.9642249,-84.33438909561954,-93.05250677656251,-93.56605409912439,-79.34037954670688,-79.08333233590929,-74.01238069999999,-67.45654323568989,-79.53354982510979,-97.9549628941034,-82.55936282039846,-77.45105977399695,-76.18774403551819,-82.44067819999999,-92.48568382574045,-76.6934132168704,-91.95683940314461,-83.84596813095078,-84.06083239910039,-84.67134903000149,-83.90917382137056,-92.28983560682489,-73.37509855012729,-85.18907891026478,-88.51552576233773,-89.871577121424,-85.5844893191195,-87.82229092011687,-78.14444352104016,-76.49557123029852,-79.01267851975504,-116.6768932329386,-68.21999264324018,-96.94717593126433,-78.87794515329837,-76.59008613453307,-81.83451182314374,-82.39299839413458,-122.4545622453709,-107.8676300494191,-72.0558917,-85.82522495563299,-79.80085580232139,-80.07874861795668,-93.16458641389622,-98.36549671078185,-81.14306812554344,-86.28521194328175,-88.99042108232373,-87.31309343033141,78.2037212,-81.88158941244929,-85.29968609783923,-73.7155858,-72.73477339999999,-77.0037145296605,-75.38230096836804,-81.7367946,-96.64793041546318,-90.87487038598911,-84.92375164373317,-81.99560322689779,-71.15722177785327,-75.32934057751807,-99.13024647445343,-79.55688656928012,-82.99232084411008,-77.80973550201296,-73.7511920123242,-78.61891305326316,-79.40458638581239,-92.3229551,-86.11488779398088,-94.8187261023558,-96.92256763370509,-155.0845188330478,-68.01803321830094,-78.67271518248876,-87.85040546563803,-83.71679389395865,-80.21826091194856,-77.0037145296605,-94.41122222903627,-88.02194662020278],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,["Williams College","Amherst College","Pomona College","Swarthmore College","Wellesley College","Bowdoin College","Carleton College","United States Naval Academy","Claremont McKenna College","United States Military Academy","Middlebury College","Washington and Lee University","Smith College","Vassar College","Davidson College","Grinnell College","Hamilton College","Barnard College","Colgate University","Haverford College","United States Air Force Academy","University of Richmond","Wesleyan University","Colby College","Bates College","Berea College","Colorado College","Macalester College","Harvey Mudd College","Soka University of America","Bryn Mawr College","Kenyon College","College of the Holy Cross","Pitzer College","Scripps College","Mount Holyoke College","Bucknell University","Occidental College","Denison University","Lafayette College","Oberlin College and Conservatory","Skidmore College","Trinity College","DePauw University","Furman University","Thomas Aquinas College","Hillsdale College","Union College","Whitman College","Dickinson College","Principia College","Spelman College","Centre College","Connecticut College","Rhodes College","Wabash College","Bard College","Gettysburg College","St. John's College","Agnes Scott College","Lawrence University","St. John's College","St. Olaf College","Wheaton College","Kalamazoo College","St. Lawrence University","Virginia Military Institute","Wofford College","Hobart and William Smith College","Knox College","Reed College","Sarah Lawrence College","Allegheny College","College of Wooster","Muhlenberg College","New College of Florida","Willamette University","Beloit College","Earlham College","Gustavus Adolphus College","Bennington College","Lake Forest College","Southwestern University","University of Puget Sound","Washington College","Juniata College","St. Mary's College of Maryland","Stonehill College","Ursinus College","Wheaton College","Augustana College","College of St. Benedict","Hampden-Sydney College","Lewis and Clark College","St. John's University","Cornell College","Saint Mary's College","Hanover College","Hendrix College","Hollins University","Hope College","Transylvania University","Austin College","Luther College","Randolph-Macon College","Whittier College","Birmingham-Southern College","Drew University","Goucher College","Lycoming College","Ohio Wesleyan University","Saint Anselm College","St. Norbert College","Susquehanna University","Saint Michael's College","Hampshire College","Linfield College","Roanoke College","Saint Vincent College","Morehouse College","Presbyterian College","Randolph College","Salem College","Westminster College","Westmont College","Eckerd College","Houghton College","Illinois College","Massachusetts College of Liberal Arts","Meredith College","Monmouth College","Albion College","Millsaps College","Ripon College","SUNY-Purchase College","University of Minnesota-Morris","University of North Carolina-Asheville","Coe College","Franklin College","Hartwick College","Central College","Covenant College","Wittenberg University","Emmanuel College","Fisk University","Gordon College","Marymount Manhattan College","Tougaloo College","Albright College","Allen University","Bennett College","Bethany College","Bethany Lutheran College","Bethune-Cookman University","Bloomfield College","Bridgewater College","Bryn Athyn College of the New Church","Centenary College of Louisiana","Cheyney University of Pennsylvania","Dillard University","East-West University","Georgetown College","Guilford College","Johnson C. Smith University","Lane College","Lyon College","Maryville College","Oglethorpe University","Ouachita Baptist University","Simpson College","Southern Virginia University","Sweet Briar College","The King's College","University of Maine-Machias","University of Pittsburgh-Greensburg","University of Science and Arts of Oklahoma","University of Virginia-Wise","Virginia Union University","Virginia Wesleyan University","Warren Wilson College","Wartburg College","Wells College","Westminster College","Young Harris College","Adrian College","Alma College","Antioch University","Arkansas Baptist College","Bard College at Simon's Rock","Berry College","Bethel University","Blackburn College","Calvin College","Carthage College","Christendom College","Christopher Newport University","Coastal Carolina University","College of Idaho","College of the Atlantic","Doane University","Eastern Mennonite University","Elizabethtown College","Emory and Henry College","Erskine College","Evergreen State College","Fort Lewis College","Franklin Pierce University","Goshen College","Greensboro College","Grove City College","Hamline University","Hastings College","Hiram College","Huntingdon College","Illinois Wesleyan University","Judson College","King College","Lees-McRae College","Lindsey Wilson College","Manhattanville College","Marlboro College","McDaniel College","Moravian College","Muskingum College","Nebraska Wesleyan University","Northland College","Olivet College","Paine College","Pine Manor College","Rosemont College","Schreiner University","Seton Hill University","Shawnee State University","Shepherd University","Siena College","St. Augustine's College","St. Vincent College","Stephens College","Talladega College","Texas A&amp;M University-Galveston","University of Dallas","University of Hawaii-Hilo","University of Main-Presque Isle","University of Pittsburgh-Bradford","University of Wisconsin-Parkside","Wesleyan College","West Virginia Wesleyan College","Western Maryland College","William Jewell College","Wisconsin Lutheran College"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[11.1692622,47.26149205],"lng":[-155.0845188330478,78.2037212]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="shiny-app-notes" class="section level2 hasAnchor" number="11.3">
+<h2><span class="header-section-number">11.3</span> Shiny App notes<a href="shiny-apps.html#shiny-app-notes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It appears that <code>tmap</code> maps could also be used in Shiny with the <code>tmapOutput()</code> and <code>renderTmap()</code> functions.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="mapping-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="hurricane-dorian.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
