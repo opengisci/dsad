@@ -15,7 +15,8 @@ title: "Interactive Spatial Stories"
 - How Prof Holler [geocoded profile data](https://drive.google.com/drive/folders/1a308sFHQ_LyN9hvuIrSpKCw-nGuf5_Ny?usp=sharing)
 - Is the geography of New York City a problem?
 - Presentations: 6 minute story with Question, app driver & narrator(s). Focus on your findings and to some extent your achievements, not your struggles
-- `qdapRegex` package has some useful text cleaning functions for Twitter text, including `rm_twitter_url`,  `rm_url`, `rm_tag`, and `rm_hash`. It also has some functions for address components.
+- `qdapRegex` package has some useful text cleaning functions for Twitter text, including `rm_twitter_url`,  `rm_url`, `rm_tag`, and `rm_hash`. It also has some functions for address components. 
+- The qdapRegex functions above will work best if you convert the tweet text to lower-case first, with the `tolower()` function.
 
 ## Possible Project Improvements
 
