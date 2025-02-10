@@ -59,7 +59,7 @@ Some advice:
 
 ## Final Project Tidbits
 
-- Data is available in this private repository [github.com/opengisci/opengisci_restricted](https://github.com/opengisci/opengisci_restricted)
+- Data is available in this private repository [https://github.com/opengisci/Data-Restricted](https://github.com/opengisci/Data-Restricted)
 - Get started downloading Tweets and removing duplicates with [this script](https://drive.google.com/open?id=1FcBs7UUbX76HpyZEzd8T57M4thoM90tT&usp=drive_fs)
 - Store all shiny app content in one folder, including data required of the app
 - Only use cleaned and anonymized data in the app
@@ -102,8 +102,6 @@ Each group shall collaborate in a group GitHub repository within the [OpenGIScie
 - **Attribution** of sources for all data, software, ideas, and any authorized use of code (e.g. from a tutorial or worked example online). 
 - **Presentation** of the final project to the full DSAD class (Thursday 10:25 to 10:55)
 - **Submission** of the final code repository on GitHub by noon EST of Friday, January 31.
-
-- Data for final projects is available in a private repository: [github.com/opengisci/opengisci_restricted](https://github.com/opengisci/opengisci_restricted)
 
 ## Cheat sheets
 
